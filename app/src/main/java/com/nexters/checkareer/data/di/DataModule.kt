@@ -12,9 +12,6 @@ import com.nexters.checkareer.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -67,7 +64,7 @@ object DataModule {
 //        ).build()
 //    }
 
-//    @Singleton
+    @Singleton
     @Provides
     fun provideIoDispatcher() = Dispatchers.IO
 }

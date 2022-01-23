@@ -2,7 +2,6 @@ package com.nexters.checkareer.data.source.category.local
 
 import com.nexters.checkareer.domain.category.Category
 import com.nexters.checkareer.domain.util.Result
-import javax.inject.Inject
 
 class CategoryLocalDataSource : CategoryLocal {
 
