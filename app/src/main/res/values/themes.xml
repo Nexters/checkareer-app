@@ -9,4 +9,11 @@
         <!-- Target Android sdk versions < 26 and > 14. -->
         <item name="fontFamily">@font/opensans_font</item>
     </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_sample_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.Checkareer</item>
+    </style>
+
 </resources>
