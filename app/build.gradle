@@ -75,4 +75,7 @@ dependencies {
     // Log
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
+    // Splash screen
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
 }
