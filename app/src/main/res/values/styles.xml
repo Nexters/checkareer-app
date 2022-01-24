@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.Checkareer"/>
+
+    <style name="HomeRecyclerView">
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+
+</resources>
