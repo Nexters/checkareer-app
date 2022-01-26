@@ -7,7 +7,15 @@
         <entry key="app/src/main/res/drawable/ic_sample_icon.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.45625" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/create_profile_activity.xml" value="0.48802083333333335" />
+        <entry key="app/src/main/res/layout/create_profile_frag.xml" value="0.48802083333333335" />
         <entry key="app/src/main/res/layout/home_activity.xml" value="0.5911458333333334" />
+        <entry key="app/src/main/res/layout/home_frag.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/home_my_profile_item.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/home_other_profile_item.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/loading_animation_layout.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/onboarding_activity.xml" value="0.5911458333333334" />
+        <entry key="app/src/main/res/layout/onboarding_frag.xml" value="0.4552083333333333" />
       </map>
     </option>
   </component>

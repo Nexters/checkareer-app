@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.nexters.checkareer.R
-import com.nexters.checkareer.presentation.ui.home.HomeActivity
+import com.nexters.checkareer.presentation.ui.onboarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,8 +13,8 @@ class SplashActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.splash_activity)
 
-        startActivity(Intent(this, HomeActivity::class.java))
+        startActivity(Intent(this, OnBoardingActivity::class.java))
     }
 }

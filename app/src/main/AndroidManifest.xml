@@ -13,9 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Checkareer">
         <activity
+            android:name=".presentation.ui.createprofile.CreateProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.onboarding.OnBoardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.splash.SplashActivity"
-            android:theme="@style/Theme.App.Starting"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +30,7 @@
         </activity>
         <activity
             android:name=".presentation.ui.home.HomeActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>
