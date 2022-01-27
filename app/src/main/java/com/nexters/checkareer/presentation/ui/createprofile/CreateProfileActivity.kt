@@ -1,19 +1,18 @@
-package com.nexters.checkareer.presentation.ui.onboarding
+package com.nexters.checkareer.presentation.ui.createprofile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.nexters.checkareer.R
-import com.nexters.checkareer.presentation.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OnBoardingActivity : AppCompatActivity() {
+class CreateProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.onboarding_activity)
+        setContentView(R.layout.create_profile_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, OnBoardingFragment.newInstance())
+                .replace(R.id.container, CreateProfileFragment.newInstance())
                 .commitNow()
         }
     }

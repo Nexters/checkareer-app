@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.nexters.checkareer.databinding.OnboardingFragBinding
 import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnBoardingFragment : Fragment() {
 
     private val viewModel by viewModels<OnBoardingViewModel>()

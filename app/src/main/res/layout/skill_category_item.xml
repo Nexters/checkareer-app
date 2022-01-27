@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect" />
+
+
+        <variable
+            name="eventListener"
+            type="com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener" />
+    </data>
+
+    <LinearLayout
+        android:onClick="@{(view) -> eventListener.onSkillCategoryClicked(item, view)}"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        tools:layout_width="200dp"
+        android:layout_height="50dp">
+
+        <TextView
+            android:text="@{item.name}"
+            tools:text="Android"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>
