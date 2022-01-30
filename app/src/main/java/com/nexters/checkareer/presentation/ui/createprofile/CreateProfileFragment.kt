@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +17,7 @@ import com.nexters.checkareer.domain.category.Category
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
+import com.nexters.checkareer.presentation.ui.home.adapter.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +26,8 @@ class CreateProfileFragment : Fragment(), SkillCategoryListener {
     private val viewModel by viewModels<CreateProfileViewModel>()
 
     private lateinit var viewDataBinding: CreateProfileFragBinding
+
+    private var selectedSkillCategories = mutableListOf<CategorySelect>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewDataBinding = CreateProfileFragBinding.inflate(inflater, container, false).apply {
@@ -36,10 +40,18 @@ class CreateProfileFragment : Fragment(), SkillCategoryListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupLifecycleOwner()
-        setupListAdapter()
+        setupSkillListAdapter()
+        setupSelectedSkillListAdapter()
+
     }
 
-    private fun setupListAdapter() {
+    private fun setupSelectedSkillListAdapter() {
+        viewDataBinding.recyclerviewSelectedSkillCategory.apply {
+            adapter = SkillCategoryAdapter(this@CreateProfileFragment)
+        }
+    }
+
+    private fun setupSkillListAdapter() {
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())
             layoutManager.apply {
@@ -62,13 +74,20 @@ class CreateProfileFragment : Fragment(), SkillCategoryListener {
     }
 
     override fun onSkillCategoryClicked(item: CategorySelect, view: View) {
-        println(item.selected)
-        if(!item.selected) {
-            view.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.black))
+        if (!item.selected) {
+            println("add ${item.name} ${item.id}")
+            //view.findViewById<CardView>(R.id.cardview_skill_category).setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
             item.selected = true
+            viewModel.addSelectedSkillCategoryItem(item)
+
+
         } else {
-            view.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+            println("remove ${item.name} ${item.id}")
+            //view.findViewById<CardView>(R.id.cardview_skill_category).setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             item.selected = false
+            viewModel.removeSelectedSkillCategoryItem(item)
+
+
         }
 
     }

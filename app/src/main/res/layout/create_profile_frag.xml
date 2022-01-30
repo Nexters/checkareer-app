@@ -18,6 +18,20 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.createprofile.CreateProfileActivity">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
 
         <TextView
             android:id="@+id/text_title"
@@ -27,11 +41,44 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.07" />
+
+        <TextView
+            android:id="@+id/textview_selected_skill_category_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="@{Integer.toString(viewmodel.selectedSkillCategoryItems.size())}"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_title"
+            app:layout_constraintStart_toEndOf="@id/text_title" />
+
+        <TextView
+            android:id="@+id/textview_max_selected_skill_category_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="/10 개"
+            app:layout_constraintBottom_toBottomOf="@id/text_title"
+            app:layout_constraintStart_toEndOf="@id/textview_selected_skill_category_count" />
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_selected_skill_category"
+            style="@style/SkillCategoryRecyclerView"
+            android:layout_width="0dp"
+            selectedSkillItems="@{viewmodel.selectedSkillCategoryItems}"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/text_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_skill_category"
@@ -41,10 +88,22 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/button_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_title" />
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_selected_skill_category" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_next"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="0dp"
+            android:text="다음"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
 
     <style name="SkillCategoryRecyclerView">
         <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
-        <item name="android:orientation">vertical</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
 

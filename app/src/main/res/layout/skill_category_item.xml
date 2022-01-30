@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <data>
+        <import type="com.nexters.checkareer.R" />
+
         <variable
             name="item"
             type="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect" />
@@ -13,20 +17,27 @@
             type="com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener" />
     </data>
 
-    <LinearLayout
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_skill_category"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@{item.selected ? @color/gray : @color/white}"
         android:onClick="@{(view) -> eventListener.onSkillCategoryClicked(item, view)}"
         android:orientation="vertical"
-        android:layout_margin="5dp"
-        android:layout_width="wrap_content"
-        tools:layout_width="200dp"
-        android:layout_height="50dp">
+        tools:layout_width="200dp">
+
 
         <TextView
-            android:text="@{item.name}"
-            tools:text="Android"
-            android:layout_margin="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@{item.name}"
+            tools:text="Android" />
 
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
 </layout>

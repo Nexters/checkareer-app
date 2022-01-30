@@ -3,6 +3,7 @@ package com.nexters.checkareer.presentation.ui.createprofile.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.nexters.checkareer.presentation.ui.createprofile.holder.SelectedSkillViewHolder
 import com.nexters.checkareer.presentation.ui.createprofile.holder.SkillViewHolder
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
@@ -20,6 +21,7 @@ class SkillCategoryAdapter(
         getItem(position)?.let { item ->
             when (holder) {
                 is SkillViewHolder -> holder.bind(item)
+                is SelectedSkillViewHolder -> holder.bind(item)
             }
         }
     }
