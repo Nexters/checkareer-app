@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.nexters.checkareer.presentation.ui.createprofile.CreateProfileViewModel" />
+            type="com.nexters.checkareer.presentation.ui.createprofile.CreateProfile1ViewModel" />
 
     </data>
 
@@ -33,52 +33,60 @@
             app:layout_constraintGuide_percent="0.95" />
 
 
+        <ImageView
+            android:id="@+id/imageview_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:paddingEnd="20dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <TextView
-            android:id="@+id/text_title"
+            android:id="@+id/textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="스킬을 선택해보세요"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07" />
+            app:layout_constraintTop_toBottomOf="@id/imageview_back" />
 
         <TextView
             android:id="@+id/textview_selected_skill_category_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{Integer.toString(viewmodel.selectedSkillCategoryItems.size())}"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:text="@{Integer.toString(viewmodel.selectedSkillCategoryItems.size())}"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/text_title"
-            app:layout_constraintStart_toEndOf="@id/text_title" />
+            app:layout_constraintBottom_toBottomOf="@id/textview_title"
+            app:layout_constraintStart_toEndOf="@id/textview_title" />
 
         <TextView
             android:id="@+id/textview_max_selected_skill_category_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="/10 개"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:text="/10 개"
-            app:layout_constraintBottom_toBottomOf="@id/text_title"
+            app:layout_constraintBottom_toBottomOf="@id/textview_title"
             app:layout_constraintStart_toEndOf="@id/textview_selected_skill_category_count" />
-
-
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_selected_skill_category"
             style="@style/SkillCategoryRecyclerView"
-            android:layout_width="0dp"
             selectedSkillItems="@{viewmodel.selectedSkillCategoryItems}"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/text_title" />
+            app:layout_constraintTop_toBottomOf="@id/textview_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_skill_category"

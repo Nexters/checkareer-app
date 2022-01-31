@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/create_profile_nav_graph"
+    app:startDestination="@id/createProfileFragment">
+
+    <fragment
+        android:id="@+id/createProfileFragment"
+        android:name="com.nexters.checkareer.presentation.ui.createprofile.CreateProfileFragment1"
+        android:label="CreateProfileFragment" >
+        <action
+            android:id="@+id/action_createProfileFragment_to_completeProfileFragment"
+            app:destination="@id/completeProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeProfileFragment"
+        android:name="com.nexters.checkareer.presentation.ui.createprofile.CreateProfileFragment2"
+        android:label="CompleteProfileFragment" >
+        <argument
+            android:name="skillCategories"
+            app:argType="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect[]" />
+    </fragment>
+</navigation>

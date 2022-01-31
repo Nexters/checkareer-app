@@ -8,8 +8,11 @@
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.45625" />
         <entry key="app/src/main/res/font/opensans_font.xml" value="0.6067708333333334" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/create_profile_activity.xml" value="0.48802083333333335" />
+        <entry key="app/src/main/res/layout/complete_profile_activity.xml" value="0.22552083333333334" />
+        <entry key="app/src/main/res/layout/complete_profile_frag.xml" value="0.43385416666666665" />
+        <entry key="app/src/main/res/layout/create_profile_activity.xml" value="0.3701149425287356" />
         <entry key="app/src/main/res/layout/create_profile_frag.xml" value="0.48802083333333335" />
+        <entry key="app/src/main/res/layout/create_profile_frag_2.xml" value="0.5911458333333334" />
         <entry key="app/src/main/res/layout/home_activity.xml" value="0.5911458333333334" />
         <entry key="app/src/main/res/layout/home_frag.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/home_my_profile_item.xml" value="0.35572916666666665" />

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateProfileViewModel @Inject constructor(
+class CreateProfile1ViewModel @Inject constructor(
     val getSkillCategoryUseCase: GetSkillCategoryUseCase
 ) : ViewModel() {
 

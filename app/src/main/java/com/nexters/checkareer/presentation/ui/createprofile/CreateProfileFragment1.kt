@@ -4,33 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.nexters.checkareer.R
-import com.nexters.checkareer.databinding.CreateProfileFragBinding
-import com.nexters.checkareer.domain.category.Category
+import com.nexters.checkareer.databinding.CreateProfileFrag1Binding
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
-import com.nexters.checkareer.presentation.ui.home.adapter.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateProfileFragment : Fragment(), SkillCategoryListener {
+class CreateProfileFragment1 : Fragment(), SkillCategoryListener {
 
-    private val viewModel by viewModels<CreateProfileViewModel>()
-
-    private lateinit var viewDataBinding: CreateProfileFragBinding
-
-    private var selectedSkillCategories = mutableListOf<CategorySelect>()
+    private val viewModel by viewModels<CreateProfile1ViewModel>()
+    private lateinit var viewDataBinding: CreateProfileFrag1Binding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewDataBinding = CreateProfileFragBinding.inflate(inflater, container, false).apply {
+        viewDataBinding = CreateProfileFrag1Binding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
         }
         return viewDataBinding.root
@@ -43,11 +37,20 @@ class CreateProfileFragment : Fragment(), SkillCategoryListener {
         setupSkillListAdapter()
         setupSelectedSkillListAdapter()
 
+        viewDataBinding.buttonNext.setOnClickListener {
+            val action = CreateProfileFragment1Directions.actionCreateProfileFragmentToCompleteProfileFragment(viewModel.selectedSkillCategoryItems.value!!.toTypedArray())
+            Navigation.findNavController(view).navigate(action)
+        }
+
+        viewDataBinding.imageviewBack.setOnClickListener {
+            requireActivity().finish()
+        }
+
     }
 
     private fun setupSelectedSkillListAdapter() {
         viewDataBinding.recyclerviewSelectedSkillCategory.apply {
-            adapter = SkillCategoryAdapter(this@CreateProfileFragment)
+            adapter = SkillCategoryAdapter(this@CreateProfileFragment1)
         }
     }
 
@@ -59,7 +62,7 @@ class CreateProfileFragment : Fragment(), SkillCategoryListener {
                 justifyContent = JustifyContent.FLEX_START
             }
             setLayoutManager(layoutManager)
-            adapter = SkillCategoryAdapter(this@CreateProfileFragment)
+            adapter = SkillCategoryAdapter(this@CreateProfileFragment1)
         }
     }
 
@@ -68,28 +71,19 @@ class CreateProfileFragment : Fragment(), SkillCategoryListener {
     }
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = CreateProfileFragment()
-    }
-
     override fun onSkillCategoryClicked(item: CategorySelect, view: View) {
         if (!item.selected) {
-            println("add ${item.name} ${item.id}")
-            //view.findViewById<CardView>(R.id.cardview_skill_category).setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
             item.selected = true
             viewModel.addSelectedSkillCategoryItem(item)
-
-
         } else {
-            println("remove ${item.name} ${item.id}")
-            //view.findViewById<CardView>(R.id.cardview_skill_category).setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             item.selected = false
             viewModel.removeSelectedSkillCategoryItem(item)
-
-
         }
+    }
 
+    companion object {
+        @JvmStatic
+        fun newInstance() = CreateProfileFragment1()
     }
 
 
