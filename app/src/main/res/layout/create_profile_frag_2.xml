@@ -83,7 +83,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="이름을 입력해주세요."/>
+                    android:hint="이름을 입력해주세요." />
 
                 <TextView
                     android:layout_width="wrap_content"

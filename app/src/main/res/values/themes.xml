@@ -7,7 +7,7 @@
         <!-- For Android sdk versions 26+. -->
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/opensans_font</item>
         <!-- Target Android sdk versions < 26 and > 14. -->
-        <item name="fontFamily">@font/opensans_font</item>
+        <item name="fontFamily">@font/suit_font</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
