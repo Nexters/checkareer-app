@@ -1,12 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Checkareer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Checkareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!-- For Android sdk versions 26+. -->
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/opensans_font</item>
         <!-- Target Android sdk versions < 26 and > 14. -->
-        <item name="fontFamily">@font/opensans_font</item>
+        <item name="fontFamily">@font/suit_font</item>
     </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_sample_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.Checkareer</item>
+    </style>
+
 </resources>

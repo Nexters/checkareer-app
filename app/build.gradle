@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -74,5 +76,15 @@ dependencies {
 
     // Log
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Splash screen
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
+    // FlexboxLayout
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    // Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0'
 
 }

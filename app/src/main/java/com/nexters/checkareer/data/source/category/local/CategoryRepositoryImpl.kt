@@ -15,4 +15,8 @@ class CategoryRepositoryImpl @Inject constructor(
     override suspend fun findByUserId(userId: String): Result<List<Category>> {
         return local.findCategoriesByUserId(userId)
     }
+
+    override suspend fun findAllCategory(): Result<List<Category>> {
+        return local.findCategories()
+    }
 }
