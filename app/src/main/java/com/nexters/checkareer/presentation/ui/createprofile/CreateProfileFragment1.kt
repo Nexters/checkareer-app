@@ -50,7 +50,7 @@ class CreateProfileFragment1 : Fragment(), SkillCategoryListener {
 
     private fun setupSelectedSkillListAdapter() {
         viewDataBinding.recyclerviewSelectedSkillCategory.apply {
-            adapter = SkillCategoryAdapter(this@CreateProfileFragment1)
+            adapter = SkillCategoryAdapter(this@CreateProfileFragment1, "SELECTED_SKILL_LIST")
         }
     }
 
@@ -62,7 +62,7 @@ class CreateProfileFragment1 : Fragment(), SkillCategoryListener {
                 justifyContent = JustifyContent.FLEX_START
             }
             setLayoutManager(layoutManager)
-            adapter = SkillCategoryAdapter(this@CreateProfileFragment1)
+            adapter = SkillCategoryAdapter(this@CreateProfileFragment1, ".")
         }
     }
 
