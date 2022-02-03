@@ -8,6 +8,8 @@
 
         <import type="com.nexters.checkareer.R" />
 
+        <import type="android.graphics.Typeface" />
+
         <variable
             name="item"
             type="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect" />
@@ -24,13 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_margin="5dp"
-        android:onClick="@{(view) -> eventListener.onSkillCategoryClicked(item, view)}"
         android:orientation="vertical"
-        android:strokeWidth="@{item.selected}"
-        app:cardBackgroundColor="@color/transparent"
+        app:cardBackgroundColor="#FFD02C"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
-        app:strokeColor="@{item.selected ? @color/white : @color/light_gray}"
         tools:layout_width="200dp">
 
 
@@ -39,9 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:skillTextStyle='@{item.selected ? "bold" : "normal"}'
             android:text="@{item.name}"
-            android:textColor="@{item.selected ? @color/white : @color/light_gray}"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="16sp"
             tools:text="Android" />
 

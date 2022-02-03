@@ -15,7 +15,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_start"
@@ -39,7 +40,8 @@
             android:paddingEnd="20dp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
 
         <TextView
@@ -48,8 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="프로필 작성을 마루리 해보세요."
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/imageview_back" />
 
@@ -57,10 +60,11 @@
             android:id="@+id/textview_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:text="사용자 정보"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/textview_title" />
 
@@ -68,8 +72,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/textview_subtitle">
@@ -83,12 +88,24 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="이름을 입력해주세요." />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/transparent"
+                    android:hint="이름을 입력해주세요."
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="나를 나타내는 스킬 태그 TOP3" />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="나를 나타내는 스킬 태그 TOP3"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_selected_skill_category"
@@ -109,8 +126,14 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
+            android:backgroundTint="#71FFAA"
             android:elevation="0dp"
+            android:stateListAnimator="@null"
             android:text="다음"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start" />

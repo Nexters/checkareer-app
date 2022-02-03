@@ -14,4 +14,11 @@
     <color name="colorAccent">@color/purple_500</color>
     <color name="colorTextPrimary">@color/black</color>
 
+    <color name="backgroundColor">#222222</color>
+
+    <color name="light_gray">#CCCCCC</color>
+    <color name="point_color_1">#71FFAA</color>
+    <color name="transparent">#00FFFFFF</color>
+
+
 </resources>

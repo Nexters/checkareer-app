@@ -15,13 +15,14 @@
   ~ limitations under the License.
   -->
 
-<font-family xmlns:app="http://schemas.android.com/apk/res-auto">
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <font
         app:fontStyle="normal"
         app:fontWeight="400"
         app:font="@font/opensans_regular" />
     <font
-        app:fontStyle="normal"
+        android:fontStyle="normal"
         app:fontWeight="700"
         app:font="@font/opensans_semibold" />
 </font-family>

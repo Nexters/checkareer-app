@@ -45,7 +45,7 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
 
     private fun setupSelectedSkillListAdapter() {
         viewDataBinding.recyclerviewSelectedSkillCategory.apply {
-            adapter = SkillCategoryAdapter(this@CreateProfileFragment2)
+            adapter = SkillCategoryAdapter(this@CreateProfileFragment2, "PROFILE_SELECTED_SKILL_LIST")
         }
     }
 
