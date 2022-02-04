@@ -13,14 +13,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Checkareer">
         <activity
-            android:name=".view.MainActivity"
-            android:exported="true">
+            android:name=".presentation.ui.completeprofile.CompleteProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.createprofile.CreateProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.onboarding.OnBoardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.splash.SplashActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.ui.home.HomeActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

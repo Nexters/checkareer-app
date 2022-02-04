@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="com.nexters.checkareer.R" />
+
+        <import type="android.graphics.Typeface" />
+
+        <variable
+            name="item"
+            type="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect" />
+
+
+        <variable
+            name="eventListener"
+            type="com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_skill_category"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#FFD02C"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        tools:layout_width="200dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@{item.name}"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="Android" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

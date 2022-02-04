@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="com.nexters.checkareer.R" />
+
+        <variable
+            name="item"
+            type="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect" />
+
+
+        <variable
+            name="eventListener"
+            type="com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_skill_category"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:onClick="@{(view) -> eventListener.onSkillCategoryClicked(item, view)}"
+        android:orientation="vertical"
+        android:strokeWidth="@{item.selected}"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@{item.selected ? @color/white : @color/light_gray}"
+        tools:layout_width="200dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:skillTextStyle='@{item.selected ? "bold" : "normal"}'
+            android:text="@{item.name}"
+            android:textColor="@{item.selected ? @color/white : @color/light_gray}"
+            android:textSize="16sp"
+            tools:text="Android" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>
