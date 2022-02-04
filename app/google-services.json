@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "802735257890",
+    "project_id": "careery-97ac6",
+    "storage_bucket": "careery-97ac6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802735257890:android:8984c090cc959a451fcd7b",
+        "android_client_info": {
+          "package_name": "com.nexters.checkareer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802735257890-bsbs51vciuurl5lbv4j69c67ce4hbbbm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nexters.checkareer",
+            "certificate_hash": "65c33370e0b7d86c1550ec493aab708d4e89b41e"
+          }
+        },
+        {
+          "client_id": "802735257890-bcaf9gfccvqkr8197moqto7sscg36grf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa79SnD8yy75BoZRWvXOcvY6Zn8-xYT6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802735257890-bcaf9gfccvqkr8197moqto7sscg36grf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
