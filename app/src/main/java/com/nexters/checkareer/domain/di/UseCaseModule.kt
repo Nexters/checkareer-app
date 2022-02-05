@@ -3,6 +3,7 @@ package com.nexters.checkareer.domain.di
 import com.nexters.checkareer.domain.category.CategoryRepository
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
+import com.nexters.checkareer.domain.usecase.SaveProfileUseCase
 import com.nexters.checkareer.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -28,6 +29,13 @@ object UseCaseModule {
     ): GetSkillCategoryUseCase {
         return GetSkillCategoryUseCase(categoryRepository)
     }
+
+//    @Provides
+//    fun provideSaveProfileUseCase(
+//        userRepository: UserRepository,
+//    ): SaveProfileUseCase {
+//        return SaveProfileUseCase(userRepository)
+//    }
 
 
 }

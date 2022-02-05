@@ -1,5 +1,9 @@
 package com.nexters.checkareer.data.di
 
+import android.content.Context
+import androidx.room.Room
+import com.nexters.checkareer.data.adapter.db.AppDataBase
+import com.nexters.checkareer.data.adapter.db.dao.UserDao
 import com.nexters.checkareer.data.source.category.local.CategoryLocal
 import com.nexters.checkareer.data.source.category.local.CategoryLocalDataSource
 import com.nexters.checkareer.data.source.category.local.CategoryRepositoryImpl
@@ -12,6 +16,7 @@ import com.nexters.checkareer.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -43,26 +48,29 @@ object DataModule {
 
     @LocalUserDataSource
     @Provides
-    fun provideUserLocalDataSource(): UserDataSource {
-        return UserLocalDataSource()
+    fun provideUserLocalDataSource(userDao: UserDao): UserDataSource {
+        return UserLocalDataSource(userDao)
     }
 
     @Singleton
+
+
+    
     @LocalCategoryDataSource
     @Provides
     fun provideCategoryLocalDataSource(): CategoryLocal {
         return CategoryLocalDataSource()
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideDataBase(@ApplicationContext context: Context): AppDataBase {
-//        return Room.databaseBuilder(
-//            context.applicationContext,
-//            AppDataBase::class.java,
-//            "checkareer.db"
-//        ).build()
-//    }
+    @Singleton
+    @Provides
+    fun provideDb(@ApplicationContext context: Context): AppDataBase =
+        Room.databaseBuilder(context, AppDataBase::class.java, AppDataBase.DB_NAME).build()
+
+    @Singleton
+    @Provides
+    fun provideDao(database: AppDataBase) = database.userDao()
+
 
     @Singleton
     @Provides

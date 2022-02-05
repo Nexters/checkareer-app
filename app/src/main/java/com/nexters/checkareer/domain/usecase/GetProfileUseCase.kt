@@ -1,6 +1,7 @@
 package com.nexters.checkareer.domain.usecase
 
 import com.nexters.checkareer.domain.category.CategoryRepository
+import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.user.UserRepository
 import com.nexters.checkareer.domain.util.Result
 import com.nexters.checkareer.domain.util.getValue
@@ -15,9 +16,9 @@ class GetProfileUseCase @Inject constructor(
     suspend operator fun invoke(forceUpdate: Boolean = false): Result<Profile> {
         return try {
             val user = userRepository.findUser(forceUpdate).getValue()
-            val categories = categoryRepository.findByUserId(user.id).getValue()
+            val categories = categoryRepository.findByUserId("user.id").getValue()
 
-            Result.Success(Profile(user, categories))
+            Result.Success(Profile(User("", ""), categories))
         } catch (e: Exception) {
             Result.Error(e)
         }

@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.nexters.checkareer.data.adapter.db.data.UserProfileData
 import com.nexters.checkareer.databinding.CreateProfileFrag2Binding
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
 
     private val viewModel by viewModels<CreateProfile2ViewModel>()
@@ -36,6 +39,10 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         viewDataBinding.imageviewBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        viewDataBinding.buttonNext.setOnClickListener {
+            saveUserProfile()
+        }
     }
 
 
@@ -47,6 +54,15 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         viewDataBinding.recyclerviewSelectedSkillCategory.apply {
             adapter = SkillCategoryAdapter(this@CreateProfileFragment2, "PROFILE_SELECTED_SKILL_LIST")
         }
+    }
+
+    private fun saveUserProfile() = with(viewDataBinding) {
+        viewModel.saveUserProfile(
+            UserProfileData(
+                name = edittextName.text.toString(),
+                skills = viewModel.selectedSkillCategoryItems.value?.toList() ?: listOf()
+            )
+        )
     }
 
     companion object {

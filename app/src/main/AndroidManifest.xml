@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Checkareer">
         <activity
-            android:name=".presentation.ui.completeprofile.CompleteProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.createprofile.CreateProfileActivity"
             android:exported="false" />
         <activity
