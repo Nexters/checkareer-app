@@ -1,19 +1,23 @@
 package com.nexters.checkareer.presentation.ui.createprofile
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.nexters.checkareer.data.adapter.db.data.UserProfileData
+import com.nexters.checkareer.data.adapter.db.data.UserProfile
 import com.nexters.checkareer.databinding.CreateProfileFrag2Binding
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
@@ -33,7 +37,7 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLifecycleOwner()
-        viewModel.selectedSkillCategoryItems.value = args.skillCategories.take(3).toMutableList()
+        viewModel.setSelectedSkillItems(args.skillCategories.toList())
         setupSelectedSkillListAdapter()
 
         viewDataBinding.imageviewBack.setOnClickListener {
@@ -41,10 +45,10 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         }
 
         viewDataBinding.buttonNext.setOnClickListener {
-            saveUserProfile()
+            viewModel.saveUserProfile()
         }
+        setupEditTextEvent()
     }
-
 
     private fun setupLifecycleOwner() {
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
@@ -56,14 +60,35 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         }
     }
 
-    private fun saveUserProfile() = with(viewDataBinding) {
+    private fun setupEditTextEvent() {
+        viewDataBinding.edittextName.apply {
+            addTextChangedListener(object: TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.setName(s.toString())
+                }
+            })
+        }
+    }
+
+   /*private fun saveUserProfile() = with(viewDataBinding) {
         viewModel.saveUserProfile(
-            UserProfileData(
-                name = edittextName.text.toString(),
-                skills = viewModel.selectedSkillCategoryItems.value?.toList() ?: listOf()
+            UserProfile(
+                user = edittextName.text.toString(),
+                skills = viewModel.selectedSkillItems.value?.toList() ?: listOf()
             )
         )
-    }
+    }*/
 
     companion object {
         @JvmStatic

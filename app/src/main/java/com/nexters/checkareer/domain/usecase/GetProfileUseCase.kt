@@ -1,6 +1,6 @@
 package com.nexters.checkareer.domain.usecase
 
-import com.nexters.checkareer.domain.category.CategoryRepository
+import com.nexters.checkareer.domain.skill.SkillRepository
 import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.user.UserRepository
 import com.nexters.checkareer.domain.util.Result
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class GetProfileUseCase @Inject constructor(
     private val userRepository: UserRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: SkillRepository
 ) {
     suspend operator fun invoke(forceUpdate: Boolean = false): Result<Profile> {
         return try {

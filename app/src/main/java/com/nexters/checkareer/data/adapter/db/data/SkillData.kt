@@ -18,5 +18,5 @@ data class SkillData(
     val name: String,
 
     @ColumnInfo(name = "parentId")
-    val parentId: String,
+    val parentId: String? = null,
 )

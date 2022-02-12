@@ -1,9 +1,10 @@
 package com.nexters.checkareer.data.source.user
 
-import com.nexters.checkareer.data.adapter.db.data.UserProfileData
+import com.nexters.checkareer.data.adapter.db.data.UserProfile
 import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.user.UserRepository
 import com.nexters.checkareer.domain.util.Result
+import com.nexters.checkareer.domain.vo.Profile
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -15,17 +16,16 @@ class UserRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserRepository {
 
-    override suspend fun findUser(forceUpdate: Boolean): Result<UserProfileData> {
-        return local.findUser()
+    override suspend fun findUser(forceUpdate: Boolean): Result<UserProfile> {
+        return local.findUserProfile()
     }
 
     override suspend fun findUsers(forceUpdate: Boolean): Result<List<User>> {
         return Result.Success(emptyList())
     }
 
-    override suspend fun insertUser(userProfileData: UserProfileData) = withContext(ioDispatcher) {
-        local.insertUserProfile(userProfileData)
+    override suspend fun insertUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
+        return@withContext local.insertUserProfile(profile)
     }
-
 
 }

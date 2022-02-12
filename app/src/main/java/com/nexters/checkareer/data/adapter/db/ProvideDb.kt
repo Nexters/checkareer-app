@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 
 
-fun provideDb(context: Context): AppDataBase =
-    Room.databaseBuilder(context, AppDataBase::class.java, AppDataBase.DB_NAME).build()
+fun provideDb(context: Context): AppDatabase =
+    Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DB_NAME).build()
 
-fun provideDao(database: AppDataBase) = database.userDao()
+fun provideDao(database: AppDatabase) = database.userDao()

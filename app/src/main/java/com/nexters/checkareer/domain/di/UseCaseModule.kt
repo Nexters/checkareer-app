@@ -1,6 +1,6 @@
 package com.nexters.checkareer.domain.di
 
-import com.nexters.checkareer.domain.category.CategoryRepository
+import com.nexters.checkareer.domain.skill.SkillRepository
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
 import com.nexters.checkareer.domain.usecase.SaveProfileUseCase
@@ -18,24 +18,25 @@ object UseCaseModule {
     @Provides
     fun provideGetProfileUseCase(
         userRepository: UserRepository,
-        categoryRepository: CategoryRepository
+        skillRepository: SkillRepository
     ): GetProfileUseCase {
-        return GetProfileUseCase(userRepository, categoryRepository)
+        return GetProfileUseCase(userRepository, skillRepository)
     }
 
     @Provides
     fun provideGetSkillCategoryUseCase(
-        categoryRepository: CategoryRepository
+        categoryRepository: SkillRepository
     ): GetSkillCategoryUseCase {
         return GetSkillCategoryUseCase(categoryRepository)
     }
 
-//    @Provides
-//    fun provideSaveProfileUseCase(
-//        userRepository: UserRepository,
-//    ): SaveProfileUseCase {
-//        return SaveProfileUseCase(userRepository)
-//    }
+    @Provides
+    fun provideSaveProfileUseCase(
+        userRepository: UserRepository,
+        skillRepository: SkillRepository
+    ): SaveProfileUseCase {
+        return SaveProfileUseCase(userRepository, skillRepository)
+    }
 
 
 }

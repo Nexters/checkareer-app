@@ -5,12 +5,12 @@ import androidx.room.Junction
 import androidx.room.Relation
 
 
-data class RelationUserSkill(
+data class UserProfile(
     @Embedded val user: UserData,
     @Relation(
         parentColumn = "userId",
         entityColumn = "skillId",
         associateBy = Junction(UserSkillData::class)
     )
-    private val skills: List<SkillData>
+    val skills: List<SkillData>
 )

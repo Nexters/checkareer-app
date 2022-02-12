@@ -4,13 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nexters.checkareer.R
-import com.nexters.checkareer.data.adapter.db.data.UserProfileData
-import com.nexters.checkareer.domain.category.Category
-import com.nexters.checkareer.domain.usecase.GetProfileUseCase
-import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
+import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.usecase.SaveProfileUseCase
-import com.nexters.checkareer.domain.util.getValue
+import com.nexters.checkareer.domain.user.User
+import com.nexters.checkareer.domain.vo.Profile
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,12 +18,32 @@ class CreateProfile2ViewModel @Inject constructor(
     private val saveProfileUseCase: SaveProfileUseCase
 ) : ViewModel() {
 
-    private val _selectedSkillCategoryItems = MutableLiveData<MutableList<CategorySelect>>()
-    val selectedSkillCategoryItems = _selectedSkillCategoryItems
+    private val _selectedSkillItems = MutableLiveData<List<CategorySelect>>()
+    val selectedSkillItems: LiveData<List<CategorySelect>> = _selectedSkillItems
 
+    private val _name = MutableLiveData<String>()
+    val name: LiveData<String> = _name
 
-    fun saveUserProfile(userProfileData: UserProfileData) = viewModelScope.launch {
-        saveProfileUseCase.invoke(userProfileData)
+    fun setSelectedSkillItems(categorySelect: List<CategorySelect>) {
+        _selectedSkillItems.value = categorySelect
+    }
+
+    fun setName(name: String) {
+        _name.value = name
+    }
+
+    fun saveUserProfile() = viewModelScope.launch {
+        name.value?.let { name ->
+            selectedSkillItems.value?.let { skill ->
+                val profile = Profile(
+                    User(name = name),
+                    skill.map {
+                        Skill(it.id, it.name)
+                    }
+                )
+                saveProfileUseCase.invoke(profile)
+            }
+        }
     }
 
 }

@@ -3,13 +3,9 @@ package com.nexters.checkareer.presentation.ui.createprofile.holder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.nexters.checkareer.databinding.HomeMyProfileItemBinding
 import com.nexters.checkareer.databinding.SkillCategoryItemBinding
-import com.nexters.checkareer.domain.category.Category
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
-import com.nexters.checkareer.presentation.ui.home.listener.HomeListener
-import com.nexters.checkareer.presentation.ui.home.model.MyProfile
 
 class SkillViewHolder constructor(val binding: SkillCategoryItemBinding) :
     RecyclerView.ViewHolder(binding.root) {

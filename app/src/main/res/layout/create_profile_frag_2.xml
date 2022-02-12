@@ -111,7 +111,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_selected_skill_category"
                     style="@style/SkillCategoryRecyclerView"
-                    selectedSkillItems="@{viewmodel.selectedSkillCategoryItems}"
+                    selectedSkillItems="@{viewmodel.selectedSkillItems}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
