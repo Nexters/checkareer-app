@@ -1,21 +1,13 @@
 package com.nexters.checkareer.presentation.ui.createprofile.binding
 
-import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.nexters.checkareer.domain.category.Category
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.util.fromDpToPx
 import android.graphics.Typeface
-
-import android.R.style
-
-
 
 
 @BindingAdapter("skillItems")

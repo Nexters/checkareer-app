@@ -86,6 +86,7 @@
                 android:padding="10dp">
 
                 <EditText
+                    android:id="@+id/edittext_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -110,7 +111,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_selected_skill_category"
                     style="@style/SkillCategoryRecyclerView"
-                    selectedSkillItems="@{viewmodel.selectedSkillCategoryItems}"
+                    selectedSkillItems="@{viewmodel.selectedSkillItems}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

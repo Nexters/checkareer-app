@@ -1,17 +1,24 @@
 package com.nexters.checkareer.data.di
 
-import com.nexters.checkareer.data.source.category.local.CategoryLocal
-import com.nexters.checkareer.data.source.category.local.CategoryLocalDataSource
-import com.nexters.checkareer.data.source.category.local.CategoryRepositoryImpl
+import android.content.Context
+import androidx.room.Room
+import com.nexters.checkareer.data.adapter.db.AppDatabase
+import com.nexters.checkareer.data.adapter.db.dao.SkillDao
+import com.nexters.checkareer.data.adapter.db.dao.UserDao
+import com.nexters.checkareer.data.adapter.db.dao.UserSkillDao
+import com.nexters.checkareer.data.source.skill.local.SkillLocal
+import com.nexters.checkareer.data.source.skill.local.SkillLocalDataSource
+import com.nexters.checkareer.data.source.skill.local.SkillRepositoryImpl
 import com.nexters.checkareer.data.source.user.UserDataSource
 import com.nexters.checkareer.data.source.user.UserRepositoryImpl
 import com.nexters.checkareer.data.source.user.local.UserLocalDataSource
 import com.nexters.checkareer.data.source.user.remote.UserRemoteDataSource
-import com.nexters.checkareer.domain.category.CategoryRepository
+import com.nexters.checkareer.domain.skill.SkillRepository
 import com.nexters.checkareer.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -43,26 +50,26 @@ object DataModule {
 
     @LocalUserDataSource
     @Provides
-    fun provideUserLocalDataSource(): UserDataSource {
-        return UserLocalDataSource()
+    fun provideUserLocalDataSource(userDao: UserDao, userSkillDao: UserSkillDao): UserDataSource {
+        return UserLocalDataSource(userDao, userSkillDao)
     }
 
-    @Singleton
+    
     @LocalCategoryDataSource
     @Provides
-    fun provideCategoryLocalDataSource(): CategoryLocal {
-        return CategoryLocalDataSource()
+    fun provideCategoryLocalDataSource(skillDao: SkillDao): SkillLocal {
+        return SkillLocalDataSource(skillDao)
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideDataBase(@ApplicationContext context: Context): AppDataBase {
-//        return Room.databaseBuilder(
-//            context.applicationContext,
-//            AppDataBase::class.java,
-//            "checkareer.db"
-//        ).build()
-//    }
+    /*@Singleton
+    @Provides
+    fun provideDb(@ApplicationContext context: Context): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DB_NAME).build()
+
+    @Singleton
+    @Provides
+    fun provideDao(database: AppDatabase) = database.userDao()*/
+
 
     @Singleton
     @Provides
@@ -88,10 +95,10 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideCategoryRepository(
-        @DataModule.LocalCategoryDataSource local: CategoryLocal,
+        @DataModule.LocalCategoryDataSource local: SkillLocal,
         ioDispatcher: CoroutineDispatcher
-    ): CategoryRepository {
-        return CategoryRepositoryImpl(
+    ): SkillRepository {
+        return SkillRepositoryImpl(
             local, ioDispatcher
         )
     }

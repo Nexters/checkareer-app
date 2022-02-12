@@ -9,7 +9,7 @@ fun Profile.toHomes(): List<Home> {
 
     val result = ArrayList<Home>()
 
-    result.add(Home(Home.HomeType.MY_PROFILE, MyProfile(this.user.name, this.category.map { Category(it.name) })))
+    result.add(Home(Home.HomeType.MY_PROFILE, MyProfile(this.user.name, this.skills.map { Category(it.name) })))
 
     return result
 }
