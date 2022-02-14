@@ -16,8 +16,10 @@
         <entry key="app/src/main/res/layout/create_profile_frag.xml" value="0.48802083333333335" />
         <entry key="app/src/main/res/layout/create_profile_frag_1.xml" value="0.360586319218241" />
         <entry key="app/src/main/res/layout/create_profile_frag_2.xml" value="0.360586319218241" />
-        <entry key="app/src/main/res/layout/home_activity.xml" value="0.5911458333333334" />
-        <entry key="app/src/main/res/layout/home_frag.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/home_activity.xml" value="0.19381107491856678" />
+        <entry key="app/src/main/res/layout/home_frag.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/home_frag_2.xml" value="0.3697068403908795" />
+        <entry key="app/src/main/res/layout/home_frag_3.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/home_my_profile_item.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/home_other_profile_item.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/loading_animation_layout.xml" value="0.35572916666666665" />
@@ -27,6 +29,7 @@
         <entry key="app/src/main/res/layout/skill_category_item_profile.xml" value="0.36414473684210524" />
         <entry key="app/src/main/res/layout/skill_category_item_profle.xml" value="0.36414473684210524" />
         <entry key="app/src/main/res/layout/skill_category_item_selected.xml" value="0.36414473684210524" />
+        <entry key="app/src/main/res/layout/skill_category_item_vertical.xml" value="0.37335526315789475" />
       </map>
     </option>
   </component>

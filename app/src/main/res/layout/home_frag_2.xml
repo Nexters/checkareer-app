@@ -5,12 +5,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <variable
-            name="viewmodel"
-            type="com.nexters.checkareer.presentation.ui.createprofile.CreateProfile2ViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,51 +27,38 @@
             app:layout_constraintGuide_percent="0.95" />
 
         <ImageView
-            android:id="@+id/imageview_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/imageview_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:paddingEnd="20dp"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_sample_icon"
+            app:layout_constraintEnd_toStartOf="@id/imageview_delete"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
-
-        <TextView
-            android:id="@+id/textview_title"
+        <ImageView
+            android:id="@+id/imageview_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="프로필 작성을 마루리 해보세요."
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/imageview_back" />
-
-        <TextView
-            android:id="@+id/textview_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="사용자 정보"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/textview_title" />
-
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_sample_icon"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview_my_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
+            app:cardBackgroundColor="@color/cardBackgroundColor"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/textview_subtitle">
+            app:layout_constraintTop_toBottomOf="@id/imageview_delete">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,18 +66,19 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <EditText
-                    android:id="@+id/edittext_name"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textview_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@color/transparent"
-                    android:hint="이름을 입력해주세요."
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/light_gray"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="이름" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -104,16 +86,16 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="10dp"
                     android:text="나를 나타내는 스킬 태그 TOP3"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_selected_skill_category"
-                    style="@style/SkillCategoryRecyclerView"
-                    selectedSkillItems="@{viewmodel.selectedSkillItems}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/recyclerview_selected_skill_category"-->
+                <!--                    style="@style/SkillCategoryRecyclerView"-->
+                <!--                    selectedSkillItems="@{viewmodel.selectedSkillItems}"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content" />-->
 
 
             </LinearLayout>
@@ -122,22 +104,30 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_next"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/point_color_1"
-            android:elevation="0dp"
-            android:stateListAnimator="@null"
-            android:text="다음"
-            android:textColor="@color/black"
+        <TextView
+            android:id="@+id/textview_skill_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/skill_information"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:cornerRadius="45dp"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_selected_skill_category"
+            style="@style/SkillListCategoryRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start" />
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/textview_skill_information"
+            tools:listitem="@layout/skill_category_item_vertical" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

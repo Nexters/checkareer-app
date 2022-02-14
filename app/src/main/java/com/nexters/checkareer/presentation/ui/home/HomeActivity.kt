@@ -16,4 +16,6 @@ class HomeActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
+
 }

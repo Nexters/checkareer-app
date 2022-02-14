@@ -1,5 +1,6 @@
 package com.nexters.checkareer.presentation.ui.createprofile
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,7 @@ import com.nexters.checkareer.databinding.CreateProfileFrag2Binding
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
+import com.nexters.checkareer.presentation.ui.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -46,6 +48,9 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
 
         viewDataBinding.buttonNext.setOnClickListener {
             viewModel.saveUserProfile()
+            val intent = Intent(requireContext(), HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            startActivity(intent)
         }
         setupEditTextEvent()
     }
