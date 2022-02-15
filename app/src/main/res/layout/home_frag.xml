@@ -19,6 +19,17 @@
         android:background="@color/backgroundColor"
         tools:context=".presentation.ui.home.HomeFragment">
 
+        <ImageView
+            android:id="@+id/imageview_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
 
         <com.google.android.material.tabs.TabLayout
@@ -26,40 +37,40 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/backgroundColor"
-            app:tabTextColor="@color/white"
-            app:tabRippleColor="@null"
-            app:tabIndicatorColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabMode="fixed"/>
+            app:layout_constraintTop_toBottomOf="@id/imageview_menu"
+            app:tabIndicatorColor="@color/white"
+            app:tabMode="fixed"
+            app:tabRippleColor="@null"
+            app:tabTextColor="@color/white" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager_home"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout_home"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout_home" />
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/home_recyclerview"-->
-<!--            style="@style/HomeRecyclerView"-->
-<!--            homeItems="@{viewmodel.items}"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/home_recyclerview"-->
+        <!--            style="@style/HomeRecyclerView"-->
+        <!--            homeItems="@{viewmodel.items}"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent" />-->
 
-<!--        <com.nexters.checkareer.presentation.widget.LoadingView-->
-<!--            android:id="@+id/progress_bar"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:visibility="@{viewmodel.dataLoading ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <!--        <com.nexters.checkareer.presentation.widget.LoadingView-->
+        <!--            android:id="@+id/progress_bar"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:visibility="@{viewmodel.dataLoading ? View.VISIBLE : View.GONE}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
