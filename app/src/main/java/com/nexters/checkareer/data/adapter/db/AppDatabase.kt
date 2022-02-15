@@ -2,19 +2,18 @@ package com.nexters.checkareer.data.adapter.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.nexters.checkareer.data.adapter.db.dao.SkillDao
 import com.nexters.checkareer.data.adapter.db.dao.UserDao
 import com.nexters.checkareer.data.adapter.db.dao.UserSkillDao
 import com.nexters.checkareer.data.adapter.db.data.SkillData
 import com.nexters.checkareer.data.adapter.db.data.UserData
-import com.nexters.checkareer.data.adapter.db.data.UserSkillData
+import com.nexters.checkareer.data.adapter.db.data.UserAndSkillData
 
 @Database(
     entities = [
         UserData::class,
         SkillData::class,
-        UserSkillData::class
+        UserAndSkillData::class
     ],
     version = 1,
     exportSchema = false
