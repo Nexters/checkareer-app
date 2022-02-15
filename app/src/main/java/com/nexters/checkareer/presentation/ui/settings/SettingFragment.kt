@@ -25,6 +25,14 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupCloseButton()
+    }
+
+    private fun setupCloseButton() {
+        viewDataBinding.imageviewClose.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     companion object {
