@@ -26,6 +26,8 @@
         <entry key="app/src/main/res/layout/loading_animation_layout.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/onboarding_activity.xml" value="0.5911458333333334" />
         <entry key="app/src/main/res/layout/onboarding_frag.xml" value="0.360586319218241" />
+        <entry key="app/src/main/res/layout/setting_activity.xml" value="0.28157894736842104" />
+        <entry key="app/src/main/res/layout/setting_frag.xml" value="0.28157894736842104" />
         <entry key="app/src/main/res/layout/skill_category_item.xml" value="0.5765625" />
         <entry key="app/src/main/res/layout/skill_category_item_profile.xml" value="0.36414473684210524" />
         <entry key="app/src/main/res/layout/skill_category_item_profle.xml" value="0.36414473684210524" />

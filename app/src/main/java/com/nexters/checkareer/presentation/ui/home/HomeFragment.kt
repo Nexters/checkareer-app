@@ -1,5 +1,6 @@
 package com.nexters.checkareer.presentation.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.nexters.checkareer.presentation.ui.home.adapter.HomePageAdapter
 import com.nexters.checkareer.presentation.ui.home.listener.HomeListener
 import com.nexters.checkareer.presentation.ui.home.model.MyProfile
 import com.nexters.checkareer.presentation.ui.home.model.OtherProfile
+import com.nexters.checkareer.presentation.ui.settings.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,12 +44,19 @@ class HomeFragment : Fragment(), HomeListener {
         setupListAdapter()
         setupViewPagerAdapter()
         setupTabLayout()
+        setupSettingButton()
     }
 
     private fun setupListAdapter() {
 //        viewDataBinding.homeRecyclerview.apply {
 //            adapter = HomeAdapter(this@HomeFragment)
 //        }
+    }
+
+    private fun setupSettingButton() {
+        viewDataBinding.imageviewMenu.setOnClickListener {
+            startActivity(Intent(requireContext(), SettingActivity::class.java))
+        }
     }
 
 
