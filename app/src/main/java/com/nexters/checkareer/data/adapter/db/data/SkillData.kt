@@ -12,13 +12,8 @@ const val SKILL_TABLE = "skill"
 @Entity(tableName = SKILL_TABLE)
 data class SkillData(
     @PrimaryKey
-    @ColumnInfo(name = "skillId")
     val skillId: String,
-
-    @ColumnInfo(name = "name")
     val name: String,
-
-    @ColumnInfo(name = "parentId")
     val parentId: String? = null,
 ) {
     fun toEntity(): Skill {

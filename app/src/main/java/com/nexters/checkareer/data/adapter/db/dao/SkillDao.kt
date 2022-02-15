@@ -7,6 +7,6 @@ import com.nexters.checkareer.data.adapter.db.data.SkillData
 interface SkillDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveSkill(skillData: List<SkillData>)
+    suspend fun saveSkills(skillData: List<SkillData>)
 
 }
