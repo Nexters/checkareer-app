@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">checkareer</string>
 
+    <string name="my_profile">나의 프로필</string>
+    <string name="friend_profile">남의 프로필</string>
+
+    <string name="skill_information">스킬 정보</string>
+
+    <string name="next">다음</string>
+    <string name="my_skill_top_three">나를 나타내는 스킬 태그 TOP3</string>
+    <string name="please_insert_name">이름을 입력해주세요.</string>
+    <string name="finish_your_profile">프로필 작성을 마루리 해보세요.</string>
+    <string name="user_information">사용자 정보</string>
+    <string name="please_select_skills">스킬을 선택해주세요.</string>
 </resources>

@@ -15,10 +15,12 @@
     <color name="colorTextPrimary">@color/black</color>
 
     <color name="backgroundColor">#222222</color>
+    <color name="cardBackgroundColor">#373737</color>
+    <color name="light_gray">#999999</color>
 
-    <color name="light_gray">#CCCCCC</color>
-    <color name="point_color_1">#71FFAA</color>
+    <color name="point_color_1">#EAFF6A</color>
     <color name="transparent">#00FFFFFF</color>
+
 
 
 </resources>

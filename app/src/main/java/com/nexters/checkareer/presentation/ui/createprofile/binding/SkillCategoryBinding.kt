@@ -8,6 +8,8 @@ import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategor
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.util.fromDpToPx
 import android.graphics.Typeface
+import com.nexters.checkareer.domain.skill.Skill
+import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 
 
 @BindingAdapter("skillItems")
@@ -26,11 +28,31 @@ fun setSelectedSkillItems(recyclerView: RecyclerView, items: List<CategorySelect
     }
 }
 
+@BindingAdapter("mySkillTopThreeItems")
+fun setMySkillTopThreeItems(recyclerView: RecyclerView, items: List<Skill>?) {
+    (recyclerView.adapter as? MySkillAdapter)?.run {
+        submitList(items?.take(3) ?: listOf())
+        notifyDataSetChanged()
+    }
+}
+
+@BindingAdapter("mySkillItems")
+fun setMySkillItems(recyclerView: RecyclerView, items: List<Skill>?) {
+    (recyclerView.adapter as? MySkillAdapter)?.run {
+        submitList(items)
+        notifyDataSetChanged()
+    }
+}
+
+
+
+
 
 @BindingAdapter("android:strokeWidth")
 fun setStrokeWidth(view: MaterialCardView, selected: Boolean) {
     view.strokeWidth = if(selected) 2F.fromDpToPx() else 1F.fromDpToPx()
 }
+
 
 @BindingAdapter("android:skillTextStyle")
 fun setTypeFace(textView: TextView, style: String) {

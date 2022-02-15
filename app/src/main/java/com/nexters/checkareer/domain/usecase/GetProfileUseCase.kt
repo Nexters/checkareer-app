@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 class GetProfileUseCase @Inject constructor(
     private val userRepository: UserRepository,
-    private val categoryRepository: SkillRepository
+    private val skillRepository: SkillRepository,
 ) {
     suspend operator fun invoke(forceUpdate: Boolean = false): Result<Profile> {
         return try {
             val user = userRepository.findUser(forceUpdate).getValue()
-            val categories = categoryRepository.findByUserId("user.id").getValue()
+            val skills = skillRepository.findByUserId("user.id").getValue()
 
-            Result.Success(Profile(User("", ""), categories))
+            Result.Success(Profile(User("", ""), skills))
         } catch (e: Exception) {
             Result.Error(e)
         }

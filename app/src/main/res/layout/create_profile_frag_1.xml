@@ -51,9 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="스킬을 선택해보세요"
+            android:text="@string/please_select_skills"
             android:textColor="@color/white"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/imageview_back" />
 
@@ -61,10 +62,12 @@
             android:id="@+id/textview_selected_skill_category_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:text="@{Integer.toString(viewmodel.selectedSkillCategoryItems.size())}"
             android:textColor="@color/white"
             android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/textview_title"
             app:layout_constraintStart_toEndOf="@id/textview_title" />
 
@@ -75,6 +78,8 @@
             android:text="/10 개"
             android:textColor="@color/white"
             android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/textview_title"
             app:layout_constraintStart_toEndOf="@id/textview_selected_skill_category_count" />
 
@@ -86,6 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
+            android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/textview_title" />
@@ -109,14 +115,14 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="#71FFAA"
+            android:backgroundTint="@color/point_color_1"
             android:elevation="0dp"
             android:stateListAnimator="@null"
             android:text="다음"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:cornerRadius="12dp"
+            app:cornerRadius="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start" />
