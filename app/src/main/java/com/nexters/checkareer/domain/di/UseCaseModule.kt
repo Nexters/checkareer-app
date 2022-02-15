@@ -17,10 +17,9 @@ object UseCaseModule {
 
     @Provides
     fun provideGetProfileUseCase(
-        userRepository: UserRepository,
-        skillRepository: SkillRepository
+        userRepository: UserRepository
     ): GetProfileUseCase {
-        return GetProfileUseCase(userRepository, skillRepository)
+        return GetProfileUseCase(userRepository)
     }
 
     @Provides

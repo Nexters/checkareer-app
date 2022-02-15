@@ -21,7 +21,7 @@ data class UserData(
     @ColumnInfo(name = "createdAt", defaultValue = "CURRENT_TIMESTAMP")
     val createdAt: Long = System.currentTimeMillis()
 ) {
-    fun UserData.toEntity(): User {
+    fun toEntity(): User {
         return User(userId, name)
     }
 }

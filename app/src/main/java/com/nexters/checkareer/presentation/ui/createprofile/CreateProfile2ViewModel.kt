@@ -41,7 +41,7 @@ class CreateProfile2ViewModel @Inject constructor(
                         Skill(it.id, it.name)
                     }
                 )
-                saveProfileUseCase.invoke(profile)
+                saveProfileUseCase(profile)
             }
         }
     }
