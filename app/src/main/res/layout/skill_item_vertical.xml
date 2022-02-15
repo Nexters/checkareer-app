@@ -12,12 +12,9 @@
 
         <variable
             name="item"
-            type="com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect" />
+            type="com.nexters.checkareer.domain.skill.Skill" />
 
 
-        <variable
-            name="eventListener"
-            type="com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener" />
     </data>
 
 

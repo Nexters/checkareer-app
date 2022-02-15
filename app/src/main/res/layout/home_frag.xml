@@ -19,6 +19,8 @@
         android:background="@color/backgroundColor"
         tools:context=".presentation.ui.home.HomeFragment">
 
+
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout_home"
             android:layout_width="0dp"

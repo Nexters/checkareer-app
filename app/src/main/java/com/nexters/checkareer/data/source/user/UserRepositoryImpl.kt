@@ -16,12 +16,12 @@ class UserRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserRepository {
 
-    override suspend fun findUser(forceUpdate: Boolean): Result<UserProfile> {
-        return local.findUserProfile()
+    override suspend fun findUser(forceUpdate: Boolean): Result<UserProfile> = withContext(ioDispatcher)  {
+        return@withContext local.findUserProfile()
     }
 
-    override suspend fun findUsers(forceUpdate: Boolean): Result<List<User>> {
-        return Result.Success(emptyList())
+    override suspend fun findUsers(forceUpdate: Boolean): Result<List<User>> = withContext(ioDispatcher)  {
+        return@withContext Result.Success(emptyList())
     }
 
     override suspend fun insertUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {

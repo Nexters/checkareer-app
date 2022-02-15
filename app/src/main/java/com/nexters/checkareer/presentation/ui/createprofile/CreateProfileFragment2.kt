@@ -14,10 +14,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.nexters.checkareer.data.adapter.db.data.UserProfile
 import com.nexters.checkareer.databinding.CreateProfileFrag2Binding
+import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
 import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCategoryListener
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.presentation.ui.home.HomeActivity
+import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -39,8 +41,10 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLifecycleOwner()
-        viewModel.setSelectedSkillItems(args.skillCategories.toList())
-        setupSelectedSkillListAdapter()
+        viewModel.setSelectedSkillItems(args.skillCategories.toList().map { Skill(it.id, it.name) })
+        setupMySkillTopThreeAdapter()
+        setupMySkillAdapter()
+        setupEditTextEvent()
 
         viewDataBinding.imageviewBack.setOnClickListener {
             findNavController().popBackStack()
@@ -49,25 +53,29 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         viewDataBinding.buttonNext.setOnClickListener {
             viewModel.saveUserProfile()
             val intent = Intent(requireContext(), HomeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             startActivity(intent)
         }
-        setupEditTextEvent()
     }
 
     private fun setupLifecycleOwner() {
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
     }
 
-    private fun setupSelectedSkillListAdapter() {
-        viewDataBinding.recyclerviewSelectedSkillCategory.apply {
-            adapter = SkillCategoryAdapter(this@CreateProfileFragment2, "PROFILE_SELECTED_SKILL_LIST")
+    private fun setupMySkillAdapter() {
+        viewDataBinding.recyclerviewMySkills.apply {
+            adapter = MySkillAdapter("SKILL_LIST")
+        }
+    }
+
+    private fun setupMySkillTopThreeAdapter() {
+        viewDataBinding.recyclerviewMySkillsTopThree.apply {
+            adapter = MySkillAdapter("SKILL_TOP_THREE_LIST")
         }
     }
 
     private fun setupEditTextEvent() {
         viewDataBinding.edittextName.apply {
-            addTextChangedListener(object: TextWatcher {
+            addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -86,14 +94,14 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         }
     }
 
-   /*private fun saveUserProfile() = with(viewDataBinding) {
-        viewModel.saveUserProfile(
-            UserProfile(
-                user = edittextName.text.toString(),
-                skills = viewModel.selectedSkillItems.value?.toList() ?: listOf()
-            )
-        )
-    }*/
+    /*private fun saveUserProfile() = with(viewDataBinding) {
+         viewModel.saveUserProfile(
+             UserProfile(
+                 user = edittextName.text.toString(),
+                 skills = viewModel.selectedSkillItems.value?.toList() ?: listOf()
+             )
+         )
+     }*/
 
     companion object {
         @JvmStatic

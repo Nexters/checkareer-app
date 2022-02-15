@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewmodel"
+            type="com.nexters.checkareer.presentation.ui.home.HomeViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,17 +89,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="10dp"
-                    android:text="나를 나타내는 스킬 태그 TOP3"
+                    android:text="@string/my_skill_top_three"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <!--                <androidx.recyclerview.widget.RecyclerView-->
-                <!--                    android:id="@+id/recyclerview_selected_skill_category"-->
-                <!--                    style="@style/SkillCategoryRecyclerView"-->
-                <!--                    selectedSkillItems="@{viewmodel.selectedSkillItems}"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content" />-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_my_skills_top_three"
+                    style="@style/SkillCategoryRecyclerView"
+                    mySkillTopThreeItems="@{viewmodel.skills}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
@@ -117,8 +121,9 @@
             app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_selected_skill_category"
-            style="@style/SkillListCategoryRecyclerView"
+            android:id="@+id/recyclerview_my_skills"
+            style="@style/SkillListRecyclerView"
+            mySkillItems="@{viewmodel.skills}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
@@ -127,7 +132,7 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/textview_skill_information"
-            tools:listitem="@layout/skill_category_item_vertical" />
+            tools:listitem="@layout/skill_item_vertical" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
