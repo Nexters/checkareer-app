@@ -9,4 +9,7 @@ interface UserDataSource {
     suspend fun findUserProfile(): Result<UserProfile>
 
     suspend fun insertUserProfile(profile: Profile): Result<Unit>
+
+    suspend fun deleteUserProfile(profile: Profile): Result<Unit>
+
 }

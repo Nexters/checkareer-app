@@ -8,4 +8,7 @@ interface UserRepository {
     suspend fun findUserProfile(forceUpdate: Boolean): Result<Profile>
 
     suspend fun insertUser(profile: Profile): Result<Unit>
+
+    suspend fun deleteUser(profile: Profile): Result<Unit>
+
 }
