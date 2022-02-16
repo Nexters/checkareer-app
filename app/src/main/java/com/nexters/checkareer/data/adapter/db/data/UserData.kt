@@ -12,16 +12,14 @@ const val USER_TABLE = "user"
 @Entity(tableName = USER_TABLE)
 data class UserData(
     @PrimaryKey
-    @ColumnInfo(name = "userId")
     val userId: String = UUID.randomUUID().toString(),
 
-    @ColumnInfo(name = "name")
     val name: String = "anonymous",
 
     @ColumnInfo(name = "createdAt", defaultValue = "CURRENT_TIMESTAMP")
     val createdAt: Long = System.currentTimeMillis()
 ) {
-    fun UserData.toEntity(): User {
+    fun toEntity(): User {
         return User(userId, name)
     }
 }
