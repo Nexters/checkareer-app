@@ -73,11 +73,11 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/button_create_profile"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
+            android:layout_width="147dp"
+            android:layout_height="48dp"
             android:layout_marginTop="30dp"
-            app:cardBackgroundColor="#71FFAA"
-            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/point_color_1"
+            app:cardCornerRadius="24dp"
             app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="@id/textview_title"
             app:layout_constraintTop_toBottomOf="@id/textview_subtitle">

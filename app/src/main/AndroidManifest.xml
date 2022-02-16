@@ -13,8 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Checkareer">
         <activity
-            android:name=".presentation.ui.createprofile.CreateProfileActivity"
+            android:name=".presentation.ui.login.LoginActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.ui.settings.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.createprofile.CreateProfileActivity"
+            android:exported="false"
+            android:noHistory="true" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingActivity"
             android:exported="false" />

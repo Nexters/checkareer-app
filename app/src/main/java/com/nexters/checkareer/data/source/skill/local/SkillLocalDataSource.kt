@@ -19,7 +19,9 @@ class SkillLocalDataSource(
         return Result.Success(
             listOf(
                 Skill("1", "Android"),
-                Skill("2", "IOS")
+                Skill("2", "IOS"),
+                Skill("3", "웹 개발"),
+                Skill("4", "프로토타이핑"),
             )
         )
     }

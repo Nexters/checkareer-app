@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "802735257890",
+    "firebase_url": "https://careery-97ac6-default-rtdb.firebaseio.com",
     "project_id": "careery-97ac6",
     "storage_bucket": "careery-97ac6.appspot.com"
   },
@@ -22,6 +23,14 @@
           }
         },
         {
+          "client_id": "802735257890-ie3ldc6m3dh269hf5bas4hohc19rgqhd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nexters.checkareer",
+            "certificate_hash": "4f9383b8687525637a835bdfa6f3a0ea3087acfe"
+          }
+        },
+        {
           "client_id": "802735257890-bcaf9gfccvqkr8197moqto7sscg36grf.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -35,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "802735257890-bcaf9gfccvqkr8197moqto7sscg36grf.apps.googleusercontent.com",
+              "client_id": "802735257890-6a47rncs3a1jadkktg20r5vtn8vgg2be.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,16 +1,21 @@
 package com.nexters.checkareer.presentation.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFragBinding
-import com.nexters.checkareer.presentation.ui.home.adapter.HomeAdapter
+import com.nexters.checkareer.presentation.ui.home.adapter.HomePageAdapter
 import com.nexters.checkareer.presentation.ui.home.listener.HomeListener
 import com.nexters.checkareer.presentation.ui.home.model.MyProfile
 import com.nexters.checkareer.presentation.ui.home.model.OtherProfile
+import com.nexters.checkareer.presentation.ui.settings.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +24,8 @@ class HomeFragment : Fragment(), HomeListener {
     private val viewModel by viewModels<HomeViewModel>()
 
     private lateinit var viewDataBinding: HomeFragBinding
+
+    private lateinit var homePageAdapter: HomePageAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +42,44 @@ class HomeFragment : Fragment(), HomeListener {
 
         setupLifecycleOwner()
         setupListAdapter()
+        setupViewPagerAdapter()
+        setupTabLayout()
+        setupSettingButton()
     }
 
     private fun setupListAdapter() {
-        viewDataBinding.homeRecyclerview.apply {
-            adapter = HomeAdapter(this@HomeFragment)
+//        viewDataBinding.homeRecyclerview.apply {
+//            adapter = HomeAdapter(this@HomeFragment)
+//        }
+    }
+
+    private fun setupSettingButton() {
+        viewDataBinding.imageviewMenu.setOnClickListener {
+            startActivity(Intent(requireContext(), SettingActivity::class.java))
         }
+    }
+
+
+    private fun setupViewPagerAdapter() {
+        viewDataBinding.viewpagerHome.apply {
+            homePageAdapter = HomePageAdapter(requireActivity())
+            homePageAdapter.addFragment(HomeFragment2())
+            homePageAdapter.addFragment(HomeFragment3())
+            adapter = homePageAdapter
+        }
+    }
+
+    private fun setupTabLayout() {
+        TabLayoutMediator(viewDataBinding.tabLayoutHome, viewDataBinding.viewpagerHome) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = getString(R.string.my_profile)
+                }
+                1 -> {
+                    tab.text = getString(R.string.friend_profile)
+                }
+            }
+        }.attach()
     }
 
     private fun setupLifecycleOwner() {
@@ -58,5 +97,6 @@ class HomeFragment : Fragment(), HomeListener {
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment()
+        const val ARG_OBJECT = "object"
     }
 }
