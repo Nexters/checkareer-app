@@ -1,6 +1,7 @@
 package com.nexters.checkareer.domain.di
 
 import com.nexters.checkareer.domain.skill.SkillRepository
+import com.nexters.checkareer.domain.usecase.DeleteProfileUseCase
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
 import com.nexters.checkareer.domain.usecase.SaveProfileUseCase
@@ -37,5 +38,11 @@ object UseCaseModule {
         return SaveProfileUseCase(userRepository, skillRepository)
     }
 
+    @Provides
+    fun provideDeleteProfileUseCase(
+        userRepository: UserRepository
+    ): DeleteProfileUseCase {
+        return DeleteProfileUseCase(userRepository)
+    }
 
 }

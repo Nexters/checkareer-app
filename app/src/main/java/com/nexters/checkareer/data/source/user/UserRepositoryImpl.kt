@@ -28,7 +28,19 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
-        return@withContext local.insertUserProfile(profile)
+        return@withContext try {
+            local.insertUserProfile(profile)
+            remote.insertUserProfile(profile)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
     }
 
+    override suspend fun deleteUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
+        return@withContext try {
+            local.deleteUserProfile(profile)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
 }

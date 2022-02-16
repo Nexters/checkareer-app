@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.nexters.checkareer.data.adapter.db.data.UserProfile
@@ -46,6 +47,7 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         setupMySkillTopThreeAdapter()
         setupMySkillAdapter()
         setupEditTextEvent()
+        setEvents()
 
         viewDataBinding.imageviewBack.setOnClickListener {
             findNavController().popBackStack()
@@ -54,13 +56,19 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         viewDataBinding.buttonNext.setOnClickListener {
             if (viewDataBinding.edittextName.length() > 0) {
                 viewModel.saveUserProfile()
-                val intent = Intent(requireContext(), HomeActivity::class.java)
-                startActivity(intent)
+
             } else {
                 Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
 
         }
+    }
+
+    private fun setEvents() {
+        viewModel.goHome.observe(this.viewLifecycleOwner, {
+            val intent = Intent(requireContext(), HomeActivity::class.java)
+            startActivity(intent)
+        })
     }
 
     private fun setupLifecycleOwner() {

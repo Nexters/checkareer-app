@@ -30,19 +30,40 @@ class UserLocalDataSource (
         }
     }
 
-    override suspend fun insertUserProfile(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
-        return@withContext try {
-            UserData(
-                userId = profile.user.id,
-                name = profile.user.name).let { user ->
-                userDao.insertUser(user)
-                userSkillDao.insertUserSkill(profile.skills.map {
-                    UserAndSkillData(user.userId, it.id)
-                })
-                Result.Success(Unit)
+    override suspend fun insertUserProfile(profile: Profile): Result<Unit> =
+        withContext(ioDispatcher) {
+            return@withContext try {
+                UserData(
+                    userId = profile.user.id,
+                    name = profile.user.name
+                ).let { user ->
+                    userDao.insertUser(user)
+                    userSkillDao.insertUserSkill(profile.skills.map {
+                        UserAndSkillData(user.userId, it.id)
+                    })
+                    Result.Success(Unit)
+                }
+            } catch (e: Exception) {
+                Result.Error(DbError(e.toString()))
             }
-        } catch (e: Exception) {
-            Result.Error(DbError(e.toString()))
         }
-    }
+
+    override suspend fun deleteUserProfile(profile: Profile): Result<Unit> =
+        withContext(ioDispatcher) {
+            return@withContext try {
+                UserData(
+                    userId = profile.user.id,
+                    name = profile.user.name
+                ).let { user ->
+                    userDao.deleteUser(user.userId)
+                    userSkillDao.deleteUserSkill(profile.skills.map {
+                        user.userId
+                    })
+                    Result.Success(Unit)
+                }
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
 }
