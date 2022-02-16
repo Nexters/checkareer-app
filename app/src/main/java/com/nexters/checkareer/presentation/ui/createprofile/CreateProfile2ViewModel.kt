@@ -22,13 +22,13 @@ class CreateProfile2ViewModel @Inject constructor(
     private val saveProfileUseCase: SaveProfileUseCase
 ) : ViewModel() {
 
-    private val _selectedSkillItems = MutableLiveData<List<CategorySelect>>()
-    val selectedSkillItems: LiveData<List<CategorySelect>> = _selectedSkillItems
+    private val _selectedSkillItems = MutableLiveData<List<Skill>>()
+    val selectedSkillItems: LiveData<List<Skill>> = _selectedSkillItems
 
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
 
-    fun setSelectedSkillItems(categorySelect: List<CategorySelect>) {
+    fun setSelectedSkillItems(categorySelect: List<Skill>) {
         _selectedSkillItems.value = categorySelect
     }
 

@@ -1,11 +1,15 @@
 package com.nexters.checkareer.presentation.ui.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -28,6 +32,7 @@ class LoginFragment : Fragment() {
     private lateinit var viewDataBinding: LoginFragBinding
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var getResult: ActivityResultLauncher<Intent>
 
     private val gso by lazy {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -45,10 +50,28 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         auth = Firebase.auth
+        setupActivityResultLauncher()
         setupCloseButton()
         setupGoogleLoginButton()
+    }
+
+    private fun setupActivityResultLauncher() {
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    val account = task.getResult(ApiException::class.java)!!
+                    Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
+                    firebaseAuthWithGoogle(account.idToken!!)
+                    requireActivity().finish()
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+                    Log.w("TAG", "Google sign in failed", e)
+                }
+            }
+        }
     }
 
 
@@ -60,28 +83,20 @@ class LoginFragment : Fragment() {
 
     private fun setupGoogleLoginButton() {
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+        googleSignInClient.signOut()
         viewDataBinding.buttonGoogleLogin.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, 100)
+
+            getResult.launch(signInIntent)
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == 100) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-                Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w("TAG", "Google sign in failed", e)
-            }
-        }
+
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {

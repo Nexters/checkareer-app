@@ -12,4 +12,6 @@
     <string name="finish_your_profile">프로필 작성을 마루리 해보세요.</string>
     <string name="user_information">사용자 정보</string>
     <string name="please_select_skills">스킬을 선택해주세요.</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
 </resources>

@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -51,9 +52,14 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
         }
 
         viewDataBinding.buttonNext.setOnClickListener {
-            viewModel.saveUserProfile()
-            val intent = Intent(requireContext(), HomeActivity::class.java)
-            startActivity(intent)
+            if (viewDataBinding.edittextName.length() > 0) {
+                viewModel.saveUserProfile()
+                val intent = Intent(requireContext(), HomeActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
