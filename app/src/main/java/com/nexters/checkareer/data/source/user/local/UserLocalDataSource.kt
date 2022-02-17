@@ -33,10 +33,7 @@ class UserLocalDataSource (
     override suspend fun insertUserProfile(profile: Profile): Result<Unit> =
         withContext(ioDispatcher) {
             return@withContext try {
-                UserData(
-                    userId = profile.user.id,
-                    name = profile.user.name
-                ).let { user ->
+                profile.user.toUserData().let { user ->
                     userDao.insertUser(user)
                     userSkillDao.insertUserSkill(profile.skills.map {
                         UserAndSkillData(user.userId, it.id)
@@ -51,19 +48,23 @@ class UserLocalDataSource (
     override suspend fun deleteUserProfile(profile: Profile): Result<Unit> =
         withContext(ioDispatcher) {
             return@withContext try {
-                UserData(
-                    userId = profile.user.id,
-                    name = profile.user.name
-                ).let { user ->
-                    userDao.deleteUser(user.userId)
-                    userSkillDao.deleteUserSkill(profile.skills.map {
-                        user.userId
-                    })
-                    Result.Success(Unit)
-                }
+                userDao.deleteUser(profile.user.id)
+                userSkillDao.deleteUserSkill(listOf(profile.user.id))
+                Result.Success(Unit)
             } catch (e: Exception) {
                 Result.Error(e)
             }
         }
 
+    override suspend fun updateUser(profile: Profile): Result<Unit> =
+        withContext(ioDispatcher) {
+            return@withContext try {
+                profile.user.toUserData().let { user ->
+                    userDao.updateUser(user)
+                    Result.Success(Unit)
+                }
+            } catch (e: Exception) {
+                Result.Error(DbError(e.toString()))
+            }
+        }
 }

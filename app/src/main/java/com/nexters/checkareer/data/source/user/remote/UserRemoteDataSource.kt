@@ -36,4 +36,8 @@ class UserRemoteDataSource @Inject constructor(
     override suspend fun deleteUserProfile(profile: Profile): Result<Unit> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun updateUser(profile: Profile): Result<Unit> {
+        TODO("Not yet implemented")
+    }
 }

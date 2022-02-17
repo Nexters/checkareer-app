@@ -12,7 +12,7 @@ class GetProfileUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(forceUpdate: Boolean = false): Result<Profile> {
         return try {
-            val userProfile = userRepository.findUserProfile(forceUpdate).getValue()
+            val userProfile = userRepository.findUserProfile().getValue()
             Result.Success(userProfile)
         } catch (e: Exception) {
             Result.Error(e)
