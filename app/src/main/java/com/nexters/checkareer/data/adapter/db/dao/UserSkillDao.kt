@@ -2,6 +2,7 @@ package com.nexters.checkareer.data.adapter.db.dao
 
 import androidx.room.*
 import com.nexters.checkareer.data.adapter.db.data.UserAndSkillData
+import com.nexters.checkareer.data.adapter.db.data.UserData
 
 @Dao
 interface UserSkillDao {

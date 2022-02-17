@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.nexters.checkareer.domain.user.User
+import com.nexters.checkareer.domain.vo.LogInInfo
 import java.util.*
 
 const val USER_TABLE = "user"
@@ -16,10 +17,14 @@ data class UserData(
 
     val name: String = "anonymous",
 
+    val email: String?,
+
+    val photoUrl: String?,
+
     @ColumnInfo(name = "createdAt", defaultValue = "CURRENT_TIMESTAMP")
     val createdAt: Long = System.currentTimeMillis()
 ) {
     fun toEntity(): User {
-        return User(userId, name)
+        return User(userId, name, LogInInfo(email = email, photoUrl = photoUrl))
     }
 }

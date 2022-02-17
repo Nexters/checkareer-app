@@ -12,4 +12,6 @@ interface UserDataSource {
 
     suspend fun deleteUserProfile(profile: Profile): Result<Unit>
 
+    suspend fun updateUser(profile: Profile): Result<Unit>
+
 }

@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
@@ -22,7 +25,9 @@ import com.google.firebase.ktx.Firebase
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.LoginFragBinding
 import com.nexters.checkareer.databinding.SettingFragBinding
+import com.nexters.checkareer.presentation.ui.login.model.Account
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -34,12 +39,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var getResult: ActivityResultLauncher<Intent>
 
-    private val gso by lazy {
-        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-    }
+    lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewDataBinding = LoginFragBinding.inflate(inflater, container, false).apply {
@@ -50,30 +50,32 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = Firebase.auth
-        setupActivityResultLauncher()
+        setupGoogleLogin()
         setupCloseButton()
         setupGoogleLoginButton()
+        setupActivityResultLauncher()
+        setupEvents()
     }
 
-    private fun setupActivityResultLauncher() {
-        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                try {
-                    // Google Sign In was successful, authenticate with Firebase
-                    val account = task.getResult(ApiException::class.java)!!
-                    Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
-                    firebaseAuthWithGoogle(account.idToken!!)
-                    requireActivity().finish()
-                } catch (e: ApiException) {
-                    // Google Sign In failed, update UI appropriately
-                    Log.w("TAG", "Google sign in failed", e)
-                }
-            }
+    private fun setupEvents() {
+        viewModel.isSucceededLogin.observe(this.viewLifecycleOwner, Observer {
+            onFinish()
+        })
+    }
+
+    private fun setupGoogleLogin() {
+        activity?.let {
+            val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .requestProfile()
+                .build()
+
+            googleSignInClient = GoogleSignIn.getClient(it, googleSignInOptions)
+
+            auth = Firebase.auth
         }
     }
-
 
     private fun setupCloseButton() {
         viewDataBinding.imageviewClose.setOnClickListener {
@@ -82,21 +84,39 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupGoogleLoginButton() {
-        val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-        googleSignInClient.signOut()
+//        googleSignInClient.signOut()
         viewDataBinding.buttonGoogleLogin.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-
-            getResult.launch(signInIntent)
+            toast("Login Success")
+            signIn()
         }
     }
 
+    private fun toast(msg: String) {
+        activity?.run { Toast.makeText(this, msg, Toast.LENGTH_SHORT) }
+    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun signIn() {
+        val signInIntent = googleSignInClient.signInIntent
+        getResult.launch(signInIntent)
+    }
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-
+    private fun setupActivityResultLauncher() {
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    task.getResult(ApiException::class.java)?.let { account ->
+                        Timber.i("firebaseAuthWithGoogle: ${account.displayName} / ${account.email} / ${account.photoUrl}")
+                        firebaseAuthWithGoogle(account.idToken!!)
+                        viewModel.signIn(Account(account.displayName, account.email, account.photoUrl.toString()))
+                    }
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+                    Log.w("TAG", "Google sign in failed", e)
+                }
+            }
+        }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -105,15 +125,20 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCredential:success")
-                    //val user = auth.currentUser
-                    //updateUI(user)
+                    Timber.i("signInWithCredential:success")
+//                    val user = auth.currentUser
+//                    Timber.i("$user")
+//                    updateUI()
                 } else {
                     // If sign in fails, display a message to the user.
-                    //Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    //updateUI(null)
+                    Timber.i( "signInWithCredential:failure ${task.exception}")
+//                    updateUI()
                 }
             }
+    }
+
+    private fun onFinish() {
+        requireActivity().finish()
     }
 
     companion object {
