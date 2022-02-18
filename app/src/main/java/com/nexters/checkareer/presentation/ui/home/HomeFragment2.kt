@@ -11,6 +11,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFrag2Binding
 import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
+import com.nexters.checkareer.presentation.ui.editprofile.EditProfileActivity
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import com.nexters.checkareer.presentation.ui.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,11 +33,18 @@ class HomeFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupProfileEditButton()
         setupProfileDeleteButton()
         setupProfileCreateButton()
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
+    }
+
+    private fun setupProfileEditButton() {
+        viewDataBinding.imageviewSetting.setOnClickListener {
+            startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+        }
     }
 
     private fun setupProfileDeleteButton() {
