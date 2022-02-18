@@ -32,18 +32,33 @@
             app:tint="@color/white" />
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout_home"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/textview_my_profile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/backgroundColor"
+            android:padding="10dp"
+            android:text="나의 프로필"
+            android:textColor="@color/gray"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_menu"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageview_menu"
-            app:tabIndicatorColor="@color/white"
-            app:tabMode="fixed"
-            app:tabRippleColor="@null"
-            app:tabTextColor="@color/white" />
+            app:layout_constraintTop_toTopOf="@id/imageview_menu" />
+
+        <TextView
+            android:id="@+id/textview_friend_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="남의 프로필"
+            android:textColor="@color/gray"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/textview_my_profile"
+            app:layout_constraintStart_toEndOf="@id/textview_my_profile" />
+
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager_home"
@@ -52,7 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout_home" />
+            app:layout_constraintTop_toBottomOf="@id/textview_my_profile" />
 
         <!--        <androidx.recyclerview.widget.RecyclerView-->
         <!--            android:id="@+id/home_recyclerview"-->
