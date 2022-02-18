@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFrag2Binding
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +29,22 @@ class HomeFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupProfileDeleteButton()
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
+    }
+
+    private fun setupProfileDeleteButton() {
+        viewDataBinding.imageviewDelete.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.delete_profle))
+                .setNegativeButton("취소") { _, _ -> }
+                .setPositiveButton("확인") { dialog, _ ->
+                    viewModel.deleteUserProfile()
+                }
+                .show()
+        }
     }
 
     private fun setupLifecycleOwner() {
