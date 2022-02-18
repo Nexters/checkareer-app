@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nexters.checkareer.R
@@ -43,7 +45,6 @@ class HomeFragment : Fragment(), HomeListener {
         setupLifecycleOwner()
         setupListAdapter()
         setupViewPagerAdapter()
-        setupTabLayout()
         setupSettingButton()
     }
 
@@ -67,20 +68,44 @@ class HomeFragment : Fragment(), HomeListener {
             homePageAdapter.addFragment(HomeFragment3())
             adapter = homePageAdapter
         }
-    }
 
-    private fun setupTabLayout() {
-        TabLayoutMediator(viewDataBinding.tabLayoutHome, viewDataBinding.viewpagerHome) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = getString(R.string.my_profile)
-                }
-                1 -> {
-                    tab.text = getString(R.string.friend_profile)
+        viewDataBinding.textviewMyProfile.setOnClickListener {
+            viewDataBinding.viewpagerHome.currentItem = 0
+        }
+
+        viewDataBinding.textviewFriendProfile.setOnClickListener {
+            viewDataBinding.viewpagerHome.currentItem = 1
+        }
+
+        viewDataBinding.viewpagerHome.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                when(position) {
+                    0 -> {
+                        viewDataBinding.textviewMyProfile.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                        viewDataBinding.textviewFriendProfile.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                    }
+                    1 -> {
+                        viewDataBinding.textviewMyProfile.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                        viewDataBinding.textviewFriendProfile.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    }
                 }
             }
-        }.attach()
+        })
+
     }
+
+//    private fun setupTabLayout() {
+//        TabLayoutMediator(viewDataBinding.tabLayoutHome, viewDataBinding.viewpagerHome) { tab, position ->
+//            when (position) {
+//                0 -> {
+//                    tab.text = getString(R.string.my_profile)
+//                }
+//                1 -> {
+//                    tab.text = getString(R.string.friend_profile)
+//                }
+//            }
+//        }.attach()
+//    }
 
     private fun setupLifecycleOwner() {
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
