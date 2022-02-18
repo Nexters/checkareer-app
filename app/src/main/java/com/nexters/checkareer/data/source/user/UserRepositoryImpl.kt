@@ -17,7 +17,7 @@ class UserRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserRepository {
 
-    override suspend fun findUserProfile(forceUpdate: Boolean): Result<Profile> {
+    override suspend fun findUserProfile(): Result<Profile> {
 
         return try {
             val userProfile = local.findUserProfile().getValue()
@@ -39,6 +39,14 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun deleteUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
         return@withContext try {
             local.deleteUserProfile(profile)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
+
+    override suspend fun updateUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
+        return@withContext try {
+            local.updateUser(profile)
         } catch (e: Exception) {
             Result.Error(e)
         }
