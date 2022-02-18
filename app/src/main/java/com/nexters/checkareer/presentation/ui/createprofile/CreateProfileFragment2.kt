@@ -67,6 +67,7 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
     private fun setEvents() {
         viewModel.goHome.observe(this.viewLifecycleOwner) {
             val intent = Intent(requireContext(), HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }
