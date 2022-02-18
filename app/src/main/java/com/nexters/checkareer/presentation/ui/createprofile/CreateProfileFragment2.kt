@@ -65,10 +65,10 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
     }
 
     private fun setEvents() {
-        viewModel.goHome.observe(this.viewLifecycleOwner, {
+        viewModel.goHome.observe(this.viewLifecycleOwner) {
             val intent = Intent(requireContext(), HomeActivity::class.java)
             startActivity(intent)
-        })
+        }
     }
 
     private fun setupLifecycleOwner() {

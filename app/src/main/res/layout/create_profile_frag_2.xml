@@ -170,7 +170,7 @@
             android:backgroundTint="@color/point_color_1"
             android:elevation="0dp"
             android:stateListAnimator="@null"
-            android:text="다음"
+            android:text="@string/complete"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"

@@ -16,4 +16,5 @@
     <string name="logout">로그아웃</string>
     <string name="delete_profle">프로필을 삭제하시겠어요?</string>
     <string name="add_profile">프로필 추가하기</string>
+    <string name="complete">완료</string>
 </resources>

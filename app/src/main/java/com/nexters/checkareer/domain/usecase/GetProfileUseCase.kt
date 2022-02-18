@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetProfileUseCase @Inject constructor(
     private val userRepository: UserRepository,
 ) {
-    suspend operator fun invoke(forceUpdate: Boolean = false): Result<Profile> {
+    suspend operator fun invoke(forceUpdate: Boolean = false): Result<Profile?> {
         return try {
             val userProfile = userRepository.findUserProfile().getValue()
             Result.Success(userProfile)
