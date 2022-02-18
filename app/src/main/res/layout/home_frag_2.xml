@@ -19,6 +19,7 @@
         android:background="@color/backgroundColor">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview_create_profile"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{viewmodel.profile == null ? View.VISIBLE : View.GONE}"

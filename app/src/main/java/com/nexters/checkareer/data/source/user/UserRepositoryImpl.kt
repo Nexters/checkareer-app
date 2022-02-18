@@ -17,11 +17,15 @@ class UserRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserRepository {
 
-    override suspend fun findUserProfile(): Result<Profile> {
+    override suspend fun findUserProfile(): Result<Profile?> {
 
         return try {
             val userProfile = local.findUserProfile().getValue()
-            Result.Success(userProfile.toEntity())
+            if(userProfile == null) {
+                Result.Success(null)
+            } else {
+                Result.Success(userProfile.toEntity())
+            }
         } catch (e: Exception) {
             Result.Error(e)
         }

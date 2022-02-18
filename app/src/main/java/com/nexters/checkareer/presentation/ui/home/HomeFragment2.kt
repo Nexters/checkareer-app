@@ -1,5 +1,6 @@
 package com.nexters.checkareer.presentation.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFrag2Binding
+import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
+import com.nexters.checkareer.presentation.ui.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +33,7 @@ class HomeFragment2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupProfileDeleteButton()
+        setupProfileCreateButton()
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
@@ -44,6 +48,12 @@ class HomeFragment2 : Fragment() {
                     viewModel.deleteUserProfile()
                 }
                 .show()
+        }
+    }
+
+    private fun setupProfileCreateButton() {
+        viewDataBinding.cardviewCreateProfile.setOnClickListener {
+            startActivity(Intent(requireContext(), CreateProfileActivity::class.java))
         }
     }
 
