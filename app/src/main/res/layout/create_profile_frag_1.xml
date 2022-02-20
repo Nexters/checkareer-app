@@ -75,7 +75,7 @@
             android:id="@+id/textview_max_selected_skill_category_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/10 개"
+            android:text=" 개"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
