@@ -21,6 +21,7 @@ import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCatego
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
 import com.nexters.checkareer.presentation.ui.editprofile.addskill.AddSkillBottomSheetDialogFragment
+import com.nexters.checkareer.presentation.ui.editprofile.addsubskill.AddSubSkillBottomSheetDialogFragment
 import com.nexters.checkareer.presentation.ui.editprofile.listener.SkillEditListener
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     private lateinit var viewDataBinding: EditProfileFragBinding
 
     private lateinit var addSkillBottomSheet: BottomSheetDialogFragment
+    private lateinit var addSubSkillBottomSheet: BottomSheetDialogFragment
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -99,7 +101,8 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     }
 
     override fun onSubSkillAddClick(item: Skill, view: View) {
-        println("add skill")
+        addSubSkillBottomSheet = AddSubSkillBottomSheetDialogFragment()
+        addSubSkillBottomSheet.show(requireActivity().supportFragmentManager, "")
     }
 
 }
