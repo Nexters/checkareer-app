@@ -60,6 +60,8 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
     }
 
     private fun setupSkillListAdapter() {
+        viewModel.loadSkillCategories(true, editProfileViewModel.profile.value?.skills ?: listOf())
+
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())
             layoutManager.apply {

@@ -29,9 +29,7 @@ class EditProfileViewModel @Inject constructor(
     val profile: LiveData<Profile?> = _profile
 
 
-    init {
-        //loadHomes(true)
-    }
+    init {}
 
 
     fun removeSelectedSkillCategoryItem(skill: Skill) {
