@@ -9,6 +9,7 @@ import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.util.fromDpToPx
 import android.graphics.Typeface
 import com.nexters.checkareer.domain.skill.Skill
+import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 
 
@@ -39,6 +40,14 @@ fun setMySkillTopThreeItems(recyclerView: RecyclerView, items: List<Skill>?) {
 @BindingAdapter("mySkillItems")
 fun setMySkillItems(recyclerView: RecyclerView, items: List<Skill>?) {
     (recyclerView.adapter as? MySkillAdapter)?.run {
+        submitList(items)
+        notifyDataSetChanged()
+    }
+}
+
+@BindingAdapter("mySkillItemsEdit")
+fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<Skill>?) {
+    (recyclerView.adapter as? MySkillEditAdapter)?.run {
         submitList(items)
         notifyDataSetChanged()
     }

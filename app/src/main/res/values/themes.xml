@@ -5,13 +5,24 @@
         <item name="colorPrimaryDark">@color/backgroundColor</item>
         <item name="colorAccent">@color/backgroundColor</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/backgroundColor</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <!-- For Android sdk versions 26+. -->
 
     </style>
 
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/round_corner_background</item>
+    </style>
+
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/backgroundColor</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_sample_icon</item>
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_text</item>-->
         <item name="postSplashScreenTheme">@style/Theme.Checkareer</item>
     </style>
 
