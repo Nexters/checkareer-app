@@ -5,7 +5,7 @@ import com.nexters.checkareer.domain.user.User
 
 data class Profile(
     val user: User,
-    val skills: List<Skill>
+    var skills: List<Skill>
 )
 
 

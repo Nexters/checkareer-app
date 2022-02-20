@@ -96,8 +96,8 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="20dp"
                     android:hint="@string/please_insert_name"
-                    android:textColorHint="@color/light_gray"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/light_gray"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -129,6 +129,7 @@
             android:id="@+id/textview_skill_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="50dp"
             android:text="@string/skill_information"
             android:textColor="@color/white"
@@ -137,15 +138,16 @@
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/textview_selected_skill_category_count"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{Integer.toString(viewmodel.selectedSkillItems.size())}"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="20sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/guideline_end" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/textview_selected_skill_category_count"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@{Integer.toString(viewmodel.selectedSkillItems.size())}"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="20sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"-->
+        <!--            app:layout_constraintEnd_toEndOf="@id/guideline_end" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_my_skills"
