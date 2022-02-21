@@ -1,5 +1,6 @@
 package com.nexters.checkareer.presentation.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.nexters.checkareer.databinding.HomeFrag3Binding
 import com.nexters.checkareer.domain.vo.Profile
+import com.nexters.checkareer.presentation.ui.friendprofile.FriendProfileActivity
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.ProfileAdapter
 import com.nexters.checkareer.presentation.ui.home.listener.FriendProfileListener
@@ -45,6 +47,7 @@ class HomeFragment3 : Fragment(), FriendProfileListener {
 
     override fun onProfileClicked(item: Profile, view: View) {
         println("clicked")
+        startActivity(Intent(requireContext(), FriendProfileActivity::class.java))
     }
 
 
