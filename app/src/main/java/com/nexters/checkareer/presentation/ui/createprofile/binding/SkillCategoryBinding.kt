@@ -9,8 +9,10 @@ import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.util.fromDpToPx
 import android.graphics.Typeface
 import com.nexters.checkareer.domain.skill.Skill
+import com.nexters.checkareer.domain.vo.Profile
 import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
+import com.nexters.checkareer.presentation.ui.home.adapter.ProfileAdapter
 
 
 @BindingAdapter("skillItems")
@@ -48,6 +50,16 @@ fun setMySkillItems(recyclerView: RecyclerView, items: List<Skill>?) {
 @BindingAdapter("mySkillItemsEdit")
 fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<Skill>?) {
     (recyclerView.adapter as? MySkillEditAdapter)?.run {
+        submitList(items)
+        notifyDataSetChanged()
+    }
+}
+
+@BindingAdapter("friendProfileItems")
+fun setFriendProfileItems(recyclerView: RecyclerView, items: List<Profile>?) {
+    println(items.toString())
+    (recyclerView.adapter as? ProfileAdapter)?.run {
+        println(items.toString())
         submitList(items)
         notifyDataSetChanged()
     }

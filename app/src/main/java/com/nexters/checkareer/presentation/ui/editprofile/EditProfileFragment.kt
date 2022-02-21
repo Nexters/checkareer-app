@@ -91,11 +91,6 @@ class EditProfileFragment : Fragment(), SkillEditListener {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = EditProfileFragment()
-    }
-
     override fun onSkillDeleteClicked(item: Skill, view: View) {
         viewModel.removeSelectedSkillCategoryItem(item)
     }
@@ -103,6 +98,11 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     override fun onSubSkillAddClick(item: Skill, view: View) {
         addSubSkillBottomSheet = AddSubSkillBottomSheetDialogFragment()
         addSubSkillBottomSheet.show(requireActivity().supportFragmentManager, "")
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = EditProfileFragment()
     }
 
 }

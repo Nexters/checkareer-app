@@ -19,6 +19,11 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="ProfileRecyclerView">
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/point_color_1</item>
         <item name="colorControlActivated">@color/point_color_1</item>
