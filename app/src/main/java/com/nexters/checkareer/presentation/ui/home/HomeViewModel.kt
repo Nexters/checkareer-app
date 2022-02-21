@@ -24,6 +24,9 @@ class HomeViewModel @Inject constructor(
     private val _profile = MutableLiveData<Profile?>()
     val profile: LiveData<Profile?> = _profile
 
+    private val _friendProfiles = MutableLiveData<List<Profile>>()
+    val friendProfiles: LiveData<List<Profile>> = _friendProfiles
+
     init {
         loadHomes(true)
     }
@@ -34,6 +37,7 @@ class HomeViewModel @Inject constructor(
             viewModelScope.launch {
                 getProfileUseCase(forceUpdate).getValue().run {
                     _profile.value = this
+                    _friendProfiles.value = listOf(_profile.value!!)
                 }
             }
         } catch (e: Exception) {
