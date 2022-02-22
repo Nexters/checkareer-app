@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
 import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
 import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateProfile1ViewModel @Inject constructor(
-    val getSkillCategoryUseCase: GetSkillCategoryUseCase
+    val getAllSkillUseCase: GetAllSkillUseCase
 ) : ViewModel() {
 
 
@@ -49,7 +50,7 @@ class CreateProfile1ViewModel @Inject constructor(
         try {
             _dataLoading.value = true
             viewModelScope.launch {
-                getSkillCategoryUseCase(forceUpdate).getValue().run {
+                getAllSkillUseCase(forceUpdate).getValue().run {
                     _items.value = this.map { CategorySelect(it.id, it.name) }
                 }
             }

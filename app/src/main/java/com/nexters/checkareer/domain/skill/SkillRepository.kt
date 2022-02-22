@@ -8,5 +8,9 @@ interface SkillRepository {
 
     suspend fun findAllSkills(): Result<List<Skill>>
 
+    suspend fun findAllSkillsLocal(): Result<List<Skill>>
+
     suspend fun saveSkills(skills: List<Skill>): Result<Unit>
+
+    suspend fun saveAllSkills(skills: List<Skill>): Result<Unit>
 }

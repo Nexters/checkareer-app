@@ -13,17 +13,17 @@ class SkillRemoteDataSource(
     private val skillApi: ApiService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): SkillRemote {
-    override suspend fun findSkills(): Result<List<SkillEntity>> = withContext(ioDispatcher) {
+    override suspend fun findSkills(): Result<List<Skill>> = withContext(ioDispatcher) {
         val response = skillApi.getSkillList()
 
         return@withContext if(response.isSuccessful) {
-            Result.Success(response.body() ?: listOf())
+            Result.Success(response.body()?.map { it.toEntity() } ?: listOf())
         } else {
             Result.Error(DbError(""))
         }
     }
 
-    override suspend fun saveSkills(skill: List<SkillEntity>): Result<Unit> {
+    override suspend fun saveSkills(skill: List<Skill>): Result<Unit> {
         TODO("Not yet implemented")
     }
 }
