@@ -1,14 +1,14 @@
 package com.nexters.checkareer.data.di
 
-import android.content.Context
-import androidx.room.Room
-import com.nexters.checkareer.data.adapter.db.AppDatabase
 import com.nexters.checkareer.data.adapter.db.dao.SkillDao
 import com.nexters.checkareer.data.adapter.db.dao.UserDao
 import com.nexters.checkareer.data.adapter.db.dao.UserSkillDao
+import com.nexters.checkareer.data.network.ApiService
 import com.nexters.checkareer.data.source.skill.local.SkillLocal
 import com.nexters.checkareer.data.source.skill.local.SkillLocalDataSource
-import com.nexters.checkareer.data.source.skill.local.SkillRepositoryImpl
+import com.nexters.checkareer.data.source.skill.SkillRepositoryImpl
+import com.nexters.checkareer.data.source.skill.remote.SkillRemote
+import com.nexters.checkareer.data.source.skill.remote.SkillRemoteDataSource
 import com.nexters.checkareer.data.source.user.UserDataSource
 import com.nexters.checkareer.data.source.user.UserRepositoryImpl
 import com.nexters.checkareer.data.source.user.local.UserLocalDataSource
@@ -18,7 +18,6 @@ import com.nexters.checkareer.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +41,10 @@ object DataModule {
     @Retention(AnnotationRetention.RUNTIME)
     annotation class LocalCategoryDataSource
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class RemoteCategoryDataSource
+
     @RemoteUserDataSource
     @Provides
     fun provideUserRemoteDataSource(): UserDataSource {
@@ -54,7 +57,13 @@ object DataModule {
         return UserLocalDataSource(userDao, userSkillDao)
     }
 
-    
+    @RemoteCategoryDataSource
+    @Provides
+    fun provideCategoryRemoteDataSource(skillApi: ApiService): SkillRemote {
+        return SkillRemoteDataSource(skillApi)
+    }
+
+
     @LocalCategoryDataSource
     @Provides
     fun provideCategoryLocalDataSource(skillDao: SkillDao): SkillLocal {
@@ -88,7 +97,7 @@ object RepositoryModule {
         ioDispatcher: CoroutineDispatcher
     ): UserRepository {
         return UserRepositoryImpl(
-            local = userLocalDataSource, remote = userRemoteDataSource,  ioDispatcher
+            local = userLocalDataSource, remote = userRemoteDataSource, ioDispatcher
         )
     }
 
@@ -96,10 +105,11 @@ object RepositoryModule {
     @Provides
     fun provideCategoryRepository(
         @DataModule.LocalCategoryDataSource local: SkillLocal,
+        @DataModule.RemoteCategoryDataSource remote: SkillRemote,
         ioDispatcher: CoroutineDispatcher
     ): SkillRepository {
         return SkillRepositoryImpl(
-            local, ioDispatcher
+            local, remote, ioDispatcher
         )
     }
 }

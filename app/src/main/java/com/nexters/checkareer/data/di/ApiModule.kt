@@ -2,6 +2,7 @@ package com.nexters.checkareer.data.di
 
 import com.google.gson.GsonBuilder
 import com.nexters.checkareer.BuildConfig
+import com.nexters.checkareer.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +19,12 @@ import javax.inject.Singleton
 object ApiModule {
 
     private const val BASE_URL = "https://checkareer-prod.s3.ap-northeast-2.amazonaws.com/"
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
+    }
 
     @Singleton
     @Provides
