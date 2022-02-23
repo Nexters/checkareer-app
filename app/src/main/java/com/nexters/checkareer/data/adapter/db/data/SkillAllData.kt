@@ -7,10 +7,10 @@ import com.nexters.checkareer.domain.skill.Skill
 import java.util.*
 
 
-const val SKILL_TABLE = "skill"
+const val SKILL_ALL_TABLE = "skill_all"
 
-@Entity(tableName = SKILL_TABLE)
-data class SkillData(
+@Entity(tableName = SKILL_ALL_TABLE)
+data class SkillAllData(
     @PrimaryKey
     val skillId: String,
     val name: String,

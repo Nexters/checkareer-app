@@ -12,10 +12,10 @@
 
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:behavior_hideable="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.constraintlayout.widget.Guideline
@@ -50,26 +50,30 @@
             style="@style/SkillCategoryRecyclerView"
             selectedSkillItems="@{viewmodel.selectedSkillCategoryItems}"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:requiresFadingEdge="horizontal"
             android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/textview_title" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_skill_category"
             skillItems="@{viewmodel.items}"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="330dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:paddingTop="20dp"
+            android:requiresFadingEdge="vertical"
             app:layout_constraintBottom_toTopOf="@id/button_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerview_selected_skill_category" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_complete"
