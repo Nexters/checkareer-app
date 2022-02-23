@@ -71,7 +71,6 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
             layoutManager.apply {
                 flexDirection = FlexDirection.ROW
                 justifyContent = JustifyContent.FLEX_START
-                alignItems = AlignItems.FLEX_START
             }
             setLayoutManager(layoutManager)
             adapter = SkillCategoryAdapter(this@AddSkillBottomSheetDialogFragment, ".")
