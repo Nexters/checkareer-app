@@ -8,5 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class CategorySelect(
     val id: String,
     val name: String,
+    val parentId: Int?,
     var selected: Boolean = false
 ): Parcelable

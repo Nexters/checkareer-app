@@ -43,7 +43,7 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLifecycleOwner()
-        viewModel.setSelectedSkillItems(args.skillCategories.toList().map { Skill(it.id, it.name) })
+        viewModel.setSelectedSkillItems(args.skillCategories.toList().map { Skill(it.id, it.name, it.parentId) })
         setupMySkillTopThreeAdapter()
         setupMySkillAdapter()
         setupEditTextEvent()

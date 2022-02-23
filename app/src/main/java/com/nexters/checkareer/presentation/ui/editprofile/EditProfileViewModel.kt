@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nexters.checkareer.domain.skill.Skill
-import com.nexters.checkareer.domain.usecase.DeleteProfileUseCase
-import com.nexters.checkareer.domain.usecase.GetProfileUseCase
-import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
+import com.nexters.checkareer.domain.usecase.*
 import com.nexters.checkareer.domain.util.getValue
+import com.nexters.checkareer.domain.util.succeeded
 import com.nexters.checkareer.domain.vo.Profile
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,11 +17,14 @@ import javax.inject.Inject
 @HiltViewModel
 class EditProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val deleteProfileUseCase: DeleteProfileUseCase,
-): ViewModel() {
+    private val editProfileUseCase: EditProfileUseCase
+) : ViewModel() {
 
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading
+
+    private val _editProfileLoading = MutableLiveData<Boolean>()
+    val editProfileLoading: LiveData<Boolean> = _editProfileLoading
 
 
     private val _profile = MutableLiveData<Profile?>()
@@ -42,13 +44,11 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun addSelectedSkillCategoryItem(skillList: List<Skill>) {
-        println(skillList.toString())
         val prevSkillList = _profile.value?.skills?.toMutableList()
         prevSkillList?.addAll(skillList)
         if (prevSkillList != null) {
             _profile.value?.skills = prevSkillList.toList()
         }
-        println(_profile.value?.skills.toString())
         _profile.notifyObserver()
     }
 
@@ -58,13 +58,28 @@ class EditProfileViewModel @Inject constructor(
             viewModelScope.launch {
                 getProfileUseCase(forceUpdate).getValue().run {
                     _profile.value = this
-                    println(_profile.value.toString())
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             _dataLoading.value = false
+        }
+    }
+
+    fun editUserProfile(userName: String) {
+        try {
+            _editProfileLoading.value = true
+            profile.value?.user?.name = userName
+            viewModelScope.launch {
+                if (editProfileUseCase.invoke(_profile.value!!).succeeded) {
+                    _editProfileLoading.value = false
+                } else {
+                    _editProfileLoading.value = false
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

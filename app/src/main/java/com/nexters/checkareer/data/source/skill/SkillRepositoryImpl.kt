@@ -33,6 +33,10 @@ class SkillRepositoryImpl @Inject constructor(
         return local.saveSkills(skills)
     }
 
+    override suspend fun deleteSkills(): Result<Unit> {
+        return local.deleteSkills()
+    }
+
     override suspend fun saveAllSkills(skills: List<Skill>): Result<Unit> {
         return local.saveAllSkills(skills)
     }

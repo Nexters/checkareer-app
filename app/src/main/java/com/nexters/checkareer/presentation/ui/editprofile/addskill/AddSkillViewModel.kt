@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
-import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
+import com.nexters.checkareer.domain.usecase.SaveSkillUseCase
 import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -51,7 +51,7 @@ class AddSkillViewModel @Inject constructor(
                 getAllSkillUseCase(forceUpdate).getValue().run {
                     val skillList = this.toMutableList()
                     skillList.removeAll(alreadySelectedSkillList)
-                    _items.value = skillList.map { CategorySelect(it.id, it.name) }
+                    _items.value = skillList.map { CategorySelect(it.id, it.name, it.parentId) }
                 }
             }
         } catch (e: Exception) {

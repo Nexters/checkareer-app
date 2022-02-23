@@ -185,6 +185,31 @@
                     app:layout_constraintStart_toStartOf="@id/guideline_start"
                     app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
 
+                <TextView
+                    android:id="@+id/textview_skill_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@{Integer.toString(viewmodel.profile.skills.size())}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
+                    app:layout_constraintStart_toEndOf="@id/textview_skill_information" />
+
+                <TextView
+                    android:id="@+id/textview_max_selected_skill_category_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 개"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
+                    app:layout_constraintStart_toEndOf="@id/textview_skill_count" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_my_skills"
                     style="@style/SkillListRecyclerView"

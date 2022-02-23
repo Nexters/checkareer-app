@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -56,7 +57,10 @@ class EditProfileFragment : Fragment(), SkillEditListener {
 
     private fun setupCompleteButton() {
         viewDataBinding.buttonSave.setOnClickListener {
-            requireActivity().finish()
+            viewModel.editUserProfile(viewDataBinding.edittextName.text.toString())
+            viewModel.editProfileLoading.observe(viewLifecycleOwner) {
+                if (!it) requireActivity().finish()
+            }
         }
     }
 
@@ -66,7 +70,6 @@ class EditProfileFragment : Fragment(), SkillEditListener {
             addSkillBottomSheet.show(requireActivity().supportFragmentManager, "")
 
         }
-
 
 
     }

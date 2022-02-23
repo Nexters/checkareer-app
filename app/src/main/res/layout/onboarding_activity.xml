@@ -5,8 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".presentation.ui.onboarding.OnBoardingActivity">
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
