@@ -51,7 +51,7 @@ class AddSkillViewModel @Inject constructor(
                 getAllSkillUseCase(forceUpdate).getValue().run {
                     val skillList = this.toMutableList()
                     skillList.removeAll(alreadySelectedSkillList)
-                    _items.value = skillList.map { CategorySelect(it.id, it.name) }
+                    _items.value = skillList.map { CategorySelect(it.id, it.name, it.parentId) }
                 }
             }
         } catch (e: Exception) {

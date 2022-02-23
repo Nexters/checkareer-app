@@ -43,7 +43,7 @@ class CreateProfile2ViewModel @Inject constructor(
                     val profile = Profile(
                         User(name = name),
                         skill.map {
-                            Skill(it.id, it.name)
+                            Skill(it.id, it.name, it.parentId)
                         }
                     )
                     saveProfileUseCase(profile).getValue()

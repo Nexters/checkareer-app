@@ -37,9 +37,10 @@ object UseCaseModule {
 
     @Provides
     fun provideDeleteProfileUseCase(
-        userRepository: UserRepository
+        userRepository: UserRepository,
+        skillRepository: SkillRepository
     ): DeleteProfileUseCase {
-        return DeleteProfileUseCase(userRepository)
+        return DeleteProfileUseCase(userRepository, skillRepository)
     }
 
     @Provides
