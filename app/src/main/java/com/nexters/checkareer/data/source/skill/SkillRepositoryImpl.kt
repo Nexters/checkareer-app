@@ -17,6 +17,17 @@ class SkillRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : SkillRepository {
 
+    override suspend fun syncSkills(): Result<Unit> = withContext(ioDispatcher){
+        try {
+            val skills = remote.findSkills().getValue()
+            local.saveSkills(skills)
+
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
+
     override suspend fun findByUserId(userId: String): Result<List<Skill>> {
         return local.findSkillsByUserId(userId)
     }
@@ -35,9 +46,5 @@ class SkillRepositoryImpl @Inject constructor(
 
     override suspend fun deleteSkills(): Result<Unit> {
         return local.deleteSkills()
-    }
-
-    override suspend fun saveAllSkills(skills: List<Skill>): Result<Unit> {
-        return local.saveAllSkills(skills)
     }
 }

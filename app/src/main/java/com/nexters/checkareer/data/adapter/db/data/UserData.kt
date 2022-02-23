@@ -21,10 +21,12 @@ data class UserData(
 
     val photoUrl: String?,
 
+    val isMember: Boolean = false,
+
     @ColumnInfo(name = "createdAt", defaultValue = "CURRENT_TIMESTAMP")
     val createdAt: Long = System.currentTimeMillis()
 ) {
     fun toEntity(): User {
-        return User(userId, name, LogInInfo(email = email, photoUrl = photoUrl))
+        return User(userId, name, isMember, LogInInfo(email = email, photoUrl = photoUrl))
     }
 }

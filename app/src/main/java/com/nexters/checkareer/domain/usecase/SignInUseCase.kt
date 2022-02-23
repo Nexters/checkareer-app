@@ -13,7 +13,7 @@ class SignInUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(logInInfo: LogInInfo): Result<Unit> {
         return try {
-            val user = userRepository.findUserProfile().getValue()!!
+            val user = userRepository.findUserProfile().getValue()
 
             val modifiedUser = Profile(user.user.copy(logInInfo = logInInfo), user.skills)
             userRepository.updateUser(modifiedUser)

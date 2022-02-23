@@ -23,19 +23,17 @@ class SplashFragment : Fragment() {
         viewDataBinding = SplashFragBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
         }
-
         return viewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        checkIfCreatedProfileExistAndTransition()
+        setupEvents()
     }
 
-    private fun checkIfCreatedProfileExistAndTransition() {
-        viewModel.profile.observe(viewLifecycleOwner) {
-            if (it == null) {
+    private fun setupEvents() {
+        viewModel.isFirst.observe(viewLifecycleOwner) {
+            if (it) {
                 startActivity(Intent(requireContext(), OnBoardingActivity::class.java))
             } else {
                 startActivity(Intent(requireContext(), HomeActivity::class.java))

@@ -5,6 +5,4 @@ import com.nexters.checkareer.domain.util.Result
 
 interface SkillRemote {
     suspend fun findSkills(): Result<List<Skill>>
-
-    suspend fun saveSkills(skill: List<Skill>): Result<Unit>
 }

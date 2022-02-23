@@ -7,7 +7,7 @@ import com.nexters.checkareer.domain.util.getValue
 import java.lang.Exception
 import javax.inject.Inject
 
-class GetSkillCategoryUseCase @Inject constructor(
+class GetSkillsUseCase @Inject constructor(
     private val categoryRepository: SkillRepository
 ) {
     suspend operator fun invoke(forceUpdate: Boolean = false): Result<List<Skill>> {

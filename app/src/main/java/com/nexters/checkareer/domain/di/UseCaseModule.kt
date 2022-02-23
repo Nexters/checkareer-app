@@ -21,10 +21,24 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideGetSkillCategoryUseCase(
-        categoryRepository: SkillRepository
-    ): GetSkillCategoryUseCase {
-        return GetSkillCategoryUseCase(categoryRepository)
+    fun provideSyncSkillsUseCase(
+        skillRepository: SkillRepository
+    ): SyncSkillsUseCase {
+        return SyncSkillsUseCase(skillRepository)
+    }
+
+    @Provides
+    fun provideGetUserUseCase(
+        userRepository: UserRepository
+    ): GetUserUseCase {
+        return GetUserUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideGetSkillsUseCase(
+        skillRepository: SkillRepository
+    ): GetSkillsUseCase {
+        return GetSkillsUseCase(skillRepository)
     }
 
     @Provides

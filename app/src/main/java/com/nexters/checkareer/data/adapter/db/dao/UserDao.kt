@@ -9,7 +9,7 @@ interface UserDao {
 
     @Transaction
     @Query("SELECT * FROM user" )
-    fun getUserProfile(): UserProfile
+    fun getUserProfile(): UserProfile?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: UserData)
@@ -19,4 +19,7 @@ interface UserDao {
 
     @Update
     fun updateUser(user: UserData)
+
+    @Query("SELECT * FROM user")
+    fun getUser(): List<UserData>
 }
