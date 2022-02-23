@@ -6,7 +6,7 @@ import java.util.*
 
 data class User(
     val id: String = UUID.randomUUID().toString(),
-    val name: String,
+    var name: String,
     val logInInfo: LogInInfo? = null
 ) {
     fun toUserData(): UserData {

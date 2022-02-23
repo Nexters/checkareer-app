@@ -44,6 +44,15 @@ class SkillLocalDataSource(
         }
     }
 
+    override suspend fun deleteSkills(): Result<Unit> = withContext(ioDispatcher) {
+        return@withContext try {
+            skillDao.deleteUserSkill()
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Result.Error(DbError(e.toString()))
+        }
+    }
+
     override suspend fun saveAllSkills(skills: List<Skill>): Result<Unit> = withContext(ioDispatcher) {
         return@withContext try {
             skills.map { SkillAllData(it.id, it.name, it.parentId) }.run {

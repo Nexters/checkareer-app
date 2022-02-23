@@ -96,4 +96,9 @@ class HomeFragment2 : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadHomes(true)
+    }
+
 }

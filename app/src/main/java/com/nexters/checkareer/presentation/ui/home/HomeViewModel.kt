@@ -31,13 +31,15 @@ class HomeViewModel @Inject constructor(
         loadHomes(true)
     }
 
-    private fun loadHomes(forceUpdate: Boolean) {
+    fun loadHomes(forceUpdate: Boolean) {
         try {
             _dataLoading.value = true
             viewModelScope.launch {
                 getProfileUseCase(forceUpdate).getValue().run {
+                    println("resume")
+                    println(_profile.value?.skills.toString())
                     _profile.value = this
-                    _friendProfiles.value = listOf(_profile.value!!)
+                    //_friendProfiles.value = listOf(_profile.value!!)
                 }
             }
         } catch (e: Exception) {

@@ -12,5 +12,7 @@ interface SkillRepository {
 
     suspend fun saveSkills(skills: List<Skill>): Result<Unit>
 
+    suspend fun deleteSkills(): Result<Unit>
+
     suspend fun saveAllSkills(skills: List<Skill>): Result<Unit>
 }
