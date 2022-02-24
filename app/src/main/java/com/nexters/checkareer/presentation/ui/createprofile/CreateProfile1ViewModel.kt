@@ -21,29 +21,51 @@ class CreateProfile1ViewModel @Inject constructor(
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading
 
-    private val _items = MutableLiveData<List<CategorySelect>>()
+    private val _items = MutableLiveData<List<CategorySelect>>().apply { value = emptyList() }
     val items: LiveData<List<CategorySelect>> = _items
 
-    private val _selectedSkillCategoryItems = MutableLiveData<MutableList<CategorySelect>>()
-    val selectedSkillCategoryItems = _selectedSkillCategoryItems
+    private val _selectedSkills = MutableLiveData<List<CategorySelect>>().apply { value = emptyList() }
+    val selectedSkills: LiveData<List<CategorySelect>> = _selectedSkills
 
 
     init {
         loadSkillCategories()
-        _selectedSkillCategoryItems.value = mutableListOf()
     }
 
-    fun addSelectedSkillCategoryItem(skillCategory: CategorySelect) {
-        _selectedSkillCategoryItems.value?.add(skillCategory)
-        _selectedSkillCategoryItems.notifyObserver()
-        _items.notifyObserver()
+    fun toggleSkillItemSelected(skillCategory: CategorySelect) {
+        skillCategory.copy(selected = !skillCategory.selected).let { result ->
+            if (result.selected) {
+                addSelectedSkill(result)
+            } else {
+                removeSelectedSkill(skillCategory)
+            }
+            items.value?.let {
+                val position = it.indexOf(skillCategory)
+                _items.value = it.toMutableList().apply { this[position] = result }
+            }
+        }
     }
 
+    private fun addSelectedSkill(skillCategory: CategorySelect) {
+        selectedSkills.value?.let {
+            _selectedSkills.value = it.toMutableList().apply { add(skillCategory) }
+        }
+    }
 
-    fun removeSelectedSkillCategoryItem(skillCategory: CategorySelect) {
-        _selectedSkillCategoryItems.value?.remove(skillCategory)
-        _selectedSkillCategoryItems.notifyObserver()
-        _items.notifyObserver()
+    private fun removeSelectedSkill(skillCategory: CategorySelect) {
+        selectedSkills.value?.let {
+            _selectedSkills.value = it.toMutableList().apply { remove(skillCategory) }
+        }
+    }
+
+    fun removeSkillItemSelected(skillCategory: CategorySelect) {
+        skillCategory.copy(selected = false).let { result ->
+            removeSelectedSkill(skillCategory)
+            items.value?.let {
+                val position = it.indexOf(skillCategory)
+                _items.value = it.toMutableList().apply { this[position] = result }
+            }
+        }
     }
 
     private fun loadSkillCategories() {

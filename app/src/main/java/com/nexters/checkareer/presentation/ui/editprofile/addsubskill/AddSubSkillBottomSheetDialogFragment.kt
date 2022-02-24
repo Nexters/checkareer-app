@@ -78,13 +78,11 @@ class AddSubSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillC
     }
 
     override fun onSkillCategoryClicked(item: CategorySelect, view: View) {
-        if (!item.selected) {
-            item.selected = true
-            viewModel.addSelectedSkillCategoryItem(item)
-        } else {
-            item.selected = false
-            viewModel.removeSelectedSkillCategoryItem(item)
-        }
+        viewModel.toggleSkillItemSelected(item)
+    }
+
+    override fun onSelectedSkillClicked(item: CategorySelect) {
+        viewModel.removeSkillItemSelected(item)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

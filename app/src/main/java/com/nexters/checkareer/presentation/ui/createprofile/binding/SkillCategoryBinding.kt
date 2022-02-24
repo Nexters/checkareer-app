@@ -19,7 +19,6 @@ import com.nexters.checkareer.presentation.ui.home.adapter.ProfileAdapter
 fun setSkillItems(recyclerView: RecyclerView, items: List<CategorySelect>?) {
     (recyclerView.adapter as? SkillCategoryAdapter)?.run {
         submitList(items)
-        notifyDataSetChanged()
     }
 }
 
@@ -27,7 +26,6 @@ fun setSkillItems(recyclerView: RecyclerView, items: List<CategorySelect>?) {
 fun setSelectedSkillItems(recyclerView: RecyclerView, items: List<CategorySelect>?) {
     (recyclerView.adapter as? SkillCategoryAdapter)?.run {
         submitList(items)
-        notifyDataSetChanged()
     }
 }
 
