@@ -9,6 +9,7 @@ import com.nexters.checkareer.domain.usecase.SaveProfileUseCase
 import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.domain.vo.Profile
+import com.nexters.checkareer.domain.vo.SkillTree
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -43,7 +44,7 @@ class CreateProfile2ViewModel @Inject constructor(
                     val profile = Profile(
                         User(name = name),
                         skill.map {
-                            Skill(it.id, it.name, it.parentId)
+                            SkillTree(Skill(it.id, it.name, it.parentId))
                         }
                     )
                     saveProfileUseCase(profile).getValue()

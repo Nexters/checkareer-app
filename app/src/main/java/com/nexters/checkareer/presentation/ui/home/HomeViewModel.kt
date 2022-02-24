@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
             viewModelScope.launch {
                 getProfileUseCase(forceUpdate).getValue().run {
                     println("resume")
-                    println(_profile.value?.skills.toString())
+                    println(_profile.value?.skills)
                     _profile.value = this
                     //_friendProfiles.value = listOf(_profile.value!!)
                 }

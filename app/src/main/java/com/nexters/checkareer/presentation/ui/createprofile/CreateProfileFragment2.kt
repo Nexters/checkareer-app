@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
+class CreateProfileFragment2 : Fragment() {
 
     private val viewModel by viewModels<CreateProfile2ViewModel>()
     private val args: CreateProfileFragment2Args by navArgs()
@@ -135,9 +135,6 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
     companion object {
         @JvmStatic
         fun newInstance() = CreateProfileFragment2()
-    }
-
-    override fun onSkillCategoryClicked(item: CategorySelect, view: View) {
     }
 }
 

@@ -6,4 +6,6 @@ import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 interface SkillCategoryListener {
 
     fun onSkillCategoryClicked(item: CategorySelect, view: View)
+
+    fun onSelectedSkillClicked(item: CategorySelect)
 }

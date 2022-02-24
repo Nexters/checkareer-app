@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.google.android.flexbox.*
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.AddSkillFragmentBottomsheetBinding
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
@@ -51,7 +54,7 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
 
     private fun setupAddCompleteButton() {
         viewDataBinding.buttonComplete.setOnClickListener {
-            editProfileViewModel.addSelectedSkillCategoryItem(viewModel.selectedSkillCategoryItems.value?.toList()?.map { Skill(it.id, it.name) } ?: listOf())
+            editProfileViewModel.addSelectedSkillCategoryItem(viewModel.selectedSkills.value?.toList()?.map { Skill(it.id, it.name) } ?: listOf())
             dismiss()
         }
     }
@@ -64,7 +67,7 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupSkillListAdapter() {
-        viewModel.loadSkillCategories(true, editProfileViewModel.profile.value?.skills ?: listOf())
+        viewModel.loadSkillCategories(editProfileViewModel.profile.value?.skills?.map { it.skill } ?: listOf())
 
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())
@@ -78,13 +81,11 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
     }
 
     override fun onSkillCategoryClicked(item: CategorySelect, view: View) {
-        if (!item.selected) {
-            item.selected = true
-            viewModel.addSelectedSkillCategoryItem(item)
-        } else {
-            item.selected = false
-            viewModel.removeSelectedSkillCategoryItem(item)
-        }
+        viewModel.toggleSkillItemSelected(item)
+    }
+
+    override fun onSelectedSkillClicked(item: CategorySelect) {
+        viewModel.removeSkillItemSelected(item)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

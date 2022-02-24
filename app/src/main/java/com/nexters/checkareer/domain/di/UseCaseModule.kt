@@ -35,26 +35,17 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideGetSkillsUseCase(
-        skillRepository: SkillRepository
-    ): GetSkillsUseCase {
-        return GetSkillsUseCase(skillRepository)
-    }
-
-    @Provides
     fun provideSaveProfileUseCase(
-        userRepository: UserRepository,
-        skillRepository: SkillRepository
+        userRepository: UserRepository
     ): SaveProfileUseCase {
-        return SaveProfileUseCase(userRepository, skillRepository)
+        return SaveProfileUseCase(userRepository)
     }
 
     @Provides
     fun provideDeleteProfileUseCase(
-        userRepository: UserRepository,
-        skillRepository: SkillRepository
+        userRepository: UserRepository
     ): DeleteProfileUseCase {
-        return DeleteProfileUseCase(userRepository, skillRepository)
+        return DeleteProfileUseCase(userRepository)
     }
 
     @Provides
@@ -62,5 +53,19 @@ object UseCaseModule {
         userRepository: UserRepository
     ): SignInUseCase {
         return SignInUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideGetAllSkillUseCase(
+        skillRepository: SkillRepository
+    ): GetAllSkillUseCase {
+        return GetAllSkillUseCase(skillRepository)
+    }
+
+    @Provides
+    fun provideGetSkillsByLayerUseCase(
+        skillRepository: SkillRepository
+    ): GetSkillsByLayerUseCase {
+        return GetSkillsByLayerUseCase(skillRepository)
     }
 }

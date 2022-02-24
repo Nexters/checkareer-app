@@ -63,11 +63,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="@{Integer.toString(viewmodel.selectedSkillCategoryItems.size())}"
+            android:text="@{Integer.toString(viewmodel.selectedSkills.size())}"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewmodel.selectedSkills.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/textview_title"
             app:layout_constraintStart_toEndOf="@id/textview_title" />
 
@@ -79,7 +79,7 @@
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewmodel.selectedSkills.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/textview_title"
             app:layout_constraintStart_toEndOf="@id/textview_selected_skill_category_count" />
 
@@ -87,11 +87,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_selected_skill_category"
             style="@style/SkillCategoryRecyclerView"
-            selectedSkillItems="@{viewmodel.selectedSkillCategoryItems}"
+            selectedSkillItems="@{viewmodel.selectedSkills}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:visibility="@{viewmodel.selectedSkillCategoryItems.size > 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewmodel.selectedSkills.size > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/textview_title" />

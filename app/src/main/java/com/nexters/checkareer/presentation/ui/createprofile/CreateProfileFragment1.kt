@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -38,7 +37,7 @@ class CreateProfileFragment1 : Fragment(), SkillCategoryListener {
         setupSelectedSkillListAdapter()
 
         viewDataBinding.buttonNext.setOnClickListener {
-            val action = CreateProfileFragment1Directions.actionCreateProfileFragmentToCompleteProfileFragment(viewModel.selectedSkillCategoryItems.value!!.toTypedArray())
+            val action = CreateProfileFragment1Directions.actionCreateProfileFragmentToCompleteProfileFragment(viewModel.selectedSkills.value!!.toTypedArray())
             Navigation.findNavController(view).navigate(action)
         }
 
@@ -71,13 +70,11 @@ class CreateProfileFragment1 : Fragment(), SkillCategoryListener {
 
 
     override fun onSkillCategoryClicked(item: CategorySelect, view: View) {
-        if (!item.selected) {
-            item.selected = true
-            viewModel.addSelectedSkillCategoryItem(item)
-        } else {
-            item.selected = false
-            viewModel.removeSelectedSkillCategoryItem(item)
-        }
+        viewModel.toggleSkillItemSelected(item)
+    }
+
+    override fun onSelectedSkillClicked(item: CategorySelect) {
+        viewModel.removeSkillItemSelected(item)
     }
 
     companion object {

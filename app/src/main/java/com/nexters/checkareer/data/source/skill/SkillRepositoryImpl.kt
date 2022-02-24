@@ -6,9 +6,12 @@ import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.skill.SkillRepository
 import com.nexters.checkareer.domain.util.Result
 import com.nexters.checkareer.domain.util.getValue
+import com.nexters.checkareer.domain.vo.SkillLayer
+import com.nexters.checkareer.domain.vo.SkillTree
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class SkillRepositoryImpl @Inject constructor(
@@ -32,12 +35,29 @@ class SkillRepositoryImpl @Inject constructor(
         return local.findSkillsByUserId(userId)
     }
 
-    override suspend fun findAllSkills(): Result<List<Skill>> {
-        return remote.findSkills()
+    override suspend fun findSkillTrees(): Result<List<SkillTree>> = withContext(ioDispatcher) {
+        return@withContext try {
+            val skills = local.findSkills().getValue()
+
+            val parentSkills = skills.filter { it.layer == 3 }
+            val detailSkills = skills.filter { it.layer == 4 }
+            Timber.i("parentSkills : $parentSkills")
+            Timber.i("detailSkills : $detailSkills")
+
+            val results = parentSkills.map { parent -> parent.toSkillTree(detailSkills.filter { it.parentId == parent.id.toInt() }.map { it.toDetailSkills() })  }
+
+            Result.Success(results)
+        }catch (e: Exception) {
+            Result.Error(e)
+        }
     }
 
-    override suspend fun findAllSkillsLocal(): Result<List<Skill>> = withContext(ioDispatcher) {
+    override suspend fun findSkills(): Result<List<Skill>> = withContext(ioDispatcher) {
         return@withContext local.findSkills()
+    }
+
+    override suspend fun findSkillsByLayer(skillLayer: SkillLayer): Result<List<Skill>> = withContext(ioDispatcher){
+        return@withContext local.findSkillsByLayer(skillLayer)
     }
 
     override suspend fun saveSkills(skills: List<Skill>): Result<Unit> {

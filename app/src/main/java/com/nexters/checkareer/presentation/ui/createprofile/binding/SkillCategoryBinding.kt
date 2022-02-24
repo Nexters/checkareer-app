@@ -10,6 +10,7 @@ import com.nexters.checkareer.util.fromDpToPx
 import android.graphics.Typeface
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.vo.Profile
+import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.ProfileAdapter
@@ -19,7 +20,6 @@ import com.nexters.checkareer.presentation.ui.home.adapter.ProfileAdapter
 fun setSkillItems(recyclerView: RecyclerView, items: List<CategorySelect>?) {
     (recyclerView.adapter as? SkillCategoryAdapter)?.run {
         submitList(items)
-        notifyDataSetChanged()
     }
 }
 
@@ -27,7 +27,6 @@ fun setSkillItems(recyclerView: RecyclerView, items: List<CategorySelect>?) {
 fun setSelectedSkillItems(recyclerView: RecyclerView, items: List<CategorySelect>?) {
     (recyclerView.adapter as? SkillCategoryAdapter)?.run {
         submitList(items)
-        notifyDataSetChanged()
     }
 }
 
@@ -39,18 +38,34 @@ fun setMySkillTopThreeItems(recyclerView: RecyclerView, items: List<Skill>?) {
     }
 }
 
-@BindingAdapter("mySkillItems")
-fun setMySkillItems(recyclerView: RecyclerView, items: List<Skill>?) {
+@BindingAdapter("mySkillTreeTopThreeItems")
+fun setMySkillTreeTopThreeItems(recyclerView: RecyclerView, items: List<SkillTree>?) {
+    (recyclerView.adapter as? MySkillAdapter)?.run {
+        submitList(items?.take(3)?.map { it.skill } ?: listOf())
+        notifyDataSetChanged()
+    }
+}
+
+@BindingAdapter("homeMySkills")
+fun setHomeMySkills(recyclerView: RecyclerView, items: List<Skill>?) {
     (recyclerView.adapter as? MySkillAdapter)?.run {
         submitList(items)
         notifyDataSetChanged()
     }
 }
 
+@BindingAdapter("mySkillItems")
+fun setMySkillItems(recyclerView: RecyclerView, items: List<SkillTree>?) {
+    (recyclerView.adapter as? MySkillAdapter)?.run {
+        submitList(items?.map { it.skill })
+        notifyDataSetChanged()
+    }
+}
+
 @BindingAdapter("mySkillItemsEdit")
-fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<Skill>?) {
+fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<SkillTree>?) {
     (recyclerView.adapter as? MySkillEditAdapter)?.run {
-        submitList(items)
+        submitList(items?.map { it.skill })
         notifyDataSetChanged()
     }
 }

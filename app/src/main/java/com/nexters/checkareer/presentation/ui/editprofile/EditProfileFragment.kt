@@ -121,6 +121,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     }
 
     override fun onSubSkillAddClick(item: Skill, view: View) {
+        viewModel.setClickedSkill(item)
         addSubSkillBottomSheet = AddSubSkillBottomSheetDialogFragment()
         addSubSkillBottomSheet.show(requireActivity().supportFragmentManager, "")
     }
