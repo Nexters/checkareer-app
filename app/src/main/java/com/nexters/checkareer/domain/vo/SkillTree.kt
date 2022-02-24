@@ -1,12 +1,8 @@
 package com.nexters.checkareer.domain.vo
 
-data class SkillTree(
-    val id: String,
-    val name: String,
-    val detailSkills: List<ChildSkill> = emptyList()
-)
+import com.nexters.checkareer.domain.skill.Skill
 
-data class ChildSkill(
-    val id: String,
-    val name: String
+data class SkillTree(
+    val skill: Skill,
+    val childSkills: List<Skill> = emptyList()
 )

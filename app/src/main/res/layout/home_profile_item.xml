@@ -67,7 +67,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_my_skills_top_three"
                 style="@style/SkillCategoryRecyclerView"
-                mySkillTopThreeItems="@{item.skills}"
+                mySkillTreeTopThreeItems="@{item.skills}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

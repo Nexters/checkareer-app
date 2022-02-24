@@ -14,7 +14,6 @@ import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.nexters.checkareer.databinding.AddSkillFragmentBottomsheetBinding
 import com.nexters.checkareer.databinding.AddSubSkillFragmentBottomsheetBinding
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
@@ -53,6 +52,7 @@ class AddSubSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillC
 
     private fun setupAddCompleteButton() {
         viewDataBinding.buttonComplete.setOnClickListener {
+            viewModel.parentSkillId?.let { editProfileViewModel.saveSubSkills(it, viewModel.selectedSkills.value?.toList()?.map { Skill(it.id, it.name, it.parentId) } ?: listOf()) }
             dismiss()
         }
     }
@@ -64,7 +64,9 @@ class AddSubSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillC
     }
 
     private fun setupSkillListAdapter() {
-        viewModel.loadSkillCategories(true, editProfileViewModel.profile.value?.skills ?: listOf())
+        editProfileViewModel.clickedSkill.value?.let {
+            it.id.run { viewModel.loadSkillCategories(this.toInt()) }
+        }?: run { dismiss() }
 
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())

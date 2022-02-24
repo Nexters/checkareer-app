@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
 import com.nexters.checkareer.domain.vo.Profile
+import com.nexters.checkareer.domain.vo.SkillTree
 
 
 data class UserProfile(
@@ -25,7 +26,7 @@ data class UserProfile(
     fun toEntity(): Profile {
         return Profile(
             user.toEntity(),
-            skills.map { it.toEntity() }
+            skills.map { SkillTree(it.toEntity()) }
         )
     }
 }

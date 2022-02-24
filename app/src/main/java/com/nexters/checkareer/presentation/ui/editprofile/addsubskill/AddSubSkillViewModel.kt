@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
+import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddSubSkillViewModel @Inject constructor(
+    private val getProfileUseCase: GetProfileUseCase,
     private val getAllSkillUseCase: GetAllSkillUseCase
 ) : ViewModel() {
 
@@ -25,6 +27,8 @@ class AddSubSkillViewModel @Inject constructor(
 
     private val _selectedSkills = MutableLiveData<List<CategorySelect>>().apply { value = emptyList() }
     val selectedSkills: LiveData<List<CategorySelect>> = _selectedSkills
+
+    var parentSkillId: Int? = null
 
     fun toggleSkillItemSelected(skillCategory: CategorySelect) {
         skillCategory.copy(selected = !skillCategory.selected).let { result ->
@@ -62,15 +66,25 @@ class AddSubSkillViewModel @Inject constructor(
         }
     }
 
-    fun loadSkillCategories(forceUpdate: Boolean, alreadySelectedSkillList: List<Skill>) {
+    fun loadSkillCategories(parentSkillId: Int) {
         try {
             _dataLoading.value = true
+            this.parentSkillId = parentSkillId
             viewModelScope.launch {
-                getAllSkillUseCase(forceUpdate).getValue().run {
-                    val skillList = this.toMutableList()
-                    skillList.removeAll(alreadySelectedSkillList)
-                    _items.value = skillList.map { CategorySelect(it.id, it.name, it.parentId) }
+                getProfileUseCase().getValue()?.let { profile ->
+                    profile.skills.find { it.skill.id == parentSkillId.toString() }?.let {
+                        val mySkills = it.childSkills.map { it.id to it }.toMap()
+                        getAllSkillUseCase().getValue().filter { it.parentId == parentSkillId }.run {
+                            _items.value = this.map { skill ->
+                                if(mySkills[skill.id] != null)
+                                    CategorySelect(skill.id, skill.name, skill.parentId, true)
+                                else
+                                    CategorySelect(skill.id, skill.name, skill.parentId, false)
+                            }
+                        }
+                    }
                 }
+
             }
         } catch (e: Exception) {
             e.printStackTrace()

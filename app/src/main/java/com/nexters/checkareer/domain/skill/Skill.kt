@@ -1,6 +1,5 @@
 package com.nexters.checkareer.domain.skill
 
-import com.nexters.checkareer.domain.vo.ChildSkill
 import com.nexters.checkareer.domain.vo.SkillTree
 
 data class Skill(
@@ -9,11 +8,11 @@ data class Skill(
     val parentId: Int? = null,
     val layer: Int = 3
 ) {
-    fun toSkillTree(detailSkill: List<ChildSkill>): SkillTree {
-        return SkillTree(id, name, detailSkill)
+    fun toSkillTree(detailSkill: List<Skill>): SkillTree {
+        return SkillTree(this, detailSkill)
     }
 
-    fun toDetailSkills(): ChildSkill {
-        return ChildSkill(id, name)
+    fun toDetailSkills(): Skill {
+        return Skill(id, name, parentId, layer)
     }
 }

@@ -27,7 +27,7 @@ class AddSkillViewModel @Inject constructor(
     val selectedSkills: LiveData<List<CategorySelect>> = _selectedSkills
 
     init {
-        _selectedSkills.value = mutableListOf()
+
     }
 
     fun toggleSkillItemSelected(skillCategory: CategorySelect) {

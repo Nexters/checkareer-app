@@ -47,9 +47,14 @@ class UserLocalDataSource (
             return@withContext try {
                 profile.user.toUserData().let { user ->
                     userDao.insertUser(user)
-                    userSkillDao.insertUserSkill(profile.skills.map {
-                        UserAndSkillData(user.userId, it.id)
-                    })
+                    val userAndSkills = mutableListOf<UserAndSkillData>()
+                    profile.skills.forEach {
+                        userAndSkills.add(UserAndSkillData(user.userId, it.skill.id))
+                        it.childSkills.forEach {
+                            userAndSkills.add(UserAndSkillData(user.userId, it.id))
+                        }
+                    }
+                    userSkillDao.insertUserSkill(userAndSkills)
                     Result.Success(Unit)
                 }
             } catch (e: Exception) {

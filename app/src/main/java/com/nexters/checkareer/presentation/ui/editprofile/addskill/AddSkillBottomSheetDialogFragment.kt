@@ -67,7 +67,7 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupSkillListAdapter() {
-        viewModel.loadSkillCategories(editProfileViewModel.profile.value?.skills ?: listOf())
+        viewModel.loadSkillCategories(editProfileViewModel.profile.value?.skills?.map { it.skill } ?: listOf())
 
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())
