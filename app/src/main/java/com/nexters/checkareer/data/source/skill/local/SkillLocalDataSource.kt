@@ -34,7 +34,7 @@ class SkillLocalDataSource(
 
     override suspend fun saveSkills(skills: List<Skill>): Result<Unit> = withContext(ioDispatcher) {
         return@withContext try {
-            skills.map { SkillData(it.id, it.name, it.parentId) }.run {
+            skills.map { SkillData(it.id, it.name, it.parentId, it.layer) }.run {
                 skillDao.saveSkills(this)
                 Result.Success(Unit)
             }

@@ -8,7 +8,7 @@ data class SkillDto(
     @SerializedName("parentid") val parentId: Int?,
     @SerializedName("namekr") val nameKr: String,
     @SerializedName("nameen") val nameEn: String,
-    @SerializedName("type") val type: Int
+    @SerializedName("layout") val type: Int
 ) {
 
     fun toEntity(): Skill {
