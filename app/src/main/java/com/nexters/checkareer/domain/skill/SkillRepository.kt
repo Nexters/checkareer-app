@@ -1,6 +1,8 @@
 package com.nexters.checkareer.domain.skill
 
 import com.nexters.checkareer.domain.util.Result
+import com.nexters.checkareer.domain.vo.SkillLayer
+import com.nexters.checkareer.domain.vo.SkillTree
 
 interface SkillRepository {
 
@@ -8,9 +10,11 @@ interface SkillRepository {
 
     suspend fun findByUserId(userId: String): Result<List<Skill>>
 
-    suspend fun findAllSkills(): Result<List<Skill>>
+    suspend fun findSkillTrees(): Result<List<SkillTree>>
 
-    suspend fun findAllSkillsLocal(): Result<List<Skill>>
+    suspend fun findSkillsByLayer(skillLayer: SkillLayer): Result<List<Skill>>
+
+    suspend fun findSkills(): Result<List<Skill>>
 
     suspend fun saveSkills(skills: List<Skill>): Result<Unit>
 

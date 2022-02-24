@@ -15,4 +15,7 @@ interface SkillDao {
     @Query("SELECT * FROM skill" )
     fun getSkills(): List<SkillData>
 
+    @Query("SELECT * FROM skill WHERE layer = :layer" )
+    fun getSkillsByLayer(layer: Int): List<SkillData>
+
 }

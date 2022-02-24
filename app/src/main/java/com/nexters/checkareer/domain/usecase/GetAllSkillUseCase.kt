@@ -12,7 +12,7 @@ class GetAllSkillUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(forceUpdate: Boolean = false): Result<List<Skill>> {
         return try {
-            val categories = skillRepository.findAllSkillsLocal().getValue()
+            val categories = skillRepository.findSkills().getValue()
 
             Result.Success(categories)
         } catch (e: Exception) {

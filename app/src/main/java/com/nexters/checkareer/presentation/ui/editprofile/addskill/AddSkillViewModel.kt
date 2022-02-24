@@ -47,7 +47,7 @@ class AddSkillViewModel @Inject constructor(
         try {
             _dataLoading.value = true
             viewModelScope.launch {
-                getAllSkillUseCase(forceUpdate).getValue().run {
+                getAllSkillUseCase().getValue().run {
                     val skillList = this.toMutableList()
                     skillList.removeAll(alreadySelectedSkillList)
                     _items.value = skillList.map { CategorySelect(it.id, it.name, it.parentId) }

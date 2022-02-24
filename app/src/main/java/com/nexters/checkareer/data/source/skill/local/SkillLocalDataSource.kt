@@ -5,6 +5,7 @@ import com.nexters.checkareer.data.adapter.db.data.SkillData
 import com.nexters.checkareer.domain.error.DbError
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.util.Result
+import com.nexters.checkareer.domain.vo.SkillLayer
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,6 +30,12 @@ class SkillLocalDataSource(
     override suspend fun findSkills(): Result<List<Skill>> {
         return Result.Success(
             skillDao.getSkills().map { it.toEntity() }
+        )
+    }
+
+    override suspend fun findSkillsByLayer(skillLayer: SkillLayer): Result<List<Skill>> {
+        return Result.Success(
+            skillDao.getSkillsByLayer(skillLayer.value).map { it.toEntity() }
         )
     }
 

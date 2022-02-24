@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
+import com.nexters.checkareer.domain.usecase.GetSkillsByLayerUseCase
 import com.nexters.checkareer.domain.util.getValue
+import com.nexters.checkareer.domain.vo.SkillLayer
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateProfile1ViewModel @Inject constructor(
-    val getAllSkillUseCase: GetAllSkillUseCase
+    val getSkillsByLayerUseCase: GetSkillsByLayerUseCase
 ) : ViewModel() {
 
 
@@ -28,7 +29,7 @@ class CreateProfile1ViewModel @Inject constructor(
 
 
     init {
-        loadSkillCategories(true)
+        loadSkillCategories()
         _selectedSkillCategoryItems.value = mutableListOf()
     }
 
@@ -45,11 +46,11 @@ class CreateProfile1ViewModel @Inject constructor(
         _items.notifyObserver()
     }
 
-    private fun loadSkillCategories(forceUpdate: Boolean) {
+    private fun loadSkillCategories() {
         try {
             _dataLoading.value = true
             viewModelScope.launch {
-                getAllSkillUseCase(forceUpdate).getValue().run {
+                getSkillsByLayerUseCase(SkillLayer.PARENT).getValue().run {
                     _items.value = this.map { CategorySelect(it.id, it.name, it.parentId) }
                 }
             }
