@@ -5,7 +5,6 @@ import androidx.room.RoomDatabase
 import com.nexters.checkareer.data.adapter.db.dao.SkillDao
 import com.nexters.checkareer.data.adapter.db.dao.UserDao
 import com.nexters.checkareer.data.adapter.db.dao.UserSkillDao
-import com.nexters.checkareer.data.adapter.db.data.SkillAllData
 import com.nexters.checkareer.data.adapter.db.data.SkillData
 import com.nexters.checkareer.data.adapter.db.data.UserData
 import com.nexters.checkareer.data.adapter.db.data.UserAndSkillData
@@ -14,7 +13,6 @@ import com.nexters.checkareer.data.adapter.db.data.UserAndSkillData
     entities = [
         UserData::class,
         SkillData::class,
-        SkillAllData::class,
         UserAndSkillData::class
     ],
     version = 1,

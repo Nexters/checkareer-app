@@ -4,6 +4,8 @@ import com.nexters.checkareer.domain.util.Result
 
 interface SkillRepository {
 
+    suspend fun syncSkills(): Result<Unit>
+
     suspend fun findByUserId(userId: String): Result<List<Skill>>
 
     suspend fun findAllSkills(): Result<List<Skill>>
@@ -13,6 +15,4 @@ interface SkillRepository {
     suspend fun saveSkills(skills: List<Skill>): Result<Unit>
 
     suspend fun deleteSkills(): Result<Unit>
-
-    suspend fun saveAllSkills(skills: List<Skill>): Result<Unit>
 }

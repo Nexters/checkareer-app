@@ -4,6 +4,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nexters.checkareer.data.adapter.db.data.UserProfile
 import com.nexters.checkareer.data.source.user.UserDataSource
+import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.util.Result
 import com.nexters.checkareer.domain.vo.Profile
 import timber.log.Timber
@@ -38,6 +39,10 @@ class UserRemoteDataSource @Inject constructor(
     }
 
     override suspend fun updateUser(profile: Profile): Result<Unit> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun findUser(): Result<User> {
         TODO("Not yet implemented")
     }
 }

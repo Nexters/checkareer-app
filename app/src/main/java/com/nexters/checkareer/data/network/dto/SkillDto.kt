@@ -1,9 +1,9 @@
-package com.nexters.checkareer.data.entity
+package com.nexters.checkareer.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 import com.nexters.checkareer.domain.skill.Skill
 
-data class SkillEntity(
+data class SkillDto(
     @SerializedName("id") val id: Int,
     @SerializedName("parentid") val parentId: Int?,
     @SerializedName("namekr") val nameKr: String,

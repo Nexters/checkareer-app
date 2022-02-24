@@ -6,7 +6,9 @@ import com.nexters.checkareer.domain.vo.Profile
 
 interface UserRepository {
 
-    suspend fun findUserProfile(): Result<Profile?>
+    suspend fun findUser(): Result<User?>
+
+    suspend fun findUserProfile(): Result<Profile>
 
     suspend fun updateUser(profile: Profile): Result<Unit>
 

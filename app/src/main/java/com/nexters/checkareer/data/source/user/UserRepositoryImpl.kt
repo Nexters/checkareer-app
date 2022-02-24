@@ -1,6 +1,6 @@
 package com.nexters.checkareer.data.source.user
 
-import com.nexters.checkareer.data.adapter.db.data.UserProfile
+import com.nexters.checkareer.domain.error.ExistingUserError
 import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.user.UserRepository
 import com.nexters.checkareer.domain.util.Result
@@ -17,14 +17,17 @@ class UserRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserRepository {
 
-    override suspend fun findUserProfile(): Result<Profile?> {
+    override suspend fun findUser(): Result<User?> {
+        return local.findUser()
+    }
+
+    override suspend fun findUserProfile(): Result<Profile> {
 
         return try {
-            val userProfile = local.findUserProfile().getValue()
-            if(userProfile == null) {
-                Result.Success(null)
-            } else {
-                Result.Success(userProfile.toEntity())
+            local.findUserProfile().getValue()?.let {
+                Result.Success(it.toEntity())
+            }?: run {
+                Result.Error(ExistingUserError())
             }
         } catch (e: Exception) {
             Result.Error(e)

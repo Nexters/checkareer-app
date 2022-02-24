@@ -2,17 +2,16 @@ package com.nexters.checkareer.data.source.user.local
 
 import com.nexters.checkareer.data.adapter.db.dao.UserDao
 import com.nexters.checkareer.data.adapter.db.dao.UserSkillDao
-import com.nexters.checkareer.data.adapter.db.data.UserData
 import com.nexters.checkareer.data.adapter.db.data.UserProfile
 import com.nexters.checkareer.data.adapter.db.data.UserAndSkillData
 import com.nexters.checkareer.data.source.user.UserDataSource
 import com.nexters.checkareer.domain.error.DbError
+import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.util.Result
 import com.nexters.checkareer.domain.vo.Profile
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.lang.Exception
 
 class UserLocalDataSource (
@@ -21,7 +20,20 @@ class UserLocalDataSource (
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserDataSource {
 
-    override suspend fun findUserProfile(): Result<UserProfile> = withContext(ioDispatcher) {
+    override suspend fun findUser(): Result<User?> = withContext(ioDispatcher)  {
+        return@withContext try {
+            val user = userDao.getUser()
+            if (user.isEmpty()) {
+                Result.Success(null)
+            } else {
+                Result.Success(user.first().toEntity())
+            }
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
+
+    override suspend fun findUserProfile(): Result<UserProfile?> = withContext(ioDispatcher) {
         return@withContext try {
             val profile = userDao.getUserProfile()
             Result.Success(profile)

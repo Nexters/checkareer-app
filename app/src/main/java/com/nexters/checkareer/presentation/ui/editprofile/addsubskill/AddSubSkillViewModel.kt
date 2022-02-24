@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
-import com.nexters.checkareer.domain.usecase.GetSkillCategoryUseCase
 import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel

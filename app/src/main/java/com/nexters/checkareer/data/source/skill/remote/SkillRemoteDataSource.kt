@@ -1,6 +1,5 @@
 package com.nexters.checkareer.data.source.skill.remote
 
-import com.nexters.checkareer.data.entity.SkillEntity
 import com.nexters.checkareer.data.network.ApiService
 import com.nexters.checkareer.domain.error.DbError
 import com.nexters.checkareer.domain.skill.Skill
@@ -21,9 +20,5 @@ class SkillRemoteDataSource(
         } else {
             Result.Error(DbError(""))
         }
-    }
-
-    override suspend fun saveSkills(skill: List<Skill>): Result<Unit> {
-        TODO("Not yet implemented")
     }
 }
