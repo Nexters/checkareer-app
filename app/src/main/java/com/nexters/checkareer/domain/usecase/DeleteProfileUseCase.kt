@@ -14,7 +14,7 @@ class DeleteProfileUseCase @Inject constructor(
     suspend operator fun invoke(profile: Profile): Result<Unit> {
         return try {
             userRepository.deleteUser(profile)
-            skillRepository.deleteSkills()
+            //skillRepository.deleteSkills()
             Result.Success(Unit)
         } catch (e: Exception) {
             println(e.message)

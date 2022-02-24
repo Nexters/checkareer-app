@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +71,18 @@ class CreateProfileFragment2 : Fragment(), SkillCategoryListener {
             val intent = Intent(requireContext(), HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
+        }
+
+        viewDataBinding.edittextName.setOnKeyListener{ _, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+                if (viewDataBinding.edittextName.length() > 0) {
+                    viewModel.saveUserProfile()
+
+                } else {
+                    Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
         }
     }
 
