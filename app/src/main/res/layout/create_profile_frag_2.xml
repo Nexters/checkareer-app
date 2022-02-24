@@ -35,8 +35,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,6 +109,7 @@
                             android:layout_marginBottom="20dp"
                             android:backgroundTint="@color/point_color_1"
                             android:hint="@string/please_insert_name"
+                            android:inputType="text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -196,8 +197,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
