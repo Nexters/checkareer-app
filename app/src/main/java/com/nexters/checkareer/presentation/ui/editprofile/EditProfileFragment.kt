@@ -1,9 +1,11 @@
 package com.nexters.checkareer.presentation.ui.editprofile
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -46,7 +48,25 @@ class EditProfileFragment : Fragment(), SkillEditListener {
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
+        setEvents()
 
+    }
+
+    private fun setEvents() {
+        viewDataBinding.edittextName.setOnKeyListener{ _, keyCode, keyEvent ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                if (viewDataBinding.edittextName.length() > 0) {
+                    viewModel.editUserProfile(viewDataBinding.edittextName.text.toString())
+                    viewModel.editProfileLoading.observe(viewLifecycleOwner) {
+                        if (!it) requireActivity().finish()
+                    }
+
+                } else {
+                    Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
+            false
+        }
     }
 
     private fun setupBackButton() {
@@ -57,9 +77,14 @@ class EditProfileFragment : Fragment(), SkillEditListener {
 
     private fun setupCompleteButton() {
         viewDataBinding.buttonSave.setOnClickListener {
-            viewModel.editUserProfile(viewDataBinding.edittextName.text.toString())
-            viewModel.editProfileLoading.observe(viewLifecycleOwner) {
-                if (!it) requireActivity().finish()
+            if (viewDataBinding.edittextName.length() > 0) {
+                viewModel.editUserProfile(viewDataBinding.edittextName.text.toString())
+                viewModel.editProfileLoading.observe(viewLifecycleOwner) {
+                    if (!it) requireActivity().finish()
+                }
+
+            } else {
+                Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
     }
