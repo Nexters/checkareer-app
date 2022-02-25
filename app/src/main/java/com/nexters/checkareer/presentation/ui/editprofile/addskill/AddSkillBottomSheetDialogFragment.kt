@@ -15,7 +15,6 @@ import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.AddSkillFragmentBottomsheetBinding
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
@@ -67,7 +66,7 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupSkillListAdapter() {
-        viewModel.loadSkillCategories(editProfileViewModel.profile.value?.skills?.map { it.skill } ?: listOf())
+        viewModel.loadSkillItems(/*editProfileViewModel.profile.value?.skills?.map { it.skill } ?: listOf()*/)
 
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())
