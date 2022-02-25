@@ -20,10 +20,10 @@
         <item name="android:background">@drawable/round_corner_background</item>
     </style>
 
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/backgroundColor</item>
-<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_text</item>-->
-        <item name="postSplashScreenTheme">@style/Theme.Checkareer</item>
+    <style name="Theme.App.Starting" parent="Theme.Checkareer">
+        <item name="android:windowBackground">@drawable/splash</item>
+<!--        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>-->
+<!--        <item name="postSplashScreenTheme">@style/Theme.Checkareer</item>-->
     </style>
 
 </resources>
