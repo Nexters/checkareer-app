@@ -53,7 +53,7 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
 
     private fun setupAddCompleteButton() {
         viewDataBinding.buttonComplete.setOnClickListener {
-            editProfileViewModel.addSelectedSkillCategoryItem(viewModel.selectedSkills.value?.toList()?.map { Skill(it.id, it.name) } ?: listOf())
+            editProfileViewModel.applyParentSkills(viewModel.selectedSkills.value?.toList()?.map { Skill(it.id, it.name, it.parentId) } ?: listOf())
             dismiss()
         }
     }
@@ -66,7 +66,7 @@ class AddSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillCate
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupSkillListAdapter() {
-        viewModel.loadSkillItems(/*editProfileViewModel.profile.value?.skills?.map { it.skill } ?: listOf()*/)
+        viewModel.loadSkillItems(editProfileViewModel.profile.value?.skills ?: listOf())
 
         viewDataBinding.recyclerviewSkillCategory.apply {
             val layoutManager = FlexboxLayoutManager(requireContext())

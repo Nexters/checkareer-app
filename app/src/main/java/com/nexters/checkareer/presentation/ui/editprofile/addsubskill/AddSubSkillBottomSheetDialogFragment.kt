@@ -65,7 +65,7 @@ class AddSubSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillC
 
     private fun setupSkillListAdapter() {
         editProfileViewModel.clickedSkill.value?.let {
-            it.id.run { viewModel.loadSkillCategories(this.toInt()) }
+            it.id.run { viewModel.loadSkillCategories(editProfileViewModel.profile.value?.skills ?: listOf(), this.toInt()) }
         }?: run { dismiss() }
 
         viewDataBinding.recyclerviewSkillCategory.apply {

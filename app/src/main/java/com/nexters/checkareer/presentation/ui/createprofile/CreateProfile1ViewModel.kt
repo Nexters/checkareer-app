@@ -73,7 +73,7 @@ class CreateProfile1ViewModel @Inject constructor(
             _dataLoading.value = true
             viewModelScope.launch {
                 getSkillsByLayerUseCase(SkillLayer.PARENT).getValue().run {
-                    _items.value = this.map { CategorySelect(it.id, it.name, it.parentId) }
+                    _items.value = this.map { CategorySelect(it.id, it.name, it.parentId, it.layer) }
                 }
             }
         } catch (e: Exception) {
