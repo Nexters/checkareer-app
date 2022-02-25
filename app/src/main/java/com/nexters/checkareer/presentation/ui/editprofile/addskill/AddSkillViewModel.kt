@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.util.getValue
+import com.nexters.checkareer.domain.vo.Profile
+import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -70,22 +72,20 @@ class AddSkillViewModel @Inject constructor(
         }
     }
 
-    fun loadSkillItems() {
+    fun loadSkillItems(originSkillTree: List<SkillTree>) {
         try {
             _dataLoading.value = true
             viewModelScope.launch {
-                getProfileUseCase().getValue()?.let { profile ->
-                    val myParentSkills = profile.skills.map { it.skill.id to it.skill }.toMap()
+                val myParentSkills = originSkillTree.map { it.skill.id to it.skill }.toMap()
 
-                    getAllSkillUseCase().getValue().run {
-                        _items.value = this.map { skillTree ->
-                            if(myParentSkills[skillTree.skill.id] != null)
-                                CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, true)
-                            else
-                                CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, false)
-                        }
-                        items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
+                getAllSkillUseCase().getValue().run {
+                    _items.value = this.map { skillTree ->
+                        if(myParentSkills[skillTree.skill.id] != null)
+                            CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, skillTree.skill.layer, true)
+                        else
+                            CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, skillTree.skill.layer, false)
                     }
+                    items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
                 }
             }
         } catch (e: Exception) {

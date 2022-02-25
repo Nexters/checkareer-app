@@ -8,6 +8,7 @@ import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.util.getValue
+import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -78,11 +79,12 @@ class AddSubSkillViewModel @Inject constructor(
         }
     }
 
-    fun loadSkillCategories(parentSkillId: Int) {
+    fun loadSkillCategories(originSkillTree: List<SkillTree>, parentSkillId: Int) {
         try {
             _dataLoading.value = true
             this.parentSkillId = parentSkillId
             viewModelScope.launch {
+
                 getProfileUseCase().getValue()?.let { profile ->
                     profile.skills.find { it.skill.id == parentSkillId.toString() }?.let {
                         val mySkills = it.childSkills.map { it.id to it }.toMap()
@@ -90,9 +92,9 @@ class AddSubSkillViewModel @Inject constructor(
                         getAllSkillUseCase().getValue().find { it.skill.id == parentSkillId.toString() }?.run {
                             _items.value = this.childSkills.map { skill ->
                                 if(mySkills[skill.id] != null)
-                                    CategorySelect(skill.id, skill.name, skill.parentId, true)
+                                    CategorySelect(skill.id, skill.name, skill.parentId, skill.layer, true)
                                 else
-                                    CategorySelect(skill.id, skill.name, skill.parentId, false)
+                                    CategorySelect(skill.id, skill.name, skill.parentId, skill.layer, false)
                             }
                             items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
                         }

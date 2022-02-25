@@ -118,7 +118,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     }
 
     override fun onSkillDeleteClicked(item: SkillTree, view: View) {
-        viewModel.removeSelectedSkillCategoryItem(item.skill)
+        viewModel.removeSelectedSkillCategoryItem(item)
     }
 
     override fun onSubSkillAddClick(item: SkillTree, view: View) {

@@ -9,5 +9,6 @@ data class CategorySelect(
     val id: String,
     val name: String,
     val parentId: Int?,
+    val layer: Int,
     var selected: Boolean = false
 ): Parcelable

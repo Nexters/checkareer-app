@@ -32,29 +32,26 @@ class EditProfileViewModel @Inject constructor(
     private val _clickedSkill = MutableLiveData<Skill>()
     val clickedSkill: LiveData<Skill> = _clickedSkill
 
-    init {
-
-    }
-
     fun setClickedSkill(skill: Skill) {
         _clickedSkill.value = skill
     }
 
-
-    fun removeSelectedSkillCategoryItem(skill: Skill) {
-        val skillList = _profile.value?.skills?.map { it.skill }?.toMutableList()
-        skillList?.remove(skill)
-        _profile.value?.skills = skillList?.toList()!!.map { SkillTree(it) }
-        _profile.notifyObserver()
+    fun removeSelectedSkillCategoryItem(skill: SkillTree) {
+        profile.value?.skills?.toMutableList()?.let { originParentSkills ->
+            originParentSkills.remove(skill)
+            _profile.value?.skills = originParentSkills.toList()
+            _profile.notifyObserver()
+        }
     }
 
-    fun addSelectedSkillCategoryItem(skillList: List<Skill>) {
-        val prevSkillList = _profile.value?.skills?.map { it.skill }?.toMutableList()
-        prevSkillList?.addAll(skillList)
-        if (prevSkillList != null) {
-            _profile.value?.skills = prevSkillList.map { SkillTree(it) }
+    fun applyParentSkills(skillList: List<Skill>) {
+        profile.value?.skills?.let { parentSkills ->
+            val originParentSkills = parentSkills.map { it.skill.id to it }.toMap()
+            _profile.value?.skills = skillList.map {
+                SkillTree(it, originParentSkills[it.id]?.childSkills?: emptyList())
+            }
+            _profile.notifyObserver()
         }
-        _profile.notifyObserver()
     }
 
     fun saveSubSkills(parentSkillId: Int, skillList: List<Skill>) {
