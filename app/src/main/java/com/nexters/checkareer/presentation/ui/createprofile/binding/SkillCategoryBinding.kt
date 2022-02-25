@@ -54,6 +54,7 @@ fun setHomeMySkills(recyclerView: RecyclerView, items: List<Skill>?) {
     }
 }
 
+
 @BindingAdapter("mySkillItems")
 fun setMySkillItems(recyclerView: RecyclerView, items: List<SkillTree>?) {
     (recyclerView.adapter as? MySkillAdapter)?.run {

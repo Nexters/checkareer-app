@@ -13,237 +13,243 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardview_create_profile"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="@{viewmodel.profile == null ? View.VISIBLE : View.GONE}"
-            app:cardBackgroundColor="@color/cardBackgroundColor"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.9"
-            tools:visibility="gone">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundColor">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview_create_profile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="@{viewmodel.profile == null ? View.VISIBLE : View.GONE}"
+                app:cardBackgroundColor="@color/cardBackgroundColor"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.9"
+                tools:visibility="gone">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageview_add"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.4"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_profile"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/imageview_add"
+                        app:layout_constraintStart_toStartOf="@id/imageview_add"
+                        app:layout_constraintTop_toBottomOf="@id/imageview_add" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageview_add"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_add"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.4"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_profile"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@id/imageview_add"
-                    app:layout_constraintStart_toStartOf="@id/imageview_add"
-                    app:layout_constraintTop_toBottomOf="@id/imageview_add" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{viewmodel.profile == null ? View.GONE : View.VISIBLE}">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_start"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.05" />
+                    android:visibility="@{viewmodel.profile == null ? View.GONE : View.VISIBLE}">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_end"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.95" />
-
-                <ImageView
-                    android:id="@+id/imageview_setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_settings"
-                    app:layout_constraintEnd_toStartOf="@id/imageview_delete"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageview_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-
-                    android:padding="10dp"
-                    android:src="@drawable/ic_delete"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardview_my_profile"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    app:cardBackgroundColor="@color/cardBackgroundColor"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                    app:layout_constraintStart_toStartOf="@id/guideline_start"
-                    app:layout_constraintTop_toBottomOf="@id/imageview_delete">
-
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline_start"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        app:layout_constraintGuide_percent="0.05" />
 
-                        <TextView
-                            android:id="@+id/textview_name"
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.95" />
+
+                    <ImageView
+                        android:id="@+id/imageview_setting"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_baseline_edit_note_24"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+
+                    <!--<ImageView
+                        android:id="@+id/imageview_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+
+                        android:padding="10dp"
+                        android:src="@drawable/ic_delete"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />-->
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardview_my_profile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        app:cardBackgroundColor="@color/cardBackgroundColor"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/imageview_setting">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="20dp"
-                            android:text="@{viewmodel.profile.user.name}"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/light_gray"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            tools:text="이름" />
+                            android:orientation="vertical"
+                            android:padding="10dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/my_skill_top_three"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            <ImageView
+                                android:id="@+id/profile_image"
+                                imageUrl="@{viewmodel.profile.user}"
+                                android:layout_gravity="center"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"/>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerview_my_skills_top_three"
-                            style="@style/SkillCategoryRecyclerView"
-                            mySkillTreeTopThreeItems="@{viewmodel.profile.skills}"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/textview_name"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="@dimen/margin_normal"
+                                android:text="@{viewmodel.profile.user.name}"
+                                style="@style/BoldText"
+                                android:textColorHint="@color/light_gray"
+                                android:textSize="21sp"
+                                tools:text="이름" />
 
+                            <!--<TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="@string/my_skill_top_three"
+                                style="@style/BoldText"
+                                android:textSize="14sp"/>-->
 
-                    </LinearLayout>
-
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-                <TextView
-                    android:id="@+id/textview_skill_information"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:text="@string/skill_information"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/guideline_start"
-                    app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
-
-                <TextView
-                    android:id="@+id/textview_skill_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@{Integer.toString(viewmodel.profile.skills.size())}"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
-                    app:layout_constraintStart_toEndOf="@id/textview_skill_information" />
-
-                <TextView
-                    android:id="@+id/textview_max_selected_skill_category_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 개"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
-                    app:layout_constraintStart_toEndOf="@id/textview_skill_count" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_my_skills"
-                    style="@style/SkillListRecyclerView"
-                    mySkillItems="@{viewmodel.profile.skills}"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:clipToPadding="false"
-                    android:paddingBottom="100dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                    app:layout_constraintStart_toStartOf="@id/guideline_start"
-                    app:layout_constraintTop_toBottomOf="@id/textview_skill_information"
-                    tools:listitem="@layout/skill_item_vertical" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_share"
-            android:visibility="@{viewmodel.profile == null ? View.GONE : View.VISIBLE}"
-            app:borderWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.95" />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_gravity="center"
+                                android:id="@+id/recyclerview_my_skills_top_three"
+                                style="@style/SkillCategoryRecyclerView"
+                                mySkillTreeTopThreeItems="@{viewmodel.profile.skills}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/textview_skill_information"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:text="@string/skill_information"
+                        style="@style/BoldText"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
+
+                    <TextView
+                        android:id="@+id/textview_skill_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{Integer.toString(viewmodel.profile.skills.size())}"
+                        android:textSize="18sp"
+                        style="@style/BoldText"
+                        android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
+                        app:layout_constraintTop_toTopOf="@id/textview_skill_information"
+                        app:layout_constraintStart_toEndOf="@id/textview_skill_information" />
+
+                    <TextView
+                        android:id="@+id/textview_max_selected_skill_category_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="개"
+                        style="@style/BoldText"
+                        android:textSize="18sp"
+                        android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
+                        app:layout_constraintStart_toEndOf="@id/textview_skill_count" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_my_skills"
+                        style="@style/SkillListRecyclerView"
+                        skillTreeItems="@{viewmodel.profile.skills}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:clipToPadding="false"
+                        android:paddingBottom="100dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/textview_skill_information"
+                        tools:listitem="@layout/skill_item_vertical" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_share"
+                android:visibility="@{viewmodel.profile == null ? View.GONE : View.VISIBLE}"
+                app:borderWidth="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.95" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 </layout>

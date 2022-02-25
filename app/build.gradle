@@ -103,5 +103,9 @@ dependencies {
     // Viewpager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    // Glide
+    implementation "com.zlc.glide:webpdecoder:1.6.$rootProject.glideVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
 }

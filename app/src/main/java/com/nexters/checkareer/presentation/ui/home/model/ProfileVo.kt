@@ -1,8 +1,8 @@
 package com.nexters.checkareer.presentation.ui.home.model
 
-data class MyProfile(
+data class ProfileVo(
     val name: String,
-    val category: List<SkillVo>
+    val skills: List<SkillTreeVo>
 ): HomeInfo
 
 

@@ -3,16 +3,10 @@ package com.nexters.checkareer.presentation.ui.home.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.vo.Profile
-import com.nexters.checkareer.presentation.ui.createprofile.holder.ProfileSkillViewHolder
 import com.nexters.checkareer.presentation.ui.home.holder.FriendProfileViewHolder
-import com.nexters.checkareer.presentation.ui.home.holder.MySkillTopThreeViewHolder
-import com.nexters.checkareer.presentation.ui.home.holder.MySkillViewHolder
 import com.nexters.checkareer.presentation.ui.home.listener.FriendProfileListener
-import com.nexters.checkareer.presentation.ui.home.listener.HomeListener
 import com.nexters.checkareer.presentation.ui.home.util.ProfileItemDiffCallback
-import com.nexters.checkareer.presentation.ui.home.util.SkillItemDiffCallback
 
 class ProfileAdapter(
     private val eventListener: FriendProfileListener
