@@ -1,24 +1,18 @@
 package com.nexters.checkareer.presentation.ui.home
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFrag2Binding
 import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
 import com.nexters.checkareer.presentation.ui.editprofile.EditProfileActivity
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
-import com.nexters.checkareer.presentation.ui.onboarding.OnBoardingActivity
+import com.nexters.checkareer.presentation.ui.home.adapter.skill.SkillTreeAdapter
+import com.nexters.checkareer.presentation.ui.home.adapter.skill.SkillTreeViewType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +33,7 @@ class HomeFragment2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupProfileEditButton()
-        setupProfileDeleteButton()
+//        setupProfileDeleteButton()
         setupProfileCreateButton()
         setupLifecycleOwner()
         setupMySkillAdapter()
@@ -52,7 +46,7 @@ class HomeFragment2 : Fragment() {
         }
     }
 
-    private fun setupProfileDeleteButton() {
+    /*private fun setupProfileDeleteButton() {
         viewDataBinding.imageviewDelete.setOnClickListener {
             val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.confirm_dialog, null)
             val mBuilder = AlertDialog.Builder(requireContext()).setView(mDialogView)
@@ -72,7 +66,7 @@ class HomeFragment2 : Fragment() {
 
             }
         }
-    }
+    }*/
 
     private fun setupProfileCreateButton() {
         viewDataBinding.cardviewCreateProfile.setOnClickListener {
@@ -86,7 +80,7 @@ class HomeFragment2 : Fragment() {
 
     private fun setupMySkillAdapter() {
         viewDataBinding.recyclerviewMySkills.apply {
-            adapter = MySkillAdapter("SKILL_LIST")
+            adapter = SkillTreeAdapter(SkillTreeViewType.HOME) //MySkillAdapter("SKILL_LIST")
         }
     }
 

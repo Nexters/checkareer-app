@@ -3,32 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
-
         <import type="com.nexters.checkareer.R" />
 
         <import type="android.graphics.Typeface" />
 
         <variable
             name="item"
-            type="com.nexters.checkareer.domain.skill.Skill" />
-
-
+            type="com.nexters.checkareer.domain.vo.SkillTree" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="@dimen/margin_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardview_skill_category"
+            android:id="@+id/parent_skill_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="15dp"
             app:cardBackgroundColor="@color/cardBackgroundColor"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp">
@@ -41,13 +37,20 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{item.name}"
-                android:textColor="@color/white"
+                android:text="@{item.skill.name}"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                style="@style/BoldText"
                 tools:text="Android" />
 
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="@dimen/margin_normal"
+            app:layout_constraintTop_toBottomOf="@+id/parent_skill_view"
+            childSkillItems="@{item.childSkills}"
+            android:id="@+id/detail_skill_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

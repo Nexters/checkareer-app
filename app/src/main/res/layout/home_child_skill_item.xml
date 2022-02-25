@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="com.nexters.checkareer.R" />
+
+        <variable
+            name="item"
+            type="com.nexters.checkareer.domain.skill.Skill" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/skill_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:orientation="vertical"
+        app:strokeWidth="1dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/white"
+        tools:layout_width="200dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:skillTextStyle='@{"bold"}'
+            android:text="@{item.name}"
+            android:textColor="@{@color/white}"
+            android:textSize="14sp"
+            tools:text="Android" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>
