@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.usecase.GetAllSkillUseCase
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.util.getValue

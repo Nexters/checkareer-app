@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nexters.checkareer.databinding.EditProfileFragBinding
 import com.nexters.checkareer.domain.skill.Skill
+import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
 import com.nexters.checkareer.presentation.ui.editprofile.addskill.AddSkillBottomSheetDialogFragment
 import com.nexters.checkareer.presentation.ui.editprofile.addsubskill.AddSubSkillBottomSheetDialogFragment
@@ -116,12 +117,12 @@ class EditProfileFragment : Fragment(), SkillEditListener {
         }
     }
 
-    override fun onSkillDeleteClicked(item: Skill, view: View) {
-        viewModel.removeSelectedSkillCategoryItem(item)
+    override fun onSkillDeleteClicked(item: SkillTree, view: View) {
+        viewModel.removeSelectedSkillCategoryItem(item.skill)
     }
 
-    override fun onSubSkillAddClick(item: Skill, view: View) {
-        viewModel.setClickedSkill(item)
+    override fun onSubSkillAddClick(item: SkillTree, view: View) {
+        viewModel.setClickedSkill(item.skill)
         addSubSkillBottomSheet = AddSubSkillBottomSheetDialogFragment()
         addSubSkillBottomSheet.show(requireActivity().supportFragmentManager, "")
     }
