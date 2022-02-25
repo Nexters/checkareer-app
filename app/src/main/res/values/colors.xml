@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="gray">#7E7E7E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_text">#999999</color>
 
     <color name="colorPrimary">@color/purple_500</color>
     <color name="colorPrimaryDark">@color/purple_700</color>

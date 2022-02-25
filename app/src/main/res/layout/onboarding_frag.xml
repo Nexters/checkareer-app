@@ -21,11 +21,13 @@
 
 
         <ImageView
+            android:layout_margin="32dp"
             android:id="@+id/image_logo"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/image_temp_logo"
+            android:background="@drawable/ic_onboarding_text"
+            android:src="@drawable/ic_onboarding_shadow"
             app:layout_constraintBottom_toTopOf="@+id/half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,54 +36,43 @@
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/half"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.52"
+            app:layout_constraintGuide_percent="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
 
         <TextView
             android:id="@+id/textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="당신의 경험에 대해 알려주세요!"
-            android:textColor="@color/white"
+            android:text="@string/on_boarding_title"
+            style="@style/BoldText"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_logo" />
+            app:layout_constraintTop_toBottomOf="@id/half" />
 
         <TextView
             android:id="@+id/textview_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/suit_regular"
-            android:text="경험 기반의 커리어 기록을 통해,\n보다 다채롭게 스스로를 표현해보세요."
-            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:text="@string/on_boarding_description"
+            style="@style/RegularText"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/textview_title"
             app:layout_constraintStart_toStartOf="@+id/textview_title"
             app:layout_constraintTop_toBottomOf="@id/textview_title" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/button_login"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="로그인"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_bias="0.704" />-->
+
 
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/button_create_profile"
             android:layout_width="147dp"
             android:layout_height="48dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="48dp"
             app:cardBackgroundColor="@color/point_color_1"
             app:cardCornerRadius="24dp"
             app:cardElevation="0dp"
@@ -100,6 +91,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/imageview_arrow"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -112,19 +104,36 @@
                     android:layout_height="0dp"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:rotation="180"
-                    android:src="@drawable/ic_arrow_back"
-                    app:layout_constraintBottom_toBottomOf="@+id/textview_create_profile"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/textview_create_profile"
-                    app:layout_constraintTop_toTopOf="@+id/textview_create_profile"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/black" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </com.google.android.material.card.MaterialCardView>
 
+        <FrameLayout
+            android:id="@+id/login_button"
+            android:layout_marginTop="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingEnd="@dimen/margin_normal"
+            app:layout_constraintStart_toStartOf="@+id/button_create_profile"
+            app:layout_constraintTop_toBottomOf="@+id/button_create_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/RegularText"
+                android:textSize="14dp"
+                android:textColor="@color/gray_text"
+                android:text="@string/on_boarding_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
