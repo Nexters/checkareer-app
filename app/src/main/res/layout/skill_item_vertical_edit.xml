@@ -5,6 +5,7 @@
 
 
     <data>
+        <import type="android.view.View"/>
 
         <import type="com.nexters.checkareer.R" />
 
@@ -12,17 +13,17 @@
 
         <variable
             name="item"
-            type="com.nexters.checkareer.domain.skill.Skill" />
+            type="com.nexters.checkareer.domain.vo.SkillTree" />
 
         <variable
             name="eventListener"
             type="com.nexters.checkareer.presentation.ui.editprofile.listener.SkillEditListener" />
-
-
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/margin_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -30,14 +31,11 @@
             android:id="@+id/cardview_skill_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="@dimen/margin_8dp"
             android:orientation="vertical"
             app:cardBackgroundColor="@color/cardBackgroundColor"
             app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardElevation="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -51,10 +49,9 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{item.name}"
-                    android:textColor="@color/white"
+                    android:text="@{item.skill.name}"
+                    style="@style/BoldText"
                     android:textSize="18sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/imageview_delete"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,40 +60,63 @@
 
                 <ImageView
                     android:id="@+id/imageview_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center|end"
-                    android:layout_marginEnd="6dp"
+                    android:layout_marginEnd="@dimen/margin_normal"
                     android:onClick="@{(view) -> eventListener.onSkillDeleteClicked(item, view)}"
-                    android:padding="10dp"
                     android:src="@drawable/ic_close"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
+                    app:tint="@color/light_gray" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detail_skill_recycler_view"
+            childSkillItems="@{item.childSkills}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginBottom="4dp"
+            android:visibility="@{item.childSkills.empty ? View.GONE : View.VISIBLE}" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/skill_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="4dp"
+            android:orientation="vertical"
+            android:onClick="@{(view) -> eventListener.onSubSkillAddClick(item, view)}"
+            app:strokeWidth="1dp"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/white"
+            tools:layout_width="200dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:skillTextStyle='@{"bold"}'
+                android:text="@{@string/insert_sub_skill}"
+                android:textColor="@{@color/white}"
+                android:textSize="14sp"
+                tools:text="Android" />
 
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="@{(view) -> eventListener.onSubSkillAddClick(item, view)}"
-            android:padding="10dp"
-            android:text="@string/insert_sub_skill"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardview_skill_category" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </layout>

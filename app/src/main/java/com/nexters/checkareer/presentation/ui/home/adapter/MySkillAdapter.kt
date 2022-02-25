@@ -25,7 +25,6 @@ class MySkillAdapter(
             when (holder) {
                 is MySkillViewHolder -> holder.bind(item)
                 is MySkillTopThreeViewHolder -> holder.bind(item)
-
             }
         }
     }

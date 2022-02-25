@@ -18,7 +18,7 @@
     <string name="add_profile">프로필 추가하기</string>
     <string name="complete">완료</string>
     <string name="save">저장하기</string>
-    <string name="insert_sub_skill">세부 스킬 추가 +</string>
+    <string name="insert_sub_skill">세부 스킬 +</string>
 
     <string name="on_boarding_title">당신의 경험에 대해 알려주세요!</string>
     <string name="on_boarding_description">경험 기반의 커리어 기록을 통해,\n보다 다채롭게 스스로를 표현해보세요.</string>

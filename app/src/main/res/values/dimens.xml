@@ -4,6 +4,7 @@
     <dimen name="progress_bar_size">150dp</dimen>
 
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
 
     <dimen name ="skill_stroke_unselected" type="dimen" format="float">1.0dp</dimen>
     <dimen name="skill_stroke_selected" type="dimen" format="float">2.0dp</dimen>

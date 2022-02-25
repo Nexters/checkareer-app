@@ -66,7 +66,7 @@ fun setMySkillItems(recyclerView: RecyclerView, items: List<SkillTree>?) {
 @BindingAdapter("mySkillItemsEdit")
 fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<SkillTree>?) {
     (recyclerView.adapter as? MySkillEditAdapter)?.run {
-        submitList(items?.map { it.skill })
+        submitList(items)
         notifyDataSetChanged()
     }
 }

@@ -47,7 +47,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:paddingTop="10dp"
-                    android:paddingEnd="20dp"
+                    android:paddingEnd="@dimen/margin_normal"
                     android:paddingBottom="10dp"
                     android:src="@drawable/ic_arrow_back"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,9 +58,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="프로필 수정하기"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    style="@style/BoldText"
                     app:layout_constraintBottom_toBottomOf="@id/imageview_back"
                     app:layout_constraintStart_toEndOf="@id/imageview_back"
                     app:layout_constraintTop_toTopOf="@id/imageview_back" />
@@ -82,22 +81,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:paddingTop="@dimen/margin_8dp"
+                        android:paddingStart="@dimen/margin_8dp"
+                        android:paddingEnd="@dimen/margin_8dp"
+                        android:paddingBottom="@dimen/margin_normal">
 
                         <EditText
                             android:id="@+id/edittext_name"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginBottom="@dimen/margin_normal"
                             android:inputType="text"
                             android:backgroundTint="@color/point_color_1"
                             android:hint="@string/please_insert_name"
                             android:text="@{viewmodel.profile.user.name}"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
 
@@ -107,9 +109,8 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/my_skill_top_three"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            style="@style/BoldText"
+                            android:textSize="14sp"/>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview_my_skills_top_three"
@@ -131,9 +132,8 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="50dp"
                     android:text="@string/skill_information"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    style="@style/BoldText"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
 
@@ -141,8 +141,8 @@
                     android:id="@+id/imageview_add_skill"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_add"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_baseline_playlist_add_24"
                     app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/textview_skill_information"
@@ -154,8 +154,8 @@
                     mySkillItemsEdit="@{viewmodel.profile.skills}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginBottom="@dimen/margin_normal"
                     app:layout_constraintBottom_toTopOf="@id/button_save"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,14 +165,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_save"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="65dp"
                     android:layout_marginBottom="20dp"
                     android:backgroundTint="@color/point_color_1"
                     android:elevation="0dp"
                     android:stateListAnimator="@null"
                     android:text="@string/save"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:cornerRadius="30dp"
                     app:layout_constraintBottom_toBottomOf="parent"
