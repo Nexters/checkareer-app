@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.nexters.checkareer.presentation.ui.editprofile.skillorder.ChangeSkillOrderViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+
+        <ImageView
+            android:id="@+id/imageview_back"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="@dimen/margin_normal"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/BoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스킬 순서 변경"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_back"
+            app:layout_constraintStart_toEndOf="@id/imageview_back"
+            app:layout_constraintTop_toTopOf="@id/imageview_back" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_my_skills"
+            style="@style/SkillListRecyclerView"
+            mySkillItemsEditOrder="@{viewmodel.skillList}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:fadingEdgeLength="30dp"
+            android:nestedScrollingEnabled="false"
+            android:requiresFadingEdge="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/imageview_back"
+            tools:listitem="@layout/skill_item_vertical_edit_order" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,6 +12,7 @@ import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.vo.Profile
 import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
+import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditOrderAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import com.nexters.checkareer.presentation.ui.home.adapter.ProfileAdapter
 
@@ -66,6 +67,14 @@ fun setMySkillItems(recyclerView: RecyclerView, items: List<SkillTree>?) {
 @BindingAdapter("mySkillItemsEdit")
 fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<SkillTree>?) {
     (recyclerView.adapter as? MySkillEditAdapter)?.run {
+        submitList(items)
+        notifyDataSetChanged()
+    }
+}
+
+@BindingAdapter("mySkillItemsEditOrder")
+fun setMySkillItemsEditOrder(recyclerView: RecyclerView, items: List<SkillTree>?) {
+    (recyclerView.adapter as? MySkillEditOrderAdapter)?.run {
         submitList(items)
         notifyDataSetChanged()
     }

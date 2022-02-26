@@ -1,5 +1,6 @@
 package com.nexters.checkareer.presentation.ui.editprofile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -8,17 +9,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nexters.checkareer.databinding.EditProfileFragBinding
-import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.editprofile.adapter.MySkillEditAdapter
 import com.nexters.checkareer.presentation.ui.editprofile.addskill.AddSkillBottomSheetDialogFragment
 import com.nexters.checkareer.presentation.ui.editprofile.addsubskill.AddSubSkillBottomSheetDialogFragment
 import com.nexters.checkareer.presentation.ui.editprofile.listener.SkillEditListener
+import com.nexters.checkareer.presentation.ui.editprofile.listener.ItemDragListener
+import com.nexters.checkareer.presentation.ui.editprofile.skillorder.ChangeSkillOrderActivity
+import com.nexters.checkareer.presentation.ui.editprofile.util.ItemTouchHelperCallback
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +31,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     private val viewModel by activityViewModels<EditProfileViewModel>()
     private lateinit var viewDataBinding: EditProfileFragBinding
 
+    private lateinit var editSkillAdapter: MySkillEditAdapter
     private lateinit var addSkillBottomSheet: BottomSheetDialogFragment
     private lateinit var addSubSkillBottomSheet: BottomSheetDialogFragment
 
@@ -46,6 +49,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
         setupBackButton()
         setupCompleteButton()
         setupAddSkillButton()
+        setupChangeSkillOrderButton()
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
@@ -54,7 +58,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     }
 
     private fun setEvents() {
-        viewDataBinding.edittextName.setOnKeyListener{ _, keyCode, keyEvent ->
+        viewDataBinding.edittextName.setOnKeyListener { _, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (viewDataBinding.edittextName.length() > 0) {
                     viewModel.editUserProfile(viewDataBinding.edittextName.text.toString())
@@ -96,8 +100,15 @@ class EditProfileFragment : Fragment(), SkillEditListener {
             addSkillBottomSheet.show(requireActivity().supportFragmentManager, "")
 
         }
+    }
 
-
+    private fun setupChangeSkillOrderButton() {
+        viewDataBinding.imageviewChangeOrder.setOnClickListener {
+            val intent = Intent(requireContext(), ChangeSkillOrderActivity::class.java)
+            val arrayList = ArrayList(viewModel.profile.value?.skills)
+            intent.putParcelableArrayListExtra("skillList", arrayList)
+            startActivity(intent)
+        }
     }
 
     private fun setupLifecycleOwner() {
@@ -106,7 +117,8 @@ class EditProfileFragment : Fragment(), SkillEditListener {
 
     private fun setupMySkillAdapter() {
         viewDataBinding.recyclerviewMySkills.apply {
-            adapter = MySkillEditAdapter("SKILL_LIST", this@EditProfileFragment)
+            editSkillAdapter = MySkillEditAdapter("SKILL_LIST", this@EditProfileFragment)
+            adapter = editSkillAdapter
         }
     }
 
@@ -131,5 +143,6 @@ class EditProfileFragment : Fragment(), SkillEditListener {
         @JvmStatic
         fun newInstance() = EditProfileFragment()
     }
+
 
 }

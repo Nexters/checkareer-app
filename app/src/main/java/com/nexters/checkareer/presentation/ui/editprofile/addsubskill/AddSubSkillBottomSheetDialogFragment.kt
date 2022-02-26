@@ -14,6 +14,7 @@ import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.AddSubSkillFragmentBottomsheetBinding
 import com.nexters.checkareer.domain.skill.Skill
 import com.nexters.checkareer.presentation.ui.createprofile.adapter.SkillCategoryAdapter
@@ -39,11 +40,16 @@ class AddSubSkillBottomSheetDialogFragment : BottomSheetDialogFragment(), SkillC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         setupLifecycleOwner()
         setupSelectedSkillListAdapter()
         setupSkillListAdapter()
         setupAddCompleteButton()
 
+    }
+
+    private fun initView() {
+        viewDataBinding.textviewTitle.text = String.format(getString(R.string.add_sub_skill), editProfileViewModel.clickedSkill.value?.name)
     }
 
     private fun setupLifecycleOwner() {
