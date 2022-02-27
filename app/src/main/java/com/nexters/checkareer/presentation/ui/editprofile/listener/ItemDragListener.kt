@@ -6,6 +6,4 @@ interface ItemDragListener {
 
     fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
 
-    fun onEndDrag(viewHolder: RecyclerView.ViewHolder)
-
 }

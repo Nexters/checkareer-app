@@ -32,7 +32,7 @@ class MySkillEditOrderViewHolder constructor(val binding: SkillItemVerticalEditO
             val viewholder = MySkillEditOrderViewHolder(binding)
 
             binding.imageviewDrag.setOnTouchListener { v, event ->
-                if(event.action == MotionEvent.ACTION_DOWN) {
+                if (event.action == MotionEvent.ACTION_DOWN) {
                     listener.onStartDrag(viewholder)
                 }
                 false

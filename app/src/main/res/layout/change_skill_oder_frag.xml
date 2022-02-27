@@ -58,7 +58,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_my_skills"
             style="@style/SkillListRecyclerView"
-            mySkillItemsEditOrder="@{viewmodel.skillList}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_normal"

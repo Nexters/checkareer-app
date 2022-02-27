@@ -1,5 +1,6 @@
 package com.nexters.checkareer.presentation.ui.editprofile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -7,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -31,6 +35,7 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     private val viewModel by activityViewModels<EditProfileViewModel>()
     private lateinit var viewDataBinding: EditProfileFragBinding
 
+    private lateinit var startActivityForResult: ActivityResultLauncher<Intent>
     private lateinit var editSkillAdapter: MySkillEditAdapter
     private lateinit var addSkillBottomSheet: BottomSheetDialogFragment
     private lateinit var addSubSkillBottomSheet: BottomSheetDialogFragment
@@ -103,11 +108,19 @@ class EditProfileFragment : Fragment(), SkillEditListener {
     }
 
     private fun setupChangeSkillOrderButton() {
+        startActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                intent?.getParcelableArrayListExtra<SkillTree>("skillList")?.toList()?.let { viewModel.changeSkillListOrder(it) }
+            }
+        }
+
+
         viewDataBinding.imageviewChangeOrder.setOnClickListener {
             val intent = Intent(requireContext(), ChangeSkillOrderActivity::class.java)
             val arrayList = ArrayList(viewModel.profile.value?.skills)
             intent.putParcelableArrayListExtra("skillList", arrayList)
-            startActivity(intent)
+            startActivityForResult.launch(intent)
         }
     }
 

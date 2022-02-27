@@ -73,7 +73,7 @@ fun setMySkillItemsEdit(recyclerView: RecyclerView, items: List<SkillTree>?) {
 }
 
 @BindingAdapter("mySkillItemsEditOrder")
-fun setMySkillItemsEditOrder(recyclerView: RecyclerView, items: List<SkillTree>?) {
+fun setMySkillItemsEditOrder(recyclerView: RecyclerView, items: MutableList<SkillTree>?) {
     (recyclerView.adapter as? MySkillEditOrderAdapter)?.run {
         submitList(items)
         notifyDataSetChanged()
