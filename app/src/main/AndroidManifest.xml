@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Checkareer">
-
+        <activity
+            android:name=".presentation.ui.editprofile.skillorder.ChangeSkillOrderActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.friendprofile.FriendProfileActivity"
             android:exported="false" />

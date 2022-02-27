@@ -55,11 +55,11 @@
                     app:tint="@color/white" />
 
                 <TextView
+                    style="@style/BoldText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="프로필 수정하기"
                     android:textSize="20sp"
-                    style="@style/BoldText"
                     app:layout_constraintBottom_toBottomOf="@id/imageview_back"
                     app:layout_constraintStart_toEndOf="@id/imageview_back"
                     app:layout_constraintTop_toTopOf="@id/imageview_back" />
@@ -81,8 +81,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingTop="@dimen/margin_8dp"
                         android:paddingStart="@dimen/margin_8dp"
+                        android:paddingTop="@dimen/margin_8dp"
                         android:paddingEnd="@dimen/margin_8dp"
                         android:paddingBottom="@dimen/margin_normal">
 
@@ -95,22 +95,22 @@
                             android:layout_marginTop="12dp"
                             android:layout_marginEnd="4dp"
                             android:layout_marginBottom="@dimen/margin_normal"
-                            android:inputType="text"
                             android:backgroundTint="@color/point_color_1"
                             android:hint="@string/please_insert_name"
+                            android:inputType="text"
                             android:text="@{viewmodel.profile.user.name}"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
 
                         <TextView
+                            style="@style/BoldText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/my_skill_top_three"
-                            style="@style/BoldText"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview_my_skills_top_three"
@@ -127,12 +127,12 @@
 
                 <TextView
                     android:id="@+id/textview_skill_information"
+                    style="@style/BoldText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="50dp"
                     android:text="@string/skill_information"
-                    style="@style/BoldText"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
@@ -148,6 +148,17 @@
                     app:layout_constraintTop_toTopOf="@id/textview_skill_information"
                     app:tint="@color/white" />
 
+                <ImageView
+                    android:id="@+id/imageview_change_order"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_sort"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"
+                    app:layout_constraintEnd_toStartOf="@id/imageview_add_skill"
+                    app:layout_constraintTop_toTopOf="@id/textview_skill_information"
+                    app:tint="@color/white" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_my_skills"
                     style="@style/SkillListRecyclerView"
@@ -156,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginBottom="@dimen/margin_normal"
+                    android:nestedScrollingEnabled="false"
                     app:layout_constraintBottom_toTopOf="@id/button_save"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

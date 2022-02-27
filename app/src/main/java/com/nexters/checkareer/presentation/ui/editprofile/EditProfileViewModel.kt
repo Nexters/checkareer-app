@@ -36,6 +36,11 @@ class EditProfileViewModel @Inject constructor(
         _clickedSkill.value = skill
     }
 
+    fun changeSkillListOrder(skillList: List<SkillTree>) {
+        _profile.value?.skills = skillList
+        _profile.notifyObserver()
+    }
+
     fun removeSelectedSkillCategoryItem(skill: SkillTree) {
         profile.value?.skills?.toMutableList()?.let { originParentSkills ->
             originParentSkills.remove(skill)

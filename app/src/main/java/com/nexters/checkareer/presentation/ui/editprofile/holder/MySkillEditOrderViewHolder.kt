@@ -9,12 +9,13 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.nexters.checkareer.databinding.SkillItemVerticalEditBinding
+import com.nexters.checkareer.databinding.SkillItemVerticalEditOrderBinding
 import com.nexters.checkareer.domain.vo.SkillTree
 import com.nexters.checkareer.presentation.ui.editprofile.listener.SkillEditListener
 import com.nexters.checkareer.presentation.ui.editprofile.listener.ItemDragListener
 import com.nexters.checkareer.presentation.ui.home.adapter.skill.ChildSkillAdapter
 
-class MySkillEditViewHolder constructor(val binding: SkillItemVerticalEditBinding) :
+class MySkillEditOrderViewHolder constructor(val binding: SkillItemVerticalEditOrderBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("ClickableViewAccessibility")
@@ -25,22 +26,16 @@ class MySkillEditViewHolder constructor(val binding: SkillItemVerticalEditBindin
 
     companion object {
         @SuppressLint("ClickableViewAccessibility")
-        fun from(parent: ViewGroup, eventListener: SkillEditListener): MySkillEditViewHolder {
+        fun from(parent: ViewGroup, listener: ItemDragListener): MySkillEditOrderViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = SkillItemVerticalEditBinding.inflate(layoutInflater, parent, false)
-            val viewholder = MySkillEditViewHolder(binding)
-            binding.eventListener = eventListener
+            val binding = SkillItemVerticalEditOrderBinding.inflate(layoutInflater, parent, false)
+            val viewholder = MySkillEditOrderViewHolder(binding)
 
-
-
-            binding.detailSkillRecyclerView.apply {
-                val layoutManager = FlexboxLayoutManager(parent.context)
-                layoutManager.apply {
-                    flexDirection = FlexDirection.ROW
-                    justifyContent = JustifyContent.FLEX_START
+            binding.imageviewDrag.setOnTouchListener { v, event ->
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    listener.onStartDrag(viewholder)
                 }
-                setLayoutManager(layoutManager)
-                adapter = ChildSkillAdapter()
+                false
             }
 
             return viewholder
