@@ -135,29 +135,29 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:paddingTop="@dimen/margin_normal"
-                            android:paddingBottom="@dimen/margin_normal"
                             android:paddingStart="@dimen/margin_8dp"
-                            android:paddingEnd="@dimen/margin_8dp">
+                            android:paddingTop="@dimen/margin_normal"
+                            android:paddingEnd="@dimen/margin_8dp"
+                            android:paddingBottom="@dimen/margin_normal">
 
                             <ImageView
                                 android:id="@+id/profile_image"
                                 imageUrl="@{viewmodel.profile.user}"
-                                android:layout_gravity="center"
                                 android:layout_width="90dp"
-                                android:layout_height="90dp"/>
+                                android:layout_height="90dp"
+                                android:layout_gravity="center" />
 
                             <TextView
                                 android:id="@+id/textview_name"
-                                android:layout_gravity="center"
+                                style="@style/BoldText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginEnd="5dp"
                                 android:layout_marginBottom="@dimen/margin_normal"
                                 android:text="@{viewmodel.profile.user.name}"
-                                style="@style/BoldText"
                                 android:textColorHint="@color/light_gray"
                                 android:textSize="21sp"
                                 tools:text="이름" />
@@ -172,45 +172,46 @@
                                 android:textSize="14sp"/>-->
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:layout_gravity="center"
                                 android:id="@+id/recyclerview_my_skills_top_three"
                                 style="@style/SkillCategoryRecyclerView"
                                 mySkillTreeTopThreeItems="@{viewmodel.profile.skills}"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:requiresFadingEdge="horizontal" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
 
                     <TextView
                         android:id="@+id/textview_skill_information"
+                        style="@style/BoldText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
                         android:text="@string/skill_information"
-                        style="@style/BoldText"
                         android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="@id/guideline_start"
                         app:layout_constraintTop_toBottomOf="@id/cardview_my_profile" />
 
                     <TextView
                         android:id="@+id/textview_skill_count"
+                        style="@style/BoldText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@{Integer.toString(viewmodel.profile.skills.size())}"
                         android:textSize="18sp"
-                        style="@style/BoldText"
                         android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
-                        app:layout_constraintTop_toTopOf="@id/textview_skill_information"
-                        app:layout_constraintStart_toEndOf="@id/textview_skill_information" />
+                        app:layout_constraintStart_toEndOf="@id/textview_skill_information"
+                        app:layout_constraintTop_toTopOf="@id/textview_skill_information" />
 
                     <TextView
                         android:id="@+id/textview_max_selected_skill_category_count"
+                        style="@style/BoldText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="개"
-                        style="@style/BoldText"
                         android:textSize="18sp"
                         android:visibility="@{viewmodel.profile.skills.size > 0 ? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="@id/textview_skill_information"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">checkareer</string>
+    <string name="app_name">checareer</string>
 
     <string name="my_profile">나의 프로필</string>
     <string name="friend_profile">남의 프로필</string>
@@ -12,6 +12,7 @@
     <string name="finish_your_profile">프로필 작성을 마루리 해보세요.</string>
     <string name="user_information">사용자 정보</string>
     <string name="please_select_skills">스킬을 선택해주세요.</string>
+    <string name="settings_title">계정 설정</string>
     <string name="login">로그인</string>
     <string name="google_login">Google 계정으로 로그인</string>
     <string name="logout">로그아웃</string>
@@ -20,6 +21,7 @@
     <string name="complete">완료</string>
     <string name="save">저장하기</string>
     <string name="insert_sub_skill">세부 스킬 +</string>
+    <string name="logout_confirm_message">계정에서 로그아웃하시겠습니까?</string>
 
     <string name="on_boarding_title">당신의 경험에 대해 알려주세요!</string>
     <string name="on_boarding_description">경험 기반의 커리어 기록을 통해,\n보다 다채롭게 스스로를 표현해보세요.</string>

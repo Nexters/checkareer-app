@@ -1,9 +1,14 @@
 package com.nexters.checkareer.presentation.ui.settings
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -53,18 +58,39 @@ class SettingFragment : Fragment() {
                 null -> {
                     loginBottomSheet = LoginBottomSheetDialogFragment()
                     loginBottomSheet.show(requireActivity().supportFragmentManager, "")
-                    //startActivity(Intent(requireContext(), LoginActivity::class.java))
-                    //requireActivity().finish()
                 }
                 else -> {
-                    auth.signOut()
-                    currentUser = auth.currentUser
-                    viewDataBinding.textviewLogin.text = getString(R.string.login)
+                    openLogoutDialog()
                 }
             }
 
         }
     }
+
+    private fun openLogoutDialog() {
+        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.confirm_dialog, null)
+        val mBuilder = AlertDialog.Builder(requireContext()).setView(mDialogView)
+        val mAlertDialog = mBuilder.show()
+
+        mAlertDialog.apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            findViewById<TextView>(R.id.textview_subtitle).text = getString(R.string.logout_confirm_message)
+
+            findViewById<CardView>(R.id.cardview_confirm).setOnClickListener {
+                auth.signOut()
+                currentUser = auth.currentUser
+                viewDataBinding.textviewLogin.text = getString(R.string.login)
+                dismiss()
+            }
+
+            findViewById<CardView>(R.id.cardview_cancel).setOnClickListener {
+                dismiss()
+            }
+
+        }
+    }
+
 
     private fun updateUser() {
         currentUser = auth.currentUser
