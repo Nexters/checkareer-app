@@ -82,9 +82,7 @@ fun setMySkillItemsEditOrder(recyclerView: RecyclerView, items: MutableList<Skil
 
 @BindingAdapter("friendProfileItems")
 fun setFriendProfileItems(recyclerView: RecyclerView, items: List<Profile>?) {
-    println(items.toString())
     (recyclerView.adapter as? ProfileAdapter)?.run {
-        println(items.toString())
         submitList(items)
         notifyDataSetChanged()
     }

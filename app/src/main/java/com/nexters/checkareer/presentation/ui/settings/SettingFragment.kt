@@ -1,19 +1,24 @@
 package com.nexters.checkareer.presentation.ui.settings
 
-import android.content.Intent
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.SettingFragBinding
-import com.nexters.checkareer.presentation.ui.login.LoginActivity
+import com.nexters.checkareer.presentation.ui.login.LoginBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +28,7 @@ class SettingFragment : Fragment() {
 
     private lateinit var viewDataBinding: SettingFragBinding
 
+    private lateinit var loginBottomSheet: BottomSheetDialogFragment
     private lateinit var auth: FirebaseAuth
     private var currentUser: FirebaseUser? = null
 
@@ -50,18 +56,41 @@ class SettingFragment : Fragment() {
         viewDataBinding.textviewLogin.setOnClickListener {
             when (auth.currentUser) {
                 null -> {
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
-                    requireActivity().finish()
+                    loginBottomSheet = LoginBottomSheetDialogFragment()
+                    loginBottomSheet.show(requireActivity().supportFragmentManager, "")
                 }
                 else -> {
-                    auth.signOut()
-                    currentUser = auth.currentUser
-                    viewDataBinding.textviewLogin.text = getString(R.string.login)
+                    openLogoutDialog()
                 }
             }
 
         }
     }
+
+    private fun openLogoutDialog() {
+        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.confirm_dialog, null)
+        val mBuilder = AlertDialog.Builder(requireContext()).setView(mDialogView)
+        val mAlertDialog = mBuilder.show()
+
+        mAlertDialog.apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            findViewById<TextView>(R.id.textview_subtitle).text = getString(R.string.logout_confirm_message)
+
+            findViewById<CardView>(R.id.cardview_confirm).setOnClickListener {
+                auth.signOut()
+                currentUser = auth.currentUser
+                viewDataBinding.textviewLogin.text = getString(R.string.login)
+                dismiss()
+            }
+
+            findViewById<CardView>(R.id.cardview_cancel).setOnClickListener {
+                dismiss()
+            }
+
+        }
+    }
+
 
     private fun updateUser() {
         currentUser = auth.currentUser

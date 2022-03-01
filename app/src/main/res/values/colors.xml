@@ -22,6 +22,8 @@
     <color name="point_color_1">#EAFF6A</color>
     <color name="transparent">#00FFFFFF</color>
 
+    <color name="google_login_button_color">#4285F4</color>
+
 
 
 </resources>

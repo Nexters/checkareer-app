@@ -46,7 +46,6 @@ class HomeFragment3 : Fragment(), FriendProfileListener {
     }
 
     override fun onProfileClicked(item: Profile, view: View) {
-        println("clicked")
         startActivity(Intent(requireContext(), FriendProfileActivity::class.java))
     }
 

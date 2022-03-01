@@ -68,7 +68,6 @@ class ChangeSkillOrderFragment : Fragment(), ItemDragListener {
         viewModel.setSkillListOrder(list ?: listOf())
 
         viewDataBinding.recyclerviewMySkills.apply {
-            println(list.toString())
             mySkillEditOrderAdapter = MySkillEditOrderAdapter(list?.toMutableList() ?: mutableListOf(), this@ChangeSkillOrderFragment) {}
             adapter = mySkillEditOrderAdapter
             itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(mySkillEditOrderAdapter))
