@@ -23,9 +23,6 @@
             android:name=".presentation.ui.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.login.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.settings.SettingActivity"
             android:exported="false" />
         <activity

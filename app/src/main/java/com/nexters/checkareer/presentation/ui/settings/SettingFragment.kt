@@ -1,19 +1,19 @@
 package com.nexters.checkareer.presentation.ui.settings
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.SettingFragBinding
-import com.nexters.checkareer.presentation.ui.login.LoginActivity
+import com.nexters.checkareer.presentation.ui.login.LoginBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +23,7 @@ class SettingFragment : Fragment() {
 
     private lateinit var viewDataBinding: SettingFragBinding
 
+    private lateinit var loginBottomSheet: BottomSheetDialogFragment
     private lateinit var auth: FirebaseAuth
     private var currentUser: FirebaseUser? = null
 
@@ -50,8 +51,10 @@ class SettingFragment : Fragment() {
         viewDataBinding.textviewLogin.setOnClickListener {
             when (auth.currentUser) {
                 null -> {
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
-                    requireActivity().finish()
+                    loginBottomSheet = LoginBottomSheetDialogFragment()
+                    loginBottomSheet.show(requireActivity().supportFragmentManager, "")
+                    //startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    //requireActivity().finish()
                 }
                 else -> {
                     auth.signOut()

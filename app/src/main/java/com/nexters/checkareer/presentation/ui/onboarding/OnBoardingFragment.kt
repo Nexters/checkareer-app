@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.nexters.checkareer.databinding.OnboardingFragBinding
 import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
-import com.nexters.checkareer.presentation.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +39,7 @@ class OnBoardingFragment : Fragment() {
     }
     private fun setupLoginButton() {
         viewDataBinding.loginButton.setOnClickListener {
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            //startActivity(Intent(requireContext(), LoginActivity::class.java))
         }
     }
 

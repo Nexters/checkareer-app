@@ -8,33 +8,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nexters.checkareer.R
-import com.nexters.checkareer.databinding.LoginFragBinding
-import com.nexters.checkareer.databinding.SettingFragBinding
+import com.nexters.checkareer.databinding.LoginFragmentBottomsheetBinding
+import com.nexters.checkareer.presentation.ui.home.HomeActivity
 import com.nexters.checkareer.presentation.ui.login.model.Account
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private val viewModel by viewModels<LoginViewModel>()
 
-    private lateinit var viewDataBinding: LoginFragBinding
+    private lateinit var viewDataBinding: LoginFragmentBottomsheetBinding
 
     private lateinit var auth: FirebaseAuth
     private lateinit var getResult: ActivityResultLauncher<Intent>
@@ -42,7 +41,7 @@ class LoginFragment : Fragment() {
     lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewDataBinding = LoginFragBinding.inflate(inflater, container, false).apply {
+        viewDataBinding = LoginFragmentBottomsheetBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
         }
         return viewDataBinding.root
@@ -59,7 +58,10 @@ class LoginFragment : Fragment() {
 
     private fun setupEvents() {
         viewModel.isSucceededLogin.observe(this.viewLifecycleOwner, Observer {
-            onFinish()
+            val intent = Intent(requireContext(), HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            dismiss()
         })
     }
 
@@ -79,12 +81,12 @@ class LoginFragment : Fragment() {
 
     private fun setupCloseButton() {
         viewDataBinding.imageviewClose.setOnClickListener {
-            requireActivity().finish()
+            dismiss()
         }
     }
 
     private fun setupGoogleLoginButton() {
-//        googleSignInClient.signOut()
+        googleSignInClient.signOut()
         viewDataBinding.buttonGoogleLogin.setOnClickListener {
             toast("Login Success")
             signIn()
@@ -137,13 +139,10 @@ class LoginFragment : Fragment() {
             }
     }
 
-    private fun onFinish() {
-        requireActivity().finish()
-    }
 
     companion object {
         @JvmStatic
-        fun newInstance() = LoginFragment()
+        fun newInstance() = LoginBottomSheetDialogFragment()
     }
 
 }

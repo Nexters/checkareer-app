@@ -38,6 +38,7 @@ class EditProfileViewModel @Inject constructor(
 
     fun changeSkillListOrder(skillList: List<SkillTree>) {
         _profile.value?.skills = skillList
+        println(_profile.value?.skills.toString())
         _profile.notifyObserver()
     }
 

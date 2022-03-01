@@ -13,6 +13,7 @@
     <string name="user_information">사용자 정보</string>
     <string name="please_select_skills">스킬을 선택해주세요.</string>
     <string name="login">로그인</string>
+    <string name="google_login">Google 계정으로 로그인</string>
     <string name="logout">로그아웃</string>
     <string name="delete_profle">프로필을 삭제하시겠어요?</string>
     <string name="add_profile">프로필 추가하기</string>
