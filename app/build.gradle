@@ -108,4 +108,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
+    // Ballon layout
+    implementation "com.github.skydoves:balloon:1.4.2"
+
 }
