@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFrag2Binding
 import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
 import com.nexters.checkareer.presentation.ui.editprofile.EditProfileActivity
@@ -38,11 +40,24 @@ class HomeFragment2 : Fragment() {
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
+        setProfileImage()
     }
 
     private fun setupProfileEditButton() {
         viewDataBinding.imageviewSetting.setOnClickListener {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+        }
+    }
+
+    private fun setProfileImage() {
+        viewModel.profile.observe(viewLifecycleOwner) {
+            if(it.skills.size in 1..3) {
+                viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_1)
+            } else if(it.skills.size in 4..7) {
+                viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_2)
+            } else {
+                viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_3)
+            }
         }
     }
 
