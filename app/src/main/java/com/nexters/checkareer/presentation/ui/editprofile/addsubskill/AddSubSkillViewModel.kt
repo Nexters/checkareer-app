@@ -85,19 +85,17 @@ class AddSubSkillViewModel @Inject constructor(
             this.parentSkillId = parentSkillId
             viewModelScope.launch {
 
-                getProfileUseCase().getValue()?.let { profile ->
-                    profile.skills.find { it.skill.id == parentSkillId.toString() }?.let {
-                        val mySkills = it.childSkills.map { it.id to it }.toMap()
+                originSkillTree.find { it.skill.id == parentSkillId.toString() }?.let { skillTree ->
+                    val mySkills = skillTree.childSkills.map { it.id to it }.toMap()
 
-                        getAllSkillUseCase().getValue().find { it.skill.id == parentSkillId.toString() }?.run {
-                            _items.value = this.childSkills.map { skill ->
-                                if(mySkills[skill.id] != null)
-                                    CategorySelect(skill.id, skill.name, skill.parentId, skill.layer, true)
-                                else
-                                    CategorySelect(skill.id, skill.name, skill.parentId, skill.layer, false)
-                            }
-                            items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
+                    getAllSkillUseCase().getValue().find { it.skill.id == parentSkillId.toString() }?.run {
+                        _items.value = this.childSkills.map { skill ->
+                            if(mySkills[skill.id] != null)
+                                CategorySelect(skill.id, skill.name, skill.parentId, skill.layer, true)
+                            else
+                                CategorySelect(skill.id, skill.name, skill.parentId, skill.layer, false)
                         }
+                        items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
                     }
                 }
 
