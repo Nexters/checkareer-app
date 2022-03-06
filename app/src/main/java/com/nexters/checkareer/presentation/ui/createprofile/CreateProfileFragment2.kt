@@ -74,7 +74,7 @@ class CreateProfileFragment2 : Fragment() {
 
     private fun setProfileInformation() {
         viewModel.selectedSkillItems.observe(viewLifecycleOwner) {
-            if(it.size in 1..3) {
+            if(it.size in 0..3) {
                 viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_1)
                 viewDataBinding.textviewProfileDescription.text = getString(R.string.skill_level_1)
             } else if(it.size in 4..7) {
