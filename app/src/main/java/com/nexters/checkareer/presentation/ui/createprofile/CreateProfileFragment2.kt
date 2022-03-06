@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.nexters.checkareer.R
 import com.nexters.checkareer.data.adapter.db.data.UserProfile
 import com.nexters.checkareer.databinding.CreateProfileFrag2Binding
 import com.nexters.checkareer.domain.skill.Skill
@@ -24,6 +26,7 @@ import com.nexters.checkareer.presentation.ui.createprofile.listener.SkillCatego
 import com.nexters.checkareer.presentation.ui.createprofile.model.CategorySelect
 import com.nexters.checkareer.presentation.ui.home.HomeActivity
 import com.nexters.checkareer.presentation.ui.home.adapter.MySkillAdapter
+import com.skydoves.balloon.*
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -32,6 +35,7 @@ class CreateProfileFragment2 : Fragment() {
 
     private val viewModel by viewModels<CreateProfile2ViewModel>()
     private val args: CreateProfileFragment2Args by navArgs()
+    private lateinit var profileImageDescriptionBalloon: Balloon
 
     private lateinit var viewDataBinding: CreateProfileFrag2Binding
 
@@ -50,6 +54,8 @@ class CreateProfileFragment2 : Fragment() {
         setupMySkillAdapter()
         setupEditTextEvent()
         setEvents()
+        setProfileInformation()
+        setProfileDescriptionBalloon()
 
         viewDataBinding.imageviewBack.setOnClickListener {
             findNavController().popBackStack()
@@ -63,6 +69,42 @@ class CreateProfileFragment2 : Fragment() {
                 Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
 
+        }
+    }
+
+    private fun setProfileInformation() {
+        viewModel.selectedSkillItems.observe(viewLifecycleOwner) {
+            if(it.size in 1..3) {
+                viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_1)
+                viewDataBinding.textviewProfileDescription.text = getString(R.string.skill_level_1)
+            } else if(it.size in 4..7) {
+                viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_2)
+                viewDataBinding.textviewProfileDescription.text = getString(R.string.skill_level_2)
+            } else {
+                viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_3)
+                viewDataBinding.textviewProfileDescription.text = getString(R.string.skill_level_3)
+            }
+        }
+    }
+
+    private fun setProfileDescriptionBalloon() {
+        profileImageDescriptionBalloon = Balloon.Builder(requireContext())
+            .setLayout(R.layout.profile_description_item)
+            .setArrowOrientation(ArrowOrientation.TOP)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+            .setWidthRatio(1f)
+            .setMarginLeft(20)
+            .setMarginRight(20)
+            .setCornerRadius(10f)
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .setBalloonAnimation(BalloonAnimation.OVERSHOOT)
+            .setLifecycleOwner(viewLifecycleOwner)
+            .build()
+
+
+
+        viewDataBinding.imageviewProfileDescription.setOnClickListener {
+            viewDataBinding.imageviewProfileDescription.showAlignBottom(profileImageDescriptionBalloon)
         }
     }
 
