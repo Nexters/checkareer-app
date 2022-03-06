@@ -28,4 +28,9 @@
     <string name="on_boarding_login_button">이미 등록한 기록이 있으세요?</string>
     <string name="add_new_skill">새로운 스킬을 추가해주세요</string>
     <string name="add_sub_skill">%s의 세부 스킬을 추가해주세요</string>
+
+
+    <string name="skill_level_1">아직은 찍먹중인</string>
+    <string name="skill_level_2">부먹 중인,,</string>
+    <string name="skill_level_3">그냥,, 먹방 찍는 몰라~</string>
 </resources>
