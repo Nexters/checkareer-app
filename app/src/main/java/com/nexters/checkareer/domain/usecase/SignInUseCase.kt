@@ -15,8 +15,10 @@ class SignInUseCase @Inject constructor(
         return try {
             val user = userRepository.findUserProfile().getValue()
 
-            val modifiedUser = Profile(user.user.copy(logInInfo = logInInfo), user.skills)
-            userRepository.updateUser(modifiedUser)
+            if(user != null) {
+                val modifiedUser = Profile(user.user.copy(logInInfo = logInInfo), user.skills)
+                userRepository.updateUser(modifiedUser)
+            }
 
             Result.Success(Unit)
         } catch (e: Exception) {

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nexters.checkareer.databinding.OnboardingFragBinding
 import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
+import com.nexters.checkareer.presentation.ui.home.HomeActivity
 import com.nexters.checkareer.presentation.ui.login.LoginBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,8 +43,7 @@ class OnBoardingFragment : Fragment() {
     }
     private fun setupLoginButton() {
         viewDataBinding.loginButton.setOnClickListener {
-            loginBottomSheet = LoginBottomSheetDialogFragment()
-            loginBottomSheet.show(requireActivity().supportFragmentManager, "")
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
     }
 

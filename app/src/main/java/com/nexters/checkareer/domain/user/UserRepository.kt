@@ -8,7 +8,7 @@ interface UserRepository {
 
     suspend fun findUser(): Result<User?>
 
-    suspend fun findUserProfile(): Result<Profile>
+    suspend fun findUserProfile(): Result<Profile?>
 
     suspend fun updateUser(profile: Profile): Result<Unit>
 

@@ -21,13 +21,13 @@ class UserRepositoryImpl @Inject constructor(
         return local.findUser()
     }
 
-    override suspend fun findUserProfile(): Result<Profile> {
+    override suspend fun findUserProfile(): Result<Profile?> {
 
         return try {
             local.findUserProfile().getValue()?.let {
                 Result.Success(it.toEntity())
             }?: run {
-                Result.Error(ExistingUserError())
+                Result.Success(null)
             }
         } catch (e: Exception) {
             Result.Error(e)
