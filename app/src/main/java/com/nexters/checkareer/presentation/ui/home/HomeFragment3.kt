@@ -40,9 +40,9 @@ class HomeFragment3 : Fragment(), FriendProfileListener {
     }
 
     private fun setupFriendProfileAdapter() {
-        viewDataBinding.recyclerviewFriendProfile.apply {
-            adapter = ProfileAdapter(this@HomeFragment3)
-        }
+//        viewDataBinding.recyclerviewFriendProfile.apply {
+//            adapter = ProfileAdapter(this@HomeFragment3)
+//        }
     }
 
     override fun onProfileClicked(item: Profile, view: View) {
