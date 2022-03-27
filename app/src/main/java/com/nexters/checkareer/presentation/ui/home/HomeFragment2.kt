@@ -44,8 +44,8 @@ class HomeFragment2 : Fragment() {
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
-        setProfileImage()
-        setProfileDescriptionBalloon()
+        //setProfileImage()
+        //setProfileDescriptionBalloon()
     }
 
     private fun setupProfileEditButton() {

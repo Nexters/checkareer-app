@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.9"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"
                                 android:layout_gravity="center"
-                                tools:src="@drawable/image_tree_1" />
+                                android:src="@drawable/image_tree_1" />
 
                             <!--                            <ImageView-->
                             <!--                                android:id="@+id/profile_image"-->
@@ -182,6 +182,7 @@
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
                                     android:src="@drawable/ic_question_mark"
+                                    android:visibility="gone"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -207,6 +208,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
                                 android:requiresFadingEdge="horizontal" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -269,7 +271,7 @@
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/point_color_1"
                 android:src="@drawable/ic_share"
                 android:visibility="@{viewmodel.profile == null ? View.GONE : View.VISIBLE}"
                 app:borderWidth="0dp"

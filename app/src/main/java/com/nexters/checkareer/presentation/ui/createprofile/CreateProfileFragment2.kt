@@ -116,7 +116,7 @@ class CreateProfileFragment2 : Fragment() {
         }
 
         viewDataBinding.edittextName.setOnKeyListener{ _, keyCode, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+            if (keyCode == KEYCODE_ENTER) {
                 if (viewDataBinding.edittextName.length() > 0) {
                     viewModel.saveUserProfile()
 
@@ -124,7 +124,7 @@ class CreateProfileFragment2 : Fragment() {
                     Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
             }
-            true
+            false
         }
     }
 
