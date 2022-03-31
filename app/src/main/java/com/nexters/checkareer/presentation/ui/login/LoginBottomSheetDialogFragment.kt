@@ -3,7 +3,6 @@ package com.nexters.checkareer.presentation.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +22,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.LoginFragmentBottomsheetBinding
-import com.nexters.checkareer.presentation.ui.home.HomeActivity
 import com.nexters.checkareer.presentation.ui.login.model.Account
+import com.nexters.checkareer.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -58,9 +57,9 @@ class LoginBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private fun setupEvents() {
         viewModel.isSucceededLogin.observe(this.viewLifecycleOwner, Observer {
-            val intent = Intent(requireContext(), HomeActivity::class.java)
+            /*val intent = Intent(requireContext(), HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            startActivity(intent)*/
             dismiss()
         })
     }
@@ -111,11 +110,11 @@ class LoginBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     task.getResult(ApiException::class.java)?.let { account ->
                         Timber.i("firebaseAuthWithGoogle: ${account.displayName} / ${account.email} / ${account.photoUrl}")
                         firebaseAuthWithGoogle(account.idToken!!)
-                        viewModel.signIn(Account(account.displayName, account.email, account.photoUrl.toString()))
                     }
                 } catch (e: ApiException) {
                     // Google Sign In failed, update UI appropriately
-                    Log.w("TAG", "Google sign in failed", e)
+                    Timber.w("Google sign in failed : $e")
+                    context?.showToast(getString(R.string.login_failure))
                 }
             }
         }
@@ -126,19 +125,18 @@ class LoginBottomSheetDialogFragment : BottomSheetDialogFragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Timber.i("signInWithCredential:success")
-//                    val user = auth.currentUser
-//                    Timber.i("$user")
-//                    updateUI()
+                    auth.currentUser?.let { user ->
+                        Timber.i("$user")
+                        viewModel.signIn(Account(user.displayName, user.email, user.photoUrl.toString()))
+                    }
                 } else {
-                    // If sign in fails, display a message to the user.
                     Timber.i( "signInWithCredential:failure ${task.exception}")
-//                    updateUI()
+                    context?.showToast(getString(R.string.login_failure))
+                    dismiss()
                 }
             }
     }
-
 
     companion object {
         @JvmStatic

@@ -33,17 +33,31 @@ class CreateProfile1ViewModel @Inject constructor(
     }
 
     fun toggleSkillItemSelected(skillCategory: CategorySelect) {
-        skillCategory.copy(selected = !skillCategory.selected).let { result ->
-            if (result.selected) {
-                addSelectedSkill(result)
-            } else {
-                removeSelectedSkill(skillCategory)
+        try {
+            skillCategory.copy(selected = !skillCategory.selected).let { result ->
+                if (changeItem(skillCategory, result)) {
+                    if (result.selected) {
+                        addSelectedSkill(result)
+                    } else {
+                        removeSelectedSkill(skillCategory)
+                    }
+                }
             }
-            items.value?.let {
-                val position = it.indexOf(skillCategory)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun changeItem(skillCategory: CategorySelect, result: CategorySelect): Boolean {
+        items.value?.let {
+            val position = it.indexOf(skillCategory)
+            val isExist = position != -1
+            if (isExist) {
                 _items.value = it.toMutableList().apply { this[position] = result }
             }
+            return isExist
         }
+        return false
     }
 
     private fun addSelectedSkill(skillCategory: CategorySelect) {
@@ -60,26 +74,24 @@ class CreateProfile1ViewModel @Inject constructor(
 
     fun removeSkillItemSelected(skillCategory: CategorySelect) {
         skillCategory.copy(selected = false).let { result ->
-            removeSelectedSkill(skillCategory)
-            items.value?.let {
-                val position = it.indexOf(skillCategory)
-                _items.value = it.toMutableList().apply { this[position] = result }
+            if (changeItem(skillCategory, result)) {
+                removeSelectedSkill(skillCategory)
             }
         }
     }
 
     private fun loadSkillCategories() {
-        try {
-            _dataLoading.value = true
-            viewModelScope.launch {
-                getSkillsByLayerUseCase(SkillLayer.PARENT).getValue().run {
-                    _items.value = this.map { CategorySelect(it.id, it.name, it.parentId, it.layer) }
-                }
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
+                    getSkillsByLayerUseCase(SkillLayer.PARENT).getValue().run {
+                        _items.value = this.map { CategorySelect(it.id, it.name, it.parentId, it.layer) }
+                    }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
         }
     }
 

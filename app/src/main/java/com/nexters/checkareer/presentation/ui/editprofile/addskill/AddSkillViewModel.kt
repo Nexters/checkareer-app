@@ -32,16 +32,26 @@ class AddSkillViewModel @Inject constructor(
 
     fun toggleSkillItemSelected(skillCategory: CategorySelect) {
         skillCategory.copy(selected = !skillCategory.selected).let { result ->
-            if (result.selected) {
-                addSelectedSkill(result)
-            } else {
-                removeSelectedSkill(skillCategory)
-            }
-            items.value?.let {
-                val position = it.indexOf(skillCategory)
-                _items.value = it.toMutableList().apply { this[position] = result }
+            if (changeItem(skillCategory, result)) {
+                if (result.selected) {
+                    addSelectedSkill(result)
+                } else {
+                    removeSelectedSkill(skillCategory)
+                }
             }
         }
+    }
+
+    private fun changeItem(skillCategory: CategorySelect, result: CategorySelect): Boolean {
+        items.value?.let {
+            val position = it.indexOf(skillCategory)
+            val isExist = position != -1
+            if (isExist) {
+                _items.value = it.toMutableList().apply { this[position] = result }
+            }
+            return isExist
+        }
+        return false
     }
 
     private fun addSelectedSkill(skillCategory: CategorySelect) {
@@ -64,34 +74,34 @@ class AddSkillViewModel @Inject constructor(
 
     fun removeSkillItemSelected(skillCategory: CategorySelect) {
         skillCategory.copy(selected = false).let { result ->
-            removeSelectedSkill(skillCategory)
-            items.value?.let {
-                val position = it.indexOf(skillCategory)
-                _items.value = it.toMutableList().apply { this[position] = result }
+            if (changeItem(skillCategory, result)) {
+                removeSelectedSkill(skillCategory)
             }
         }
     }
 
     fun loadSkillItems(originSkillTree: List<SkillTree>) {
-        try {
-            _dataLoading.value = true
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
                 val myParentSkills = originSkillTree.map { it.skill.id to it.skill }.toMap()
 
                 getAllSkillUseCase().getValue().run {
-                    _items.value = this.map { skillTree ->
-                        if(myParentSkills[skillTree.skill.id] != null)
-                            CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, skillTree.skill.layer, true)
-                        else
-                            CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, skillTree.skill.layer, false)
+                     val otherSkills = this.filter { myParentSkills[it.skill.id] == null }.map { skillTree ->
+                        CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, skillTree.skill.layer, false)
                     }
-                    items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
+                    val originSkills = originSkillTree.map { skillTree ->
+                        CategorySelect(skillTree.skill.id, skillTree.skill.name, skillTree.skill.parentId, skillTree.skill.layer, true)
+                    }
+                    // 선택된 스킬리스트(origin skill 순서보장) 뒤에 나머지 스킬 담
+                    _items.value = originSkills.toMutableList().apply { addAll(otherSkills) }
+                    addSelectedSkills(originSkills)
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
         }
     }
 }

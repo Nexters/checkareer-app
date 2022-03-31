@@ -75,33 +75,33 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun loadHomes(forceUpdate: Boolean) {
-        try {
-            _dataLoading.value = true
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
                 getProfileUseCase(forceUpdate).getValue().run {
                     _profile.value = this
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
         }
     }
 
     fun editUserProfile(userName: String) {
-        try {
-            _editProfileLoading.value = true
-            profile.value?.user?.name = userName
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                _editProfileLoading.value = true
+                profile.value?.user?.name = userName
                 if (editProfileUseCase.invoke(profile.value!!).succeeded) {
                     _editProfileLoading.value = false
                 } else {
                     _editProfileLoading.value = false
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 

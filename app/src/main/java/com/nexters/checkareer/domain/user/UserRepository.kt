@@ -16,4 +16,9 @@ interface UserRepository {
 
     suspend fun deleteUser(profile: Profile): Result<Unit>
 
+    suspend fun findUserProfileByEmail(email: String): Result<Profile>
+
+    suspend fun login(profile: Profile): Result<Unit>
+
+    suspend fun logout(user: User): Result<Unit>
 }

@@ -33,4 +33,8 @@
     <string name="skill_level_1">아직은 찍먹중인</string>
     <string name="skill_level_2">부먹 중인,,</string>
     <string name="skill_level_3">그냥,, 먹방 찍는 몰라~</string>
+
+    <string name="login_success">success</string>
+    <string name="login_failure">failure</string>
+
 </resources>

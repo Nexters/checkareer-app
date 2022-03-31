@@ -84,4 +84,20 @@ class UserLocalDataSource (
                 Result.Error(DbError(e.toString()))
             }
         }
+
+    override suspend fun findUserProfileByEmail(email: String): Result<Profile> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun logout(user: User): Result<Unit> =
+        withContext(ioDispatcher) {
+            return@withContext try {
+                user.toUserData().let { user ->
+                    userDao.updateUser(user)
+                    Result.Success(Unit)
+                }
+            } catch (e: Exception) {
+                Result.Error(DbError(e.toString()))
+            }
+        }
 }

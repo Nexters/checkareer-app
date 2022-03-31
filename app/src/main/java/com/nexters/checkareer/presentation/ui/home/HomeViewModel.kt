@@ -1,7 +1,6 @@
 package com.nexters.checkareer.presentation.ui.home
 
 import androidx.lifecycle.*
-import com.nexters.checkareer.domain.usecase.DeleteProfileUseCase
 import com.nexters.checkareer.domain.usecase.GetProfileUseCase
 import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.domain.vo.Profile
@@ -11,8 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
-    private val deleteProfileUseCase: DeleteProfileUseCase
+    private val getProfileUseCase: GetProfileUseCase
 ) : ViewModel() {
 
     private val _dataLoading = MutableLiveData<Boolean>()
@@ -29,31 +27,18 @@ class HomeViewModel @Inject constructor(
     }
 
     fun loadHomes(forceUpdate: Boolean) {
-        try {
-            _dataLoading.value = true
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
                 getProfileUseCase(forceUpdate).getValue()?.run {
                     _profile.value = this
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
         }
     }
 
-    /*fun deleteUserProfile() {
-        try {
-            viewModelScope.launch {
-                profile.value?.let {
-                    deleteProfileUseCase(it).getValue().run {
-                        _profile.value = null
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }*/
 }

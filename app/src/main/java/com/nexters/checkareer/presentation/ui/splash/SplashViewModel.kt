@@ -32,33 +32,33 @@ class SplashViewModel @Inject constructor(
     }
 
     private fun sync() {
-        try {
-            _dataLoading.value = true
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
                 syncSkillsUseCase().getValue()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
+                checkUser()
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
-            checkUser()
         }
     }
 
     private fun checkUser() {
-        try {
-            _dataLoading.value = true
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
                 getUserUseCase().getValue()?.run {
                     _isFirst.value = false
                 }?:run {
                     _isFirst.value = true
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
         }
     }
 }

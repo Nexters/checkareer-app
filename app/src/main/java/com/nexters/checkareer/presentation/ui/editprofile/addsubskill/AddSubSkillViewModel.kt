@@ -35,20 +35,29 @@ class AddSubSkillViewModel @Inject constructor(
     fun toggleSkillItemSelected(skillCategory: CategorySelect) {
         try {
             skillCategory.copy(selected = !skillCategory.selected).let { result ->
-                if (result.selected) {
-                    addSelectedSkill(result)
-                } else {
-                    removeSelectedSkill(skillCategory)
-                }
-                items.value?.let {
-                    val position = it.indexOf(skillCategory)
-                    Timber.i("position $position")
-                    _items.value = it.toMutableList().apply { this[position] = result }
+                if (changeItem(skillCategory, result)) {
+                    if (result.selected) {
+                        addSelectedSkill(result)
+                    } else {
+                        removeSelectedSkill(skillCategory)
+                    }
                 }
             }
         } catch (e:Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun changeItem(skillCategory: CategorySelect, result: CategorySelect): Boolean {
+        items.value?.let {
+            val position = it.indexOf(skillCategory)
+            val isExist = position != -1
+            if (isExist) {
+                _items.value = it.toMutableList().apply { this[position] = result }
+            }
+            return isExist
+        }
+        return false
     }
 
     private fun addSelectedSkill(skillCategory: CategorySelect) {
@@ -71,19 +80,17 @@ class AddSubSkillViewModel @Inject constructor(
 
     fun removeSkillItemSelected(skillCategory: CategorySelect) {
         skillCategory.copy(selected = false).let { result ->
-            removeSelectedSkill(skillCategory)
-            items.value?.let {
-                val position = it.indexOf(skillCategory)
-                _items.value = it.toMutableList().apply { this[position] = result }
+            if (changeItem(skillCategory, result)) {
+                removeSelectedSkill(skillCategory)
             }
         }
     }
 
     fun loadSkillCategories(originSkillTree: List<SkillTree>, parentSkillId: Int) {
-        try {
-            _dataLoading.value = true
-            this.parentSkillId = parentSkillId
-            viewModelScope.launch {
+        this.parentSkillId = parentSkillId
+        viewModelScope.launch {
+            try {
+                _dataLoading.value = true
 
                 originSkillTree.find { it.skill.id == parentSkillId.toString() }?.let { skillTree ->
                     val mySkills = skillTree.childSkills.map { it.id to it }.toMap()
@@ -98,12 +105,11 @@ class AddSubSkillViewModel @Inject constructor(
                         items.value?.filter { it.selected }?.run { addSelectedSkills(this) }
                     }
                 }
-
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _dataLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            _dataLoading.value = false
         }
     }
 }

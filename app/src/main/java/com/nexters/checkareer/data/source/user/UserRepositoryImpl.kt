@@ -1,6 +1,6 @@
 package com.nexters.checkareer.data.source.user
 
-import com.nexters.checkareer.domain.error.ExistingUserError
+import com.nexters.checkareer.domain.error.UserNotFoundError
 import com.nexters.checkareer.domain.user.User
 import com.nexters.checkareer.domain.user.UserRepository
 import com.nexters.checkareer.domain.util.Result
@@ -27,7 +27,7 @@ class UserRepositoryImpl @Inject constructor(
             local.findUserProfile().getValue()?.let {
                 Result.Success(it.toEntity())
             }?: run {
-                Result.Error(ExistingUserError())
+                Result.Error(UserNotFoundError())
             }
         } catch (e: Exception) {
             Result.Error(e)
@@ -36,8 +36,10 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun insertUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
         return@withContext try {
-            local.insertUserProfile(profile)
+//            if (profile.user.isMember)
             remote.insertUserProfile(profile)
+
+            local.insertUserProfile(profile)
         } catch (e: Exception) {
             Result.Error(e)
         }
@@ -53,9 +55,34 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun updateUser(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
         return@withContext try {
+            if (profile.user.isMember)
+                remote.updateUser(profile)
             local.updateUser(profile)
         } catch (e: Exception) {
             Result.Error(e)
         }
+    }
+
+    override suspend fun findUserProfileByEmail(email: String): Result<Profile> {
+        return try {
+            val userProfile = findUserProfile().getValue()
+            Result.Success(userProfile)
+        } catch (e: Exception) {
+            remote.findUserProfileByEmail(email)
+        }
+    }
+
+    override suspend fun login(profile: Profile): Result<Unit> = withContext(ioDispatcher) {
+        return@withContext try {
+            if (profile.user.isMember)
+                remote.insertUserProfile(profile)
+            local.updateUser(profile)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
+    }
+
+    override suspend fun logout(user: User): Result<Unit> {
+        return local.logout(user)
     }
 }

@@ -6,6 +6,7 @@ import com.nexters.checkareer.domain.util.getValue
 import com.nexters.checkareer.domain.vo.LogInInfo
 import com.nexters.checkareer.domain.vo.Profile
 import java.lang.Exception
+import java.security.InvalidParameterException
 import javax.inject.Inject
 
 class SignInUseCase @Inject constructor(
@@ -13,12 +14,15 @@ class SignInUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(logInInfo: LogInInfo): Result<Unit> {
         return try {
-            val user = userRepository.findUserProfile().getValue()
+            logInInfo.email?.let {
+                val user = userRepository.findUserProfileByEmail(it).getValue()
 
-            val modifiedUser = Profile(user.user.copy(logInInfo = logInInfo), user.skills)
-            userRepository.updateUser(modifiedUser)
+                val modifiedUser = Profile(user.user.copy(logInInfo = logInInfo, isMember = true), user.skills)
+                userRepository.updateUser(modifiedUser)
 
-            Result.Success(Unit)
+                Result.Success(Unit)
+            }?: Result.Error(InvalidParameterException())
+
         } catch (e: Exception) {
             println(e.message)
             Result.Error(e)

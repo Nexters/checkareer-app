@@ -17,4 +17,8 @@ interface UserDataSource {
 
     suspend fun updateUser(profile: Profile): Result<Unit>
 
+    suspend fun findUserProfileByEmail(email: String): Result<Profile>
+
+    suspend fun logout(user: User): Result<Unit>
+
 }
