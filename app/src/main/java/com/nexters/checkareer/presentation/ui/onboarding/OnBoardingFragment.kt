@@ -10,9 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nexters.checkareer.databinding.OnboardingFragBinding
-import com.nexters.checkareer.presentation.ui.createprofile.CreateProfileActivity
 import com.nexters.checkareer.presentation.ui.home.HomeActivity
-import com.nexters.checkareer.presentation.ui.login.LoginBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,8 +31,7 @@ class OnBoardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupCreateProfileButton()
-        setupLoginButton()
+        setupStartButton()
         setupEvents()
     }
 
@@ -46,16 +43,17 @@ class OnBoardingFragment : Fragment() {
         })
     }
 
-    private fun setupCreateProfileButton() {
-        viewDataBinding.buttonCreateProfile.setOnClickListener {
-            startActivity(Intent(requireContext(), CreateProfileActivity::class.java))
-        }
-    }
-    private fun setupLoginButton() {
-        viewDataBinding.loginButton.setOnClickListener {
+    private fun setupStartButton() {
+        viewDataBinding.startButton.setOnClickListener {
             startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
     }
+
+    /*private fun setupCreateProfileButton() {
+        viewDataBinding.buttonCreateProfile.setOnClickListener {
+            startActivity(Intent(requireContext(), CreateProfileActivity::class.java))
+        }
+    }*/
 
     companion object {
         @JvmStatic

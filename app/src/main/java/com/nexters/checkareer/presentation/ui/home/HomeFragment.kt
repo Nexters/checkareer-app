@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.nexters.checkareer.R
 import com.nexters.checkareer.databinding.HomeFragBinding
 import com.nexters.checkareer.presentation.ui.home.adapter.HomePageAdapter

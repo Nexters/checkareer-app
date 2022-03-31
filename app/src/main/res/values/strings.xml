@@ -25,6 +25,7 @@
 
     <string name="on_boarding_title">당신의 경험에 대해 알려주세요!</string>
     <string name="on_boarding_description">경험 기반의 커리어 기록을 통해,\n보다 다채롭게 스스로를 표현해보세요.</string>
+    <string name="on_boarding_button">시작하기</string>
     <string name="on_boarding_login_button">이미 등록한 기록이 있으세요?</string>
     <string name="add_new_skill">새로운 스킬을 추가해주세요</string>
     <string name="add_sub_skill">%s의 세부 스킬을 추가해주세요</string>
@@ -36,5 +37,9 @@
 
     <string name="login_success">success</string>
     <string name="login_failure">failure</string>
+
+    <string name="home_empty_view_title">아직 완성된 프로필이 없어요.</string>
+    <string name="home_empty_view_description">나만의 스킬 프로필을 만들어보세요.</string>
+    <string name="home_empty_view_button_text">만들러가기</string>
 
 </resources>

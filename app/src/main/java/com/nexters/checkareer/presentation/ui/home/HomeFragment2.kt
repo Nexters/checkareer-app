@@ -40,12 +40,18 @@ class HomeFragment2 : Fragment() {
 
         setupProfileEditButton()
 //        setupProfileDeleteButton()
-        setupProfileCreateButton()
         setupLifecycleOwner()
         setupMySkillAdapter()
         setupMySkillTopThreeAdapter()
         setProfileImage()
         setProfileDescriptionBalloon()
+        setupEmptyViewButton()
+    }
+
+    private fun setupEmptyViewButton() {
+        viewDataBinding.emptyViewButton.setOnClickListener {
+            startActivity(Intent(requireContext(), CreateProfileActivity::class.java))
+        }
     }
 
     private fun setupProfileEditButton() {
@@ -108,12 +114,6 @@ class HomeFragment2 : Fragment() {
             }
         }
     }*/
-
-    private fun setupProfileCreateButton() {
-        viewDataBinding.cardviewCreateProfile.setOnClickListener {
-            startActivity(Intent(requireContext(), CreateProfileActivity::class.java))
-        }
-    }
 
     private fun setupLifecycleOwner() {
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
