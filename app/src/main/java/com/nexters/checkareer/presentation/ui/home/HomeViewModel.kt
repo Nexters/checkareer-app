@@ -16,8 +16,8 @@ class HomeViewModel @Inject constructor(
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading
 
-    private val _profile = MutableLiveData<Profile>()
-    val profile: LiveData<Profile> = _profile
+    private val _profile = MutableLiveData<Profile?>()
+    val profile: LiveData<Profile?> = _profile
 
     private val _friendProfiles = MutableLiveData<List<Profile>>()
     val friendProfiles: LiveData<List<Profile>> = _friendProfiles
@@ -32,6 +32,8 @@ class HomeViewModel @Inject constructor(
                 _dataLoading.value = true
                 getProfileUseCase(forceUpdate).getValue()?.run {
                     _profile.value = this
+                } ?: run {
+                    _profile.value = null
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

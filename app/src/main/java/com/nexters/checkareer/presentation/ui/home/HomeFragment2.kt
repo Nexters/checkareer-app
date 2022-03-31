@@ -56,9 +56,9 @@ class HomeFragment2 : Fragment() {
 
     private fun setProfileImage() {
         viewModel.profile.observe(viewLifecycleOwner) {
-            if(it.skills.size in 0..3) {
+            if(it?.skills?.size in 0..3) {
                 viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_1)
-            } else if(it.skills.size in 4..7) {
+            } else if(it?.skills?.size in 4..7) {
                 viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_2)
             } else {
                 viewDataBinding.profileImage.setImageResource(R.drawable.image_tree_3)

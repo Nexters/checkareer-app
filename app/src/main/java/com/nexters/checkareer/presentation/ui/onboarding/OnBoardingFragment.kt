@@ -53,11 +53,7 @@ class OnBoardingFragment : Fragment() {
     }
     private fun setupLoginButton() {
         viewDataBinding.loginButton.setOnClickListener {
-            loginBottomSheet = LoginBottomSheetDialogFragment()
-            loginBottomSheet.show(requireActivity().supportFragmentManager, "")
-            loginBottomSheet.dialog?.setOnDismissListener {
-                viewModel.checkUser()
-            }
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
     }
 
